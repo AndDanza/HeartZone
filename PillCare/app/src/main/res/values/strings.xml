@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PillCare</string>
+    <string name="Open">PillCare</string>
+    <string name="Close">PillCare</string>
 </resources>

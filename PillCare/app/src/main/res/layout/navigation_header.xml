@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/colorPrimaryDark">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@drawable/ic_account_circle_black_24dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="219dp"
+        android:layout_height="28dp"
+        android:text="KORISNIK: peroperic2"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+</LinearLayout>
