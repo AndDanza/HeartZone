@@ -2,4 +2,7 @@
     <string name="app_name">PillCare</string>
     <string name="Open">PillCare</string>
     <string name="Close">PillCare</string>
+    <string name="inputUsername">Korisničko Ime</string>
+    <string name="inputPassword">Lozinka</string>
+    <string name="scanBarcode">Položite barcode ispod crvene linije</string>
 </resources>
