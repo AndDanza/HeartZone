@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
 
 
-    tools:context="air1715.pillcare.PrijavaActivity">
+    tools:context="air1715.pillcare.PrijavaActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
         android:id="@+id/prijavaId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="183dp"
+        android:layout_height="71dp"
 
         android:foregroundGravity="top"
         android:gravity="center_horizontal"
@@ -20,13 +21,14 @@
         android:textSize="60sp"
         android:textColor="@android:color/white"
         android:visibility="visible"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
-        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageLogin"
+        app:layout_constraintVertical_bias="0.285" />
 
 
 
@@ -35,94 +37,85 @@
         android:layout_width="0dp"
         android:layout_height="53dp"
         android:text="Registracija"
-        android:textColor="@android:color/holo_red_dark"
         android:gravity="center"
         android:textSize="30sp"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginBottom="8dp" />
+
+    <ImageView
+        android:id="@+id/imageLogin"
+        android:layout_width="182dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/background_light"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="383dp" />
-
-    <LinearLayout
-        android:id="@+id/linearlayoutUserNamePassword"
-
-        android:layout_width="292dp"
-        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="11dp"
-        android:background="@android:color/darker_gray"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/txt_registracija"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prijavaId"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"></LinearLayout>
-    <ImageView
-        android:id="@+id/imageLogin"
-        android:layout_width="98dp"
-        android:src="@drawable/ic_login"
-        android:tint="@android:color/holo_orange_dark"
-        android:scaleType="fitStart"
-        android:layout_height="208dp"
-        tools:layout_editor_absoluteY="75dp"
-        tools:layout_editor_absoluteX="143dp"
-
-        />
+        app:layout_constraintBottom_toTopOf="@+id/input_username"
+        app:layout_constraintVertical_bias="0.971" />
 
 
     <EditText
         android:id="@+id/input_password"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="269dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:inputType="textPersonName|textVisiblePassword"
         android:text="Password"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="39dp"
-        app:layout_constraintRight_toRightOf="@+id/linearlayoutUserNamePassword"
-        android:layout_marginTop="36dp"
-        app:layout_constraintTop_toBottomOf="@+id/input_username"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/txt_registracija"
-        app:layout_constraintHorizontal_bias="0.354" />
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_prijava"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="39dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/input_username"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="268dp"
+        android:layout_height="49dp"
         android:ems="10"
         android:inputType="textPersonName|textVisiblePassword"
         android:text="UserName"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/input_password"
-        android:layout_marginTop="65dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/input_password"
-        app:layout_constraintTop_toTopOf="@+id/linearlayoutUserNamePassword"
-        app:layout_constraintHorizontal_bias="1.0" />
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_password"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/button_prijava"
-        android:layout_width="89dp"
+        android:layout_width="130dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:text="Prijava"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/linearlayoutUserNamePassword"
-        app:layout_constraintRight_toRightOf="@+id/linearlayoutUserNamePassword"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/linearlayoutUserNamePassword"
-        app:layout_constraintHorizontal_bias="0.522" />
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/txt_registracija"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
