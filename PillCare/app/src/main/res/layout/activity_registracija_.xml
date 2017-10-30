@@ -12,138 +12,133 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="316dp"
-        android:layout_height="63dp"
+        android:layout_width="315dp"
+        android:layout_height="49dp"
 
         android:layout_marginTop="16dp"
         android:foregroundGravity="top"
         android:gravity="center_horizontal"
         android:text="Registracija"
         android:textColor="@android:color/white"
-        android:textSize="50sp"
+        android:textSize="36sp"
         android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_FirstName"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/input_FirstName"
-        android:layout_width="223dp"
-        android:layout_height="53dp"
-
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginStart="84dp"
-        android:background="@android:drawable/btn_default_small"
-        android:ems="10"
-        android:inputType="textPersonName|textVisiblePassword"
-        android:text="Ime"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/input_LastName"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <EditText
-        android:id="@+id/input_Password"
-        android:layout_width="226dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:drawable/btn_default_small"
-        android:ems="10"
-        android:inputType="textPersonName|textVisiblePassword"
-        android:text="Lozinka"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/button_registration"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <EditText
-        android:id="@+id/input_LastName"
-        android:layout_width="222dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:drawable/btn_default_small"
-        android:ems="10"
-        android:inputType="textPersonName|textVisiblePassword"
-        android:text=" Prezime"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/input_UserNameRegistration"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <EditText
-        android:id="@+id/input_Email"
-        android:layout_width="225dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:drawable/btn_default_small"
-        android:ems="10"
-        android:inputType="textPersonName|textVisiblePassword"
-        android:text="E-mail"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/input_Password"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-    <EditText
-        android:id="@+id/input_UserNameRegistration"
-        android:layout_width="223dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@android:drawable/btn_default_small"
-        android:ems="10"
-        android:inputType="textPersonName|textVisiblePassword"
-        android:text="Korisnicko ime"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toTopOf="@+id/input_Email"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
-
-
-    <Button
-        android:id="@+id/button_registration"
-        android:layout_width="162dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
-        android:text="Registriraj me"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="307dp"
+        android:layout_height="428dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <EditText
+            android:id="@+id/input_FirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputFirstName"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <EditText
+            android:id="@+id/input_RetypePassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/input_RetypePassword"
+            android:inputType="textPassword"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_PasswordRegistration" />
+
+        <EditText
+            android:id="@+id/input_Email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputEmail"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_UserNameRegistration" />
+
+        <EditText
+            android:id="@+id/input_LastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputLastName"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_FirstName" />
+
+        <EditText
+            android:id="@+id/input_UserNameRegistration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputUserNameRegistration"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_LastName" />
+
+        <Button
+            android:id="@+id/button_registration"
+            android:layout_width="162dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="19dp"
+            android:layout_weight="1"
+            android:text="Registriraj me"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_RetypePassword"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="0dp" />
+
+        <EditText
+            android:id="@+id/input_PasswordRegistration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputPassword"
+            android:inputType="textPassword"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_Email" />
+    </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -5,4 +5,9 @@
     <string name="inputUsername">Korisničko Ime</string>
     <string name="inputPassword">Lozinka</string>
     <string name="scanBarcode">Položite barcode ispod crvene linije</string>
+    <string name="inputFirstName">Ime</string>
+    <string name="inputLastName">Prezime</string>
+    <string name="inputUserNameRegistration">Korisničko Ime</string>
+    <string name="inputEmail">Email</string>
+    <string name="input_RetypePassword">Ponovite Lozinku</string>
 </resources>
