@@ -3,13 +3,14 @@ package air1715.database.entiteti;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by Andrea on 30.10.2017.
  */
 
 @Table(database = NaslovnicaBazePodataka.class)
-public class Korisnik {
+public class Korisnik extends BaseModel {
     @PrimaryKey
     @Column int id;
 

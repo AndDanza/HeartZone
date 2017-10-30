@@ -4,13 +4,14 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by Andrea on 30.10.2017.
  */
 
 @Table(database = NaslovnicaBazePodataka.class)
-public class Pregled {
+public class Pregled extends BaseModel {
     @PrimaryKey
     @Column int id;
 
