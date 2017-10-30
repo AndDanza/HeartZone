@@ -7,12 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
+
 public class PrijavaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prijava);
+
+        FlowManager.init(new FlowConfig.Builder(this).build());
 
         TextView openRegistrationActivity=(TextView) findViewById(R.id.txt_registracija);
         openRegistrationActivity.setOnClickListener(new View.OnClickListener() {
