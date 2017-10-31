@@ -13,7 +13,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="air1715.pillcare.PopisLijekova_Activity">
+    tools:context="air1715.pillcare.Activities.PopisLijekova_Activity">
 
     <Button
         android:id="@+id/button_barCodeScanner"

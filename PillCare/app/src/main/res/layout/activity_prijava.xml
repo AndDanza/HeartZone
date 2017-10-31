@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context="air1715.pillcare.PrijavaActivity"
+    tools:context="air1715.pillcare.Activities.PrijavaActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
