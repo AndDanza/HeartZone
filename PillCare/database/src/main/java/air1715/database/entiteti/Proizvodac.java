@@ -5,18 +5,18 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by Andrea on 30.10.2017.
  */
 
-@Table(database = NaslovnicaBazePodataka.class)
-public class Proizvodac extends BaseModel {
-    @PrimaryKey
-    @Column int id;
+public class Proizvodac implements Serializable {
+    int id;
 
-    @Column String naziv;
+    String naziv;
 
-    @Column String slika;
+    String slika;
 
     public Proizvodac() {
     }
