@@ -11,29 +11,34 @@ import java.io.Serializable;
 /**
  * Created by Andrea on 30.10.2017.
  */
+@Table(database = NaslovnicaBazePodataka.class)
 
-public class Terapija implements Serializable {
-    int lijekoviId;
+public class Terapija extends BaseModel implements Serializable {
+    @PrimaryKey
+    @Column int lijekoviId;
 
-    int korisnikId;
+    @PrimaryKey
+    @Column int korisnikId;
 
-    String pocetak;
+    @Column String pocetak;
 
-    String kraj;
+    @Column String kraj;
 
-    Double pojedinacnaDoza;
+    @Column Double pojedinacnaDoza;
 
-    int brojDnevnihDoza;
+    @Column int brojDnevnihDoza;
 
-    boolean aktivna;
+    @Column boolean aktivna;
 
-    int upozorenje;
+    @Column int upozorenje;
 
-    int razmakDnevnihDoza;
+    @Column int razmakDnevnihDoza;
 
-    Korisnik korisnik;
+    @ForeignKey(tableClass = Korisnik.class)
+    @Column Korisnik korisnik;
 
-    Lijek lijek;
+    @ForeignKey(tableClass = Lijek.class)
+    @Column Lijek lijek;
 
     public Terapija() {
     }

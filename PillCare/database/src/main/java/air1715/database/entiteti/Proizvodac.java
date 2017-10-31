@@ -10,13 +10,15 @@ import java.io.Serializable;
 /**
  * Created by Andrea on 30.10.2017.
  */
+@Table(database = NaslovnicaBazePodataka.class)
 
-public class Proizvodac implements Serializable {
-    int id;
+public class Proizvodac extends BaseModel implements Serializable {
+    @PrimaryKey
+    @Column int id;
 
-    String naziv;
+    @Column String naziv;
 
-    String slika;
+    @Column String slika;
 
     public Proizvodac() {
     }
