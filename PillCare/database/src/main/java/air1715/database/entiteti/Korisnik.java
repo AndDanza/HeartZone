@@ -1,6 +1,11 @@
 package air1715.database.entiteti;
 
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,19 +14,26 @@ import java.io.Serializable;
 /**
  * Created by Andrea on 30.10.2017.
  */
+@Table(database = NaslovnicaBazePodataka.class)
+public class Korisnik extends BaseModel implements Serializable{
 
-public class Korisnik implements Serializable {
-
+    @PrimaryKey
+    @Column
     int id;
 
+    @Column
     String ime;
 
+    @Column
     String prezime;
 
+    @Column
     String email;
 
+    @Column
     String korisnickoIme;
 
+    @Column
     String lozinka;
 
     public Korisnik() {
