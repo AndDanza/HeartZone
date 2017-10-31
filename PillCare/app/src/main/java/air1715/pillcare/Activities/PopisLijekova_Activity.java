@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import air1715.database.entiteti.Korisnik;
 import air1715.pillcare.R;
+import air1715.pillcare.Utils.PopUpUtils;
 
 public class PopisLijekova_Activity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_lijekova_);
 
+        Korisnik loggedUser = (Korisnik)getIntent().getSerializableExtra("korisnik");
 
         dl= (DrawerLayout) findViewById(R.id.dl);
         abdt = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);

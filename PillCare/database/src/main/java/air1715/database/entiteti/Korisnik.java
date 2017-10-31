@@ -5,26 +5,39 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
 /**
  * Created by Andrea on 30.10.2017.
  */
 
-@Table(database = NaslovnicaBazePodataka.class)
-public class Korisnik extends BaseModel {
-    @PrimaryKey
-    @Column int id;
+public class Korisnik implements Serializable {
 
-    @Column String ime;
+    int id;
 
-    @Column String prezime;
+    String ime;
 
-    @Column String email;
+    String prezime;
 
-    @Column String korisnickoIme;
+    String email;
 
-    @Column String lozinka;
+    String korisnickoIme;
+
+    String lozinka;
 
     public Korisnik() {
+    }
+
+    public Korisnik(JSONObject jsonObject) throws JSONException {
+        this.id = jsonObject.getInt("id");
+        this.ime = jsonObject.getString("ime");
+        this.prezime = jsonObject.getString("prezime");
+        this.korisnickoIme = jsonObject.getString("korisnicko_ime");
+        this.email = jsonObject.getString("email");
+        this.lozinka = jsonObject.getString("lozinka");
     }
 
     public int getId() {

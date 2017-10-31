@@ -6,27 +6,27 @@ import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by Andrea on 30.10.2017.
  */
 
-@Table(database = NaslovnicaBazePodataka.class)
-public class Pregled extends BaseModel {
-    @PrimaryKey
-    @Column int id;
+public class Pregled implements Serializable {
 
-    @Column String termin;
+    int id;
 
-    @Column String biljeska;
+    String termin;
 
-    @Column String vrijemeUpozorenja;
+    String biljeska;
 
-    @Column boolean aktivan;
+    String vrijemeUpozorenja;
 
-    @Column int korisnikId;
+    boolean aktivan;
 
-    @ForeignKey(tableClass = Korisnik.class)
-    @Column Korisnik korisnik;
+    int korisnikId;
+
+    Korisnik korisnik;
 
     public Pregled() {
     }

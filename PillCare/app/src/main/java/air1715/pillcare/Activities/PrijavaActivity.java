@@ -22,6 +22,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
+import air1715.database.entiteti.Korisnik;
 import air1715.pillcare.R;
 import air1715.pillcare.Utils.EncryptionUtils;
 import air1715.pillcare.Utils.HttpUtils;
@@ -48,7 +49,6 @@ public class PrijavaActivity extends AppCompatActivity {
         final EditText passwordET = (EditText) findViewById(R.id.input_password);
         final Map params = new HashMap<String, String>();
 
-
         openRegistrationActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,10 +74,12 @@ public class PrijavaActivity extends AppCompatActivity {
                         PopUpUtils.sendMessage(context, "Ne postoji korisnik s navedenim korisničkim imenom ili nemate internet konekciju");
                     } else {
                         try {
+                            Korisnik korisnik = new Korisnik(response);
                             String encryptedPw = EncryptionUtils.sha1(password);
-                            if (encryptedPw.equals(response.getString("lozinka"))) {
-                                Intent ekran = new Intent(getBaseContext(), PopisLijekova_Activity.class);
-                                startActivity(ekran);
+                            if (encryptedPw.equals(korisnik.getLozinka())) {
+                                Intent intent = new Intent(getBaseContext(), PopisLijekova_Activity.class);
+                                intent.putExtra("korisnik", korisnik);
+                                startActivity(intent);
                             } else {
                                 PopUpUtils.sendMessage(context, "Pogresna lozinka");
                             }
