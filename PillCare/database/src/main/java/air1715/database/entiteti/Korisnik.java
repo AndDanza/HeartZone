@@ -1,9 +1,5 @@
 package air1715.database.entiteti;
 
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +34,14 @@ public class Korisnik implements Serializable {
         this.korisnickoIme = jsonObject.getString("korisnicko_ime");
         this.email = jsonObject.getString("email");
         this.lozinka = jsonObject.getString("lozinka");
+    }
+
+    public Korisnik(String ime, String prezime, String email, String korisnickoIme, String lozinka) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.korisnickoIme = korisnickoIme;
+        this.lozinka =  lozinka;
     }
 
     public int getId() {
