@@ -34,21 +34,21 @@ public class HttpUtils {
         Gson gson = new Gson();
         JSONObject jsonResult = null;
         try {
-            StringJoiner stringJoiner = new StringJoiner("&");
+            String paramatersString = "";
             for (Map.Entry<String, Object> entry : params.entrySet()) {
                 String jsonString;
-                if(!entry.getValue().getClass().equals(String.class))
-                    jsonString=gson.toJson(entry.getValue());
+                if (!entry.getValue().getClass().equals(String.class))
+                    jsonString = gson.toJson(entry.getValue());
                 else
                     jsonString = entry.getValue().toString();
-                stringJoiner.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "="
-                        + URLEncoder.encode(jsonString, "UTF-8"));
+                paramatersString += (URLEncoder.encode(entry.getKey(), "UTF-8") + "="
+                        + URLEncoder.encode(jsonString, "UTF-8")) + "&";
             }
-            path += "?" + stringJoiner.toString();
+            path += "?" + paramatersString.substring(0, paramatersString.length() - 1);
             HttpClient httpClient = new DefaultHttpClient();
             HttpGet request = new HttpGet(path);
             request.addHeader("User-Agent", USER_AGENT);
-            request.addHeader("Accept","application/json");
+            request.addHeader("Accept", "application/json");
             request.addHeader("Content-Type", "application/json");
             HttpResponse response = httpClient.execute(request);
             if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
@@ -60,7 +60,7 @@ public class HttpUtils {
             System.out.println("UnsuportedEndodingException. " + e.getLocalizedMessage());
         } catch (IOException e) {
             System.out.println("IOException. " + e.getLocalizedMessage());
-        } catch(JSONException e) {
+        } catch (JSONException e) {
             System.out.println("JsonException. " + e.getLocalizedMessage());
         }
         return jsonResult;
