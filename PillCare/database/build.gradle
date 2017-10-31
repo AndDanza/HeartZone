@@ -29,6 +29,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
     //DBFlow
     annotationProcessor "com.github.raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.raizlabs.DBFlow:dbflow-core:${dbflow_version}"
