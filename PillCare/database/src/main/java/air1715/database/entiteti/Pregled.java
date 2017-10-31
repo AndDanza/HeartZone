@@ -11,22 +11,24 @@ import java.io.Serializable;
 /**
  * Created by Andrea on 30.10.2017.
  */
+@Table(database = NaslovnicaBazePodataka.class)
+public class Pregled extends BaseModel implements Serializable {
 
-public class Pregled implements Serializable {
+    @PrimaryKey
+    @Column int id;
 
-    int id;
+    @Column String termin;
 
-    String termin;
+    @Column String biljeska;
 
-    String biljeska;
+    @Column String vrijemeUpozorenja;
 
-    String vrijemeUpozorenja;
+    @Column boolean aktivan;
 
-    boolean aktivan;
+    @Column int korisnikId;
 
-    int korisnikId;
-
-    Korisnik korisnik;
+    @ForeignKey(tableClass = Korisnik.class)
+    @Column Korisnik korisnik;
 
     public Pregled() {
     }
