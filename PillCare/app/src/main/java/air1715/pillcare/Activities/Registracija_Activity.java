@@ -60,12 +60,15 @@ public class Registracija_Activity extends AppCompatActivity {
                     PopUpUtils.sendMessage(context, "Morate popuniti sva polja");
                 else if (!password.equals(retypePassword))
                     PopUpUtils.sendMessage(context, "Lozinka i potvrda lozinke moraju biti isti");
-                else {
+                else if (existsUsernameOrEmail(username, email))
+                    PopUpUtils.sendMessage(context, "Postoji već korisnik s navedenim korisničkim imenom ili e-mailom");
+                else{
                     try {
-                        Korisnik user = new Korisnik(firstName, lastName, username, email, EncryptionUtils.sha1(password));
+                        Korisnik user = new Korisnik(firstName, lastName, email, username, EncryptionUtils.sha1(password));
                         Map params = new HashMap<String, Object>();
                         params.put("user", user);
                         if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/dodajKorisnika.php") != null) {
+                            PopUpUtils.sendMessage(context, "Uspješno ste se registrirali");
                             Intent intent = new Intent(getBaseContext(), PrijavaActivity.class);
                             startActivity(intent);
                         } else
@@ -78,5 +81,14 @@ public class Registracija_Activity extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean existsUsernameOrEmail(String username, String password) {
+        Map params = new HashMap<String, Object>();
+        params.put("username", username);
+        params.put("email", password);
+        if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/provjeriKorisnika.php") != null)
+            return true;
+        return false;
     }
 }
