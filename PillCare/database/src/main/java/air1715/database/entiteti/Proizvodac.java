@@ -6,6 +6,9 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +26,12 @@ public class Proizvodac extends BaseModel implements Serializable {
     @Column String slika;
 
     public Proizvodac() {
+    }
+
+    public Proizvodac(JSONObject jsonObject) throws JSONException {
+        this.id = jsonObject.getInt("id");
+        this.naziv = jsonObject.getString("naziv");
+        this.slika = jsonObject.getString("slika");
     }
 
     public int getId() {
