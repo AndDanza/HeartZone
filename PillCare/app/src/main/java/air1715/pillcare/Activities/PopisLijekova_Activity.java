@@ -1,7 +1,9 @@
 package air1715.pillcare.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -104,7 +106,9 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataLoadController dataControl = new DataLoadController();
+                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                DataLoadController dataControl = new DataLoadController(manager);
                 List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
                 List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
             }

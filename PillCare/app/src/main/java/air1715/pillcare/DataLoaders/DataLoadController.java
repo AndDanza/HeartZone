@@ -1,5 +1,8 @@
 package air1715.pillcare.DataLoaders;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.provider.ContactsContract;
 
 import java.net.InetAddress;
@@ -10,8 +13,10 @@ import java.util.List;
  */
 
 public class DataLoadController {
+    private ConnectivityManager connection = null;
 
-    public DataLoadController() {
+    public DataLoadController(ConnectivityManager connectionMobile) {
+        this.connection = connectionMobile;
     }
 
     public Object GetData(String dataType){
@@ -34,12 +39,7 @@ public class DataLoadController {
     }
 
     private boolean CheckInternetConnection() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            return !ipAddr.equals("");
-        }
-        catch (Exception e) {
-            return false;
-        }
+        NetworkInfo netInfo = connection.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }
