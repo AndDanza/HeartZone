@@ -34,11 +34,11 @@ public class WebServiceDataLoader implements DataLoader {
             case "medications":
                 returnData = (Object) GetMedications();
                 break;
-            case "teraphies":
-                returnData = (Object) GetTeraphies();
+            case "therapies":
+                returnData = (Object) GetTherapies();
                 break;
             case "pharmaCompanies":
-                returnData = (Object) GetPhramaCompanies();
+                returnData = (Object) GetPharmaCompanies();
                 break;
             case "appointments":
                 returnData = (Object) GetAppointments();
@@ -81,12 +81,12 @@ public class WebServiceDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Terapija> GetTeraphies(){
+    public List<Terapija> GetTherapies(){
         return null;
     }
 
     @Override
-    public List<Proizvodac> GetPhramaCompanies() {
+    public List<Proizvodac> GetPharmaCompanies() {
         Map params = new HashMap<String, String>();
         params.put("type", "all");
         JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/proizvodac.php");
