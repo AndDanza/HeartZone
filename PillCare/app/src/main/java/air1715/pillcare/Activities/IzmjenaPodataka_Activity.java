@@ -17,16 +17,16 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_izmjena_podataka);
-       final Korisnik loggedUser = (Korisnik)getIntent().getSerializableExtra("korisnik");
-        Button buttonChange=(Button) findViewById(R.id.button_ChangeData);
+        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        Button buttonChange = (Button) findViewById(R.id.button_ChangeData);
         buttonChange.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                Log.d("email",loggedUser.getEmail());
-                                                EditText newEmail= (EditText) findViewById(R.id.input_ChangeEmail);
-                                                String Email=newEmail.getText().toString();
+                                                Log.d("email", loggedUser.getEmail());
+                                                EditText newEmail = (EditText) findViewById(R.id.input_ChangeEmail);
+                                                String Email = newEmail.getText().toString();
                                                 loggedUser.setEmail(Email);
-                                                Log.d("new email",loggedUser.getEmail());
+                                                Log.d("new email", loggedUser.getEmail());
 
                                             }
                                         }

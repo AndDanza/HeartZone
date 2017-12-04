@@ -1,16 +1,15 @@
 package air1715.pillcare.Activities;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,6 @@ import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
-import air1715.pillcare.Utils.PopUpUtils;
 
 public class PopisLijekova_Activity extends AppCompatActivity {
 
@@ -41,10 +39,13 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_lijekova_);
 
-        final Korisnik loggedUser = (Korisnik)getIntent().getSerializableExtra("korisnik");
+        Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
-        dl= (DrawerLayout) findViewById(R.id.dl);
-        abdt = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
+        if (!loggedUser.exists())
+            loggedUser.save();
+
+        dl = (DrawerLayout) findViewById(R.id.dl);
+        abdt = new ActionBarDrawerToggle(this, dl, R.string.Open, R.string.Close);
         abdt.setDrawerIndicatorEnabled(true);
 
         dl.addDrawerListener(abdt);
@@ -52,40 +53,22 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        NavigationView nav_view=(NavigationView) findViewById(R.id.nav_view);
+        NavigationView nav_view = (NavigationView) findViewById(R.id.nav_view);
 
-        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id=item.getItemId();
+                int id = item.getItemId();
 
-                if (id==R.id.lijekovi)
-                {
-                    Toast.makeText(PopisLijekova_Activity.this,"LIJEKOVI",Toast.LENGTH_SHORT).show();
-                }
-
-                else if (id==R.id.ljekarne)
-                {
-                    Toast.makeText(PopisLijekova_Activity.this,"LJEKARNE",Toast.LENGTH_SHORT).show();
-                }
-
-                else if (id==R.id.pregledi)
-                {
-                    Toast.makeText(PopisLijekova_Activity.this,"PREGLEDI",Toast.LENGTH_SHORT).show();
-                }
-
-                else if (id==R.id.dnevniRaspored)
-                {
-                    Toast.makeText(PopisLijekova_Activity.this,"DNEVNI RASPORED",Toast.LENGTH_SHORT).show();
-                }
-                else if(id==R.id.IzmjenaPodataka)
-                {
-                    Toast.makeText(PopisLijekova_Activity.this,"PROMIJENI PODATKE",Toast.LENGTH_SHORT).show();
-                    Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
-                    changeUserData.putExtra("korisnik",loggedUser);
-                    startActivity(changeUserData);
-
+                if (id == R.id.lijekovi) {
+                    Toast.makeText(PopisLijekova_Activity.this, "LIJEKOVI", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.ljekarne) {
+                    Toast.makeText(PopisLijekova_Activity.this, "LJEKARNE", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.pregledi) {
+                    Toast.makeText(PopisLijekova_Activity.this, "PREGLEDI", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.dnevniRaspored) {
+                    Toast.makeText(PopisLijekova_Activity.this, "DNEVNI RASPORED", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -133,8 +116,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Log.d("PopisLijekova_Activity", "Skeniranje prekinuto");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
