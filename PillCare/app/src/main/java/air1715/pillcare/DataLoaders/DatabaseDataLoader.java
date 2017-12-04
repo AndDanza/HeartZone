@@ -23,12 +23,12 @@ public class DatabaseDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Terapija> getTeraphies() {
+    public List<Terapija> GetTherapies() {
         return null;
     }
 
     @Override
-    public List<Proizvodac> GetPhramaCompanies() {
+    public List<Proizvodac> GetPharmaCompanies() {
         return null;
     }
 
