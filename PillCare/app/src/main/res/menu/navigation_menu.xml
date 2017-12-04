@@ -20,4 +20,9 @@
         android:title="Dnevni raspored"
         android:icon="@drawable/ic_event_available_black_24dp">
     </item>
+    <item
+        android:id="@+id/IzmjenaPodataka"
+        android:title="Promijeni podatke"
+        android:icon="@drawable/ic_event_available_black_24dp">
+    </item>
 </menu>

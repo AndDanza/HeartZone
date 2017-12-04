@@ -1,6 +1,7 @@
 package air1715.pillcare.Activities;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -40,7 +41,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_lijekova_);
 
-        Korisnik loggedUser = (Korisnik)getIntent().getSerializableExtra("korisnik");
+        final Korisnik loggedUser = (Korisnik)getIntent().getSerializableExtra("korisnik");
 
         dl= (DrawerLayout) findViewById(R.id.dl);
         abdt = new ActionBarDrawerToggle(this,dl,R.string.Open,R.string.Close);
@@ -77,6 +78,14 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 else if (id==R.id.dnevniRaspored)
                 {
                     Toast.makeText(PopisLijekova_Activity.this,"DNEVNI RASPORED",Toast.LENGTH_SHORT).show();
+                }
+                else if(id==R.id.IzmjenaPodataka)
+                {
+                    Toast.makeText(PopisLijekova_Activity.this,"PROMIJENI PODATKE",Toast.LENGTH_SHORT).show();
+                    Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
+                    changeUserData.putExtra("korisnik",loggedUser);
+                    startActivity(changeUserData);
+
                 }
 
 

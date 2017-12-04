@@ -1,51 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="air1715.pillcare.Activities.IzmjenaPodataka_Activity">
-    <EditText
-        android:id="@+id/input_ChangeName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    tools:context="air1715.pillcare.Activities.Registracija_Activity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <TextView
+        android:id="@+id/changeData"
+        android:layout_width="315dp"
+        android:layout_height="49dp"
+
         android:layout_marginTop="16dp"
-        android:ems="10"
+        android:foregroundGravity="top"
+        android:gravity="center_horizontal"
+        android:text="Izmjena podataka"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        />
-    <EditText
-        android:id="@+id/input_ChangeUserName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="307dp"
+        android:layout_height="428dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="16dp"
-        android:ems="10"
+        app:layout_constraintTop_toBottomOf="@+id/changeData"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
 
-        />
-    <EditText
-        android:id="@+id/input_ChangeLastName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        <EditText
+            android:id="@+id/input_ChangeFirstName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputFirstName"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/changeData" />
 
-        />
-    <EditText
-        android:id="@+id/input_ChangeEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        <EditText
+            android:id="@+id/input_ChangeRetypePassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/input_RetypePassword"
+            android:inputType="textPassword"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_ChangePasswordRegistration" />
 
-        />
-    <EditText
-        android:id="@+id/input_ChangePassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
+        <EditText
+            android:id="@+id/input_ChangeEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputEmail"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_ChangeUserNameRegistration" />
 
-        />
+        <EditText
+            android:id="@+id/input_ChangeLastName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputLastName"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_ChangeFirstName" />
 
+        <EditText
+            android:id="@+id/input_ChangeUserNameRegistration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputUserNameRegistration"
+            android:inputType="textPersonName"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_ChangeLastName" />
+
+        <Button
+            android:id="@+id/button_ChangeData"
+            android:layout_width="162dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="19dp"
+            android:layout_weight="1"
+            android:text="Promijeni"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_RetypePassword"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="0dp" />
+
+        <EditText
+            android:id="@+id/input_ChangePasswordRegistration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/inputPassword"
+            android:inputType="textPassword"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_ChangeEmail" />
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.constraint.ConstraintLayout>
