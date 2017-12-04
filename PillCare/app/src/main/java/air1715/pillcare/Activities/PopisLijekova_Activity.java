@@ -1,7 +1,9 @@
 package air1715.pillcare.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -17,7 +19,12 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.List;
+
 import air1715.database.entiteti.Korisnik;
+import air1715.database.entiteti.Lijek;
+import air1715.database.entiteti.Proizvodac;
+import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 import air1715.pillcare.Utils.PopUpUtils;
 
@@ -92,6 +99,18 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 integrator.setBeepEnabled(false);
                 integrator.setBarcodeImageEnabled(false);
                 integrator.initiateScan();
+            }
+        });
+
+        Button getData = (Button) findViewById(R.id.get_data);
+        getData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                DataLoadController dataControl = new DataLoadController(manager);
+                List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
+                List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
             }
         });
     }

@@ -4,9 +4,11 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Andrea on 30.10.2017.
@@ -87,5 +89,9 @@ public class Pregled extends BaseModel implements Serializable {
 
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
+    }
+
+    public List<Pregled> getAll(){
+        return SQLite.select().from(Pregled.class).queryList();
     }
 }

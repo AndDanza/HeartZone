@@ -4,9 +4,15 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Andrea on 30.10.2017.
@@ -33,6 +39,16 @@ public class Lijek extends BaseModel implements Serializable {
     @Column Proizvodac proizvodac;
 
     public Lijek() {
+    }
+
+    public Lijek(JSONObject jsonObject) throws JSONException {
+        this.id = jsonObject.getInt("id");
+        this.naziv = jsonObject.getString("naziv");
+        this.jacina = jsonObject.getInt("jacina");
+        this.brojTableta = jsonObject.getInt("broj_tableta");
+        this.pakiranje = jsonObject.getString("pakiranje");
+        this.upute = jsonObject.getString("upute");
+        this.proizvodacId = jsonObject.getInt("proizvodac_id");
     }
 
     public int getId() {
@@ -97,5 +113,9 @@ public class Lijek extends BaseModel implements Serializable {
 
     public void setProizvodac(Proizvodac proizvodac) {
         this.proizvodac = proizvodac;
+    }
+
+    public List<Lijek> getAll(){
+        return SQLite.select().from(Lijek.class).queryList();
     }
 }
