@@ -1,7 +1,5 @@
 package air1715.pillcare.DataLoaders;
 
-import android.preference.PreferenceGroup;
-
 import java.util.List;
 
 import air1715.database.entiteti.Lijek;
@@ -16,7 +14,7 @@ import air1715.database.entiteti.Terapija;
 public interface DataLoader {
     Object GetData(String dataType);
     List<Lijek> GetMedications();
-    List<Terapija> GetTeraphies();
-    List<Proizvodac> GetPhramaCompanies();
+    List<Terapija> GetTherapies();
+    List<Proizvodac> GetPharmaCompanies();
     List<Pregled> GetAppointments();
 }

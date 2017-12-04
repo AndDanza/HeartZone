@@ -24,7 +24,7 @@ public class DataLoadController {
         boolean isConnectedToInternet = false;
         DataLoader dataLoader = null;
 
-        isConnectedToInternet = true;
+        isConnectedToInternet = CheckInternetConnection();
 
         if(isConnectedToInternet == true){
             dataLoader = new WebServiceDataLoader();
