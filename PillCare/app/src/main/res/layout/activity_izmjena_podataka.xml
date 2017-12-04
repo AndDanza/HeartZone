@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
-
+    tools:context="air1715.pillcare.Activities.IzmjenaPodataka_Activity">
     <EditText
         android:id="@+id/input_ChangeName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+
+        />
+    <EditText
+        android:id="@+id/input_ChangeUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,14 +38,6 @@
 
         />
     <EditText
-        android:id="@+id/input_ChangeUserName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-
-        />
-    <EditText
         android:id="@+id/input_ChangePassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -45,11 +46,6 @@
 
         />
 
-    <Button
-        android:id="@+id/button_ChangeData"
-        android:layout_width="158dp"
-        android:layout_height="62dp"
-        android:text="Izmijeni" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
