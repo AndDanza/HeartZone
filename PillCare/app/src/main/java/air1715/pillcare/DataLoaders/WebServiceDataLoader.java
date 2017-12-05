@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Proizvodac;
@@ -27,7 +28,7 @@ public class WebServiceDataLoader implements DataLoader {
     }
 
     @Override
-    public Object GetData(String dataType) {
+    public Object GetData(String dataType, Korisnik user) {
         Object returnData = null;
 
         switch (dataType) {
@@ -41,7 +42,7 @@ public class WebServiceDataLoader implements DataLoader {
                 returnData = (Object) GetPharmaCompanies();
                 break;
             case "appointments":
-                returnData = (Object) GetAppointments();
+                returnData = (Object) GetAppointments(user);
                 break;
         }
 
@@ -69,6 +70,7 @@ public class WebServiceDataLoader implements DataLoader {
         }
 
         return medications;
+
     }
 
     private List<Lijek> getMedicationsJSON(List<Lijek> medications, JSONArray jsonArray) throws JSONException {
@@ -118,7 +120,34 @@ public class WebServiceDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Pregled> GetAppointments() {
-        return null;
+    public List<Pregled> GetAppointments(Korisnik user) {
+        Map params = new HashMap<String, String>();
+        params.put("user", user.getKorisnickoIme());
+        JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/pregled.php");
+        List<Pregled> appointments = new ArrayList<Pregled>();
+        try {
+            if(response != null) {
+                Log.d("response", "response razlicit od null pregledi");
+                appointments = getAppointmentsJSON(appointments, response);
+            }
+            else {
+                Log.d("null", "null u response-u appointments");
+                return null;
+            }
+        }
+        catch (JSONException e) {
+            System.out.println("JsonExceptionAppointments. " + e.getLocalizedMessage());
+        }
+
+        return appointments;
+    }
+
+    private List<Pregled> getAppointmentsJSON(List<Pregled> appointments, JSONArray jsonArray) throws JSONException {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonobject = jsonArray.getJSONObject(i);
+            appointments.add(new Pregled(jsonobject));
+        }
+
+        return appointments;
     }
 }
