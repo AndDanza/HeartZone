@@ -33,6 +33,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private ActionBarDrawerToggle abdt;
     private Button pokreniBarcodeSkener;
     private final Activity activity = this;
+    private Button therapyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +60,24 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
+                Class<? extends AppCompatActivity> activityClass = null;
+                switch (item.getItemId()){
+                    case R.id.lijekovi : {
+                        break;
+                    }
+                    case R.id.ljekarne : {
+                        break;
+                    }
+                    case R.id.pregledi : {
+                        break;
+                    }
+                    case R.id.dnevniRaspored : {
+                        break;
+                    }
 
-                if (id == R.id.lijekovi) {
-                    Toast.makeText(PopisLijekova_Activity.this, "LIJEKOVI", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.ljekarne) {
-                    Toast.makeText(PopisLijekova_Activity.this, "LJEKARNE", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.pregledi) {
-                    Toast.makeText(PopisLijekova_Activity.this, "PREGLEDI", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.dnevniRaspored) {
-                    Toast.makeText(PopisLijekova_Activity.this, "DNEVNI RASPORED", Toast.LENGTH_SHORT).show();
-                } else if (id == R.id.terapija){
-                    Intent intent = new Intent(getBaseContext(), PopisLijekova_Activity.class);
-                    intent.putExtra("korisnik", loggedUser);
-                    startActivity(intent);
                 }
 
-
-                return true;
+                return false;
             }
         });
 
@@ -107,6 +108,17 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 DataLoadController dataControl = new DataLoadController(manager);
                 List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
                 List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
+            }
+        });
+
+        therapyBtn = (Button) findViewById(R.id.startTherapyActivity);
+
+        therapyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), TerapijaActivity.class);
+                intent.putExtra("korisnik", loggedUser);
+                startActivity(intent);
             }
         });
     }
