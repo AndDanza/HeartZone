@@ -74,10 +74,18 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     case R.id.dnevniRaspored : {
                         break;
                     }
-
+                    case R.id.IzmjenaPodataka : {
+                        Toast.makeText(PopisLijekova_Activity.this,"PROMIJENI PODATKE",Toast.LENGTH_SHORT).show();
+                        Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
+                        changeUserData.putExtra("korisnik",loggedUser);
+                        startActivity(changeUserData);
+                    }
                 }
 
-                return false;
+
+
+
+                return true;
             }
         });
 
