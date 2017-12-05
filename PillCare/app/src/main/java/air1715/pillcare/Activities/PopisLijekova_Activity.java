@@ -39,7 +39,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_lijekova_);
 
-        Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
         if (!loggedUser.exists())
             loggedUser.save();
@@ -69,6 +69,10 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     Toast.makeText(PopisLijekova_Activity.this, "PREGLEDI", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.dnevniRaspored) {
                     Toast.makeText(PopisLijekova_Activity.this, "DNEVNI RASPORED", Toast.LENGTH_SHORT).show();
+                } else if (id == R.id.terapija){
+                    Intent intent = new Intent(getBaseContext(), PopisLijekova_Activity.class);
+                    intent.putExtra("korisnik", loggedUser);
+                    startActivity(intent);
                 }
 
 
