@@ -1,6 +1,9 @@
 package air1715.pillcare.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +21,14 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_izmjena_podataka);
-        changeData();
+        if(isNetworkAvailable()==true) {
+            changeData();
+        }
+        else  {
+        Toast.makeText(IzmjenaPodataka_Activity.this,"Nemate pristup internetu, nije moguće promijeniti podatke",Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
 
@@ -70,5 +80,11 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
 
         );
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
