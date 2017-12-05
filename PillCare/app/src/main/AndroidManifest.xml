@@ -24,6 +24,7 @@
         <activity android:name=".Activities.IzmjenaPodataka_Activity"></activity>
         <activity android:name=".Activities.TerapijaActivity" />
         <activity android:name=".Activities.NovaTerapijaActivity" />
+        <activity android:name=".Activities.PopisPregleda_Activity"></activity>
     </application>
 
 </manifest>
