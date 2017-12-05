@@ -10,6 +10,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +26,7 @@ import java.util.List;
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
+import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 
@@ -34,11 +37,25 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private Button pokreniBarcodeSkener;
     private final Activity activity = this;
     private Button therapyBtn;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_lijekova_);
+
+        //proba recycler
+        context = this;
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        DataLoadController dataControl = new DataLoadController(manager);
+        List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
+        List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
+
+        MedicationsRecyclerAdapter adapter = new MedicationsRecyclerAdapter(medications, companiesData);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(adapter);
 
         final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
@@ -103,11 +120,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-                DataLoadController dataControl = new DataLoadController(manager);
-                List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
-                List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
+                //TODO
             }
         });
 
