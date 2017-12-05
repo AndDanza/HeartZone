@@ -7,6 +7,9 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,6 +36,19 @@ public class Pregled extends BaseModel implements Serializable {
     @Column Korisnik korisnik;
 
     public Pregled() {
+    }
+
+    public Pregled(JSONObject jsonObject) throws JSONException {
+        this.id = jsonObject.getInt("id");
+        this.termin = jsonObject.getString("termin");
+        this.biljeska = jsonObject.getString("biljeska");
+        this.vrijemeUpozorenja = jsonObject.getString("vrijeme");
+        int active=jsonObject.getInt("aktivan");
+        if (active<1)
+            this.aktivan = false;
+        else
+            this.aktivan = true;
+        this.korisnikId = jsonObject.getInt("korisnik_id");
     }
 
     public int getId() {
@@ -93,5 +109,12 @@ public class Pregled extends BaseModel implements Serializable {
 
     public List<Pregled> getAll(){
         return SQLite.select().from(Pregled.class).queryList();
+    }
+
+    @Override
+    public String toString() {
+        return "Termin: "+termin+ System.getProperty ("line.separator")
+                +"Biljeska: "+biljeska+ System.getProperty ("line.separator")
+                +"Upozori me: "+vrijemeUpozorenja+ System.getProperty ("line.separator");
     }
 }

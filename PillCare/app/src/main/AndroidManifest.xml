@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".Activities.Registracija_Activity" />
         <activity android:name=".Activities.PopisLijekova_Activity" />
-        <activity android:name=".Activities.IzmjenaPodataka_Activity"></activity>
+        <activity android:name=".Activities.IzmjenaPodataka_Activity" />
+        <activity android:name=".Activities.PopisPregleda_Activity"></activity>
     </application>
 
 </manifest>

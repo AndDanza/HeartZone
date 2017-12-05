@@ -66,7 +66,9 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 } else if (id == R.id.ljekarne) {
                     Toast.makeText(PopisLijekova_Activity.this, "LJEKARNE", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.pregledi) {
-                    Toast.makeText(PopisLijekova_Activity.this, "PREGLEDI", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getBaseContext(), PopisPregleda_Activity.class);
+                    intent.putExtra("korisnik", loggedUser);
+                    startActivity(intent);
                 } else if (id == R.id.dnevniRaspored) {
                     Toast.makeText(PopisLijekova_Activity.this, "DNEVNI RASPORED", Toast.LENGTH_SHORT).show();
                 } else if (id == R.id.terapija){
@@ -105,8 +107,9 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
                 DataLoadController dataControl = new DataLoadController(manager);
-                List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
-                List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
+                List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications", null);
+                List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null);
+
             }
         });
     }
