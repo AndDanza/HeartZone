@@ -2,6 +2,7 @@ package air1715.pillcare.DataLoaders;
 
 import java.util.List;
 
+import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Proizvodac;
@@ -12,8 +13,9 @@ import air1715.database.entiteti.Terapija;
  */
 
 public class DatabaseDataLoader implements DataLoader {
+
     @Override
-    public Object GetData(String dataType) {
+    public Object GetData(String dataType, Korisnik user) {
         return null;
     }
 
@@ -33,7 +35,7 @@ public class DatabaseDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Pregled> GetAppointments() {
+    public List<Pregled> GetAppointments(Korisnik user) {
         return null;
     }
 }

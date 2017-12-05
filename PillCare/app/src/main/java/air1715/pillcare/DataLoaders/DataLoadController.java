@@ -8,6 +8,8 @@ import android.provider.ContactsContract;
 import java.net.InetAddress;
 import java.util.List;
 
+import air1715.database.entiteti.Korisnik;
+
 /**
  * Created by Andrea on 29.11.2017.
  */
@@ -19,7 +21,7 @@ public class DataLoadController {
         this.connection = connectionMobile;
     }
 
-    public Object GetData(String dataType){
+    public Object GetData(String dataType, Korisnik user){
         Object data = null;
         boolean isConnectedToInternet = false;
         DataLoader dataLoader = null;
@@ -33,7 +35,7 @@ public class DataLoadController {
             dataLoader = new DatabaseDataLoader();
         }
 
-        data = dataLoader.GetData(dataType);
+        data = dataLoader.GetData(dataType, user);
 
         return data;
     }
