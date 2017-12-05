@@ -22,6 +22,8 @@
         <activity android:name=".Activities.Registracija_Activity" />
         <activity android:name=".Activities.PopisLijekova_Activity" />
         <activity android:name=".Activities.IzmjenaPodataka_Activity"></activity>
+        <activity android:name=".Activities.TerapijaActivity" />
+        <activity android:name=".Activities.NovaTerapijaActivity" />
     </application>
 
 </manifest>
