@@ -83,8 +83,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 }
 
 
-
-
                 return true;
             }
         });
