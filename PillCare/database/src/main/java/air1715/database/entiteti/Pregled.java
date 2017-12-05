@@ -35,7 +35,12 @@ public class Pregled extends BaseModel implements Serializable {
     @ForeignKey(tableClass = Korisnik.class)
     @Column Korisnik korisnik;
 
-    public Pregled() {
+    public Pregled(String terminDatumVrijeme, String biljeska, String upozorenjeDatumVrijeme, boolean aktivan, int korisnikId) {
+        this.termin = terminDatumVrijeme;
+        this.biljeska = biljeska;
+        this.vrijemeUpozorenja = upozorenjeDatumVrijeme;
+        this.aktivan = aktivan;
+        this.korisnikId =  korisnikId;
     }
 
     public Pregled(JSONObject jsonObject) throws JSONException {
@@ -50,6 +55,8 @@ public class Pregled extends BaseModel implements Serializable {
             this.aktivan = true;
         this.korisnikId = jsonObject.getInt("korisnik_id");
     }
+
+    public Pregled(){}
 
     public int getId() {
         return id;

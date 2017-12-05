@@ -69,13 +69,14 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         break;
                     }
                     case R.id.pregledi : {
-                        break;
+                        Intent changeUserData=new Intent(PopisLijekova_Activity.this,PopisPregleda_Activity.class);
+                        changeUserData.putExtra("korisnik",loggedUser);
+                        startActivity(changeUserData);
                     }
                     case R.id.dnevniRaspored : {
                         break;
                     }
                     case R.id.IzmjenaPodataka : {
-                        Toast.makeText(PopisLijekova_Activity.this,"PROMIJENI PODATKE",Toast.LENGTH_SHORT).show();
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
                         changeUserData.putExtra("korisnik",loggedUser);
                         startActivity(changeUserData);
@@ -112,8 +113,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
                 DataLoadController dataControl = new DataLoadController(manager);
-                List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
-                List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
+                List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications",null);
+                List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies",null);
             }
         });
 
