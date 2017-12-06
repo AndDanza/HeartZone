@@ -22,10 +22,12 @@ import air1715.pillcare.R;
 public class MedicationsRecyclerAdapter extends RecyclerView.Adapter<MedicationsViewHolder> {
     private List<Lijek> medications;
     private List<Proizvodac> companies;
+    private final int layout_id;
 
-    public MedicationsRecyclerAdapter(final List<Lijek> medications, final List<Proizvodac> companies) {
+    public MedicationsRecyclerAdapter(final int layoutID, final List<Lijek> medications, final List<Proizvodac> companies) {
         this.medications = medications;
         this.companies = companies;
+        this.layout_id = layoutID;
     }
 
     @Override
@@ -60,6 +62,6 @@ public class MedicationsRecyclerAdapter extends RecyclerView.Adapter<Medications
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.medication_list_item;
+        return layout_id;
     }
 }

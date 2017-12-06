@@ -34,8 +34,8 @@ public class MedicationsViewHolder extends RecyclerView.ViewHolder{
 
     public void BindViewWithData(Lijek medication, Proizvodac company){
         medicationName.setText(medication.getNaziv());
-        medicationSize.setText(String.valueOf(medication.getBrojTableta()));
-        medicationStrength.setText(String.valueOf(medication.getJacina()));
+        medicationSize.setText(String.valueOf(R.string.pillNumber + " " + medication.getBrojTableta()));
+        medicationStrength.setText(String.valueOf(R.id.pillStrenght + " " + medication.getJacina()) + "mg");
         medicationCompany.setText(company.getNaziv());
         Picasso.with(itemView.getContext()).load(medication.getPakiranje()).into(medicationImage);
     }
@@ -46,10 +46,5 @@ public class MedicationsViewHolder extends RecyclerView.ViewHolder{
         medicationStrength = (TextView) mItemView.findViewById(R.id.medication_strenght);
         medicationCompany = (TextView) mItemView.findViewById(R.id.medication_company);
         medicationImage = (ImageView) mItemView.findViewById(R.id.medication_image);
-    }
-
-    public void MedicationSelected(){
-        //TODO
-        //implementirat da se na klik otvaraju detalji o lijeku
     }
 }

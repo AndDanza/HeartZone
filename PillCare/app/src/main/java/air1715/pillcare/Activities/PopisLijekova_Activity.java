@@ -10,7 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,10 +51,11 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
         List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
 
-        MedicationsRecyclerAdapter adapter = new MedicationsRecyclerAdapter(medications, companiesData);
+        MedicationsRecyclerAdapter adapter =
+                new MedicationsRecyclerAdapter(R.layout.medication_tile_item, medications, companiesData);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new GridLayoutManager(context, Math.round(medications.size()/2)+1));
         recyclerView.setAdapter(adapter);
 
         final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
