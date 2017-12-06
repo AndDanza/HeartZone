@@ -49,39 +49,55 @@
                 android:layout_marginRight="4dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                tools:text="Demo medication name" />
+                tools:text="Demo name" />
 
             <TextView
                 android:id="@+id/medications_size"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_below="@+id/medication_name"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/strenght_lable"
                 android:text="Number of pills" />
 
             <TextView
                 android:id="@+id/medication_strenght"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/medications_size"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginTop="5dp"
-                tools:text="Pill strenght" />
+                android:textAlignment="viewStart"
+                tools:text="Pill strenght"
+                android:layout_below="@+id/medications_size"
+                android:layout_toEndOf="@+id/strenght_lable" />
 
             <TextView
                 android:id="@+id/medication_company"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/medication_strenght"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginTop="5dp"
-                tools:text="Manufacturer" />
+                tools:text="Manufacturer"
+                android:layout_below="@+id/medication_strenght"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/size_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignBaseline="@+id/medication_strenght"
+                android:layout_alignBottom="@+id/medication_strenght"
+                android:layout_alignStart="@+id/strenght_lable"
+                android:text="@string/pillStrenght" />
+
+            <TextView
+                android:id="@+id/strenght_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignStart="@+id/medication_name"
+                android:layout_below="@+id/medication_name"
+                android:text="@string/pillNumber" />
         </RelativeLayout>
 
     </RelativeLayout>

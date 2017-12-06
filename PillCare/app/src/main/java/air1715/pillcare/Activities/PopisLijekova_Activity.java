@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,7 +27,10 @@ import java.util.List;
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
+import air1715.pillcare.Adapters.MedicationsListRepresentation;
 import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
+import air1715.pillcare.Adapters.MedicationsTileRepresentation;
+import air1715.pillcare.Adapters.ModularRepresentation;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 
@@ -39,6 +43,10 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private Button therapyBtn;
     private Context context;
 
+    ModularRepresentation medicationPreview;
+    List<Lijek> medications;
+    List<Proizvodac> companies;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +56,12 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         context = this;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = new DataLoadController(manager);
-        List<Lijek> medications = (List<Lijek>) dataControl.GetData("medications");
-        List<Proizvodac> companiesData = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
+        medications = (List<Lijek>) dataControl.GetData("medications");
+        companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies");
 
-        MedicationsRecyclerAdapter adapter =
-                new MedicationsRecyclerAdapter(R.layout.medication_tile_item, medications, companiesData);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, Math.round(medications.size()/2)+1));
-        recyclerView.setAdapter(adapter);
+        medicationPreview = new MedicationsTileRepresentation(findViewById(R.id.main_recycler), context);
+        medicationPreview.LoadData(medications, companies);
+        medicationPreview.SetAdapter();
 
         final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
@@ -121,7 +126,16 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                View recycler = findViewById(R.id.main_recycler);
+
+                if(medicationPreview.getClass() == MedicationsTileRepresentation.class) {
+                    medicationPreview = new MedicationsListRepresentation(recycler, context);
+                }
+                else{
+                    medicationPreview = new MedicationsTileRepresentation(recycler, context);
+                }
+                medicationPreview.LoadData(medications, companies);
+                medicationPreview.SetAdapter();
             }
         });
 

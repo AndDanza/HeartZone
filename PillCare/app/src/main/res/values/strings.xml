@@ -11,4 +11,5 @@
     <string name="inputEmail">Email</string>
     <string name="input_RetypePassword">Ponovite Lozinku</string>
     <string name="pillNumber">Broj tableta:</string>
+    <string name="pillStrenght">Jačina(mg):</string>
 </resources>
