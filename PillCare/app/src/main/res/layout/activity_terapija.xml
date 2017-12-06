@@ -77,17 +77,18 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout">
+        android:layout_below="@+id/relativeLayout"
+        android:layout_marginTop="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/relativeLayout"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/medication_image"
+                android:id="@+id/medication_image_th"
                 android:layout_width="220dp"
                 android:layout_height="100dp"
                 android:layout_alignParentTop="true"
@@ -95,108 +96,116 @@
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/medication_name_lable"
+                android:id="@+id/medication_name_th"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/medication_image"
+                android:layout_below="@+id/medication_image_th"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:text="Medication name"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/medication_strength_lable"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/relativeLayout"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="154dp"
-                android:text="@string/pillStrenght"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
 
-            <TextView
-                android:id="@+id/medication_num_pills_lable"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignStart="@+id/medication_strength_lable"
-                android:layout_below="@+id/medication_strength_lable"
-                android:layout_marginTop="15dp"
-                android:text="@string/pillNumber"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/medication_strength_lable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/relativeLayout"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="154dp"
+                    android:text="@string/pillStrenght"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/medications_help_lable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/medication_num_pills_lable"
-                android:layout_below="@+id/medication_num_pills_lable"
-                android:layout_marginTop="14dp"
-                android:text="@string/pillWarning"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/medication_num_pills_lable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/medication_strength_lable"
+                    android:layout_below="@+id/medication_strength_lable"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/pillNumber"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/medication_strength"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_alignBaseline="@+id/medication_strength_lable"
-                android:layout_alignBottom="@+id/medication_strength_lable"
-                android:layout_toEndOf="@+id/medication_strength_lable"
-                android:text="TextView"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/medications_help_lable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/medication_num_pills_lable"
+                    android:layout_below="@+id/medication_num_pills_lable"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/pillWarning"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/medication_num_pills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="15sp"
-                android:layout_alignBaseline="@+id/medication_num_pills_lable"
-                android:layout_alignBottom="@+id/medication_num_pills_lable"
-                android:layout_toEndOf="@+id/medication_num_pills_lable" />
+                <TextView
+                    android:id="@+id/medication_strength_th"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/medication_strength_lable"
+                    android:layout_alignBottom="@+id/medication_strength_lable"
+                    android:layout_alignStart="@+id/medication_num_pills"
+                    android:text="TextView"
+                    android:textSize="19sp" />
 
-            <TextView
-                android:id="@+id/medication_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="15sp"
-                android:layout_below="@+id/medications_help_lable"
-                android:layout_alignStart="@+id/medications_help_lable" />
+                <TextView
+                    android:id="@+id/medication_num_pills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/medication_num_pills_lable"
+                    android:layout_alignBottom="@+id/medication_num_pills_lable"
+                    android:layout_alignEnd="@+id/pharma_company_logo"
+                    android:text="TextView"
+                    android:textSize="19sp" />
 
-            <TextView
-                android:id="@+id/pharma_company_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pharmaCompany"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_alignBaseline="@+id/pharma_company"
-                android:layout_alignBottom="@+id/pharma_company"
-                android:layout_alignStart="@+id/medication_help" />
+                <TextView
+                    android:id="@+id/pharma_company_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/pharma_company"
+                    android:layout_alignBottom="@+id/pharma_company"
+                    android:layout_alignStart="@+id/medication_help"
+                    android:text="@string/pharmaCompany"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/pharma_company"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="TextView"
-                android:textSize="15sp"
-                android:layout_marginTop="24dp"
-                android:layout_below="@+id/medication_help"
-                android:layout_toEndOf="@+id/pharma_company_label" />
+                <TextView
+                    android:id="@+id/medication_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="19sp"
+                    android:layout_marginRight="25dp"
+                    android:layout_below="@+id/medications_help_lable"
+                    android:layout_alignStart="@+id/medications_help_lable" />
 
-            <ImageView
-                android:id="@+id/pharma_company_logo"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                android:layout_below="@+id/pharma_company"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="17dp"
-                app:srcCompat="@mipmap/ic_launcher" />
+                <TextView
+                    android:id="@+id/pharma_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/medication_help"
+                    android:layout_marginTop="24dp"
+                    android:layout_toEndOf="@+id/pharma_company_label"
+                    android:text="TextView"
+                    android:textSize="19sp" />
+
+                <ImageView
+                    android:id="@+id/pharma_company_logo"
+                    android:layout_width="130dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/pharma_company"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="17dp"
+                    app:srcCompat="@mipmap/ic_launcher" />
+            </RelativeLayout>
 
         </RelativeLayout>
     </ScrollView>

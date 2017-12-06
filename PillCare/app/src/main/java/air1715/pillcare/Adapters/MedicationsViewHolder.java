@@ -1,6 +1,7 @@
 package air1715.pillcare.Adapters;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,9 @@ public class MedicationsViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     public void BindViewWithData(Lijek medication, Proizvodac company){
+        this.medication = medication;
+        this.company = company;
+
         medicationName.setText(medication.getNaziv());
         medicationSize.setText(String.valueOf(medication.getBrojTableta()));
         medicationStrength.setText(String.valueOf(medication.getJacina()));
@@ -46,11 +50,11 @@ public class MedicationsViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     private void GetViewElements() {
-        medicationName = (TextView) mItemView.findViewById(R.id.medication_name);
+        medicationName = (TextView) mItemView.findViewById(R.id.medication_name_th);
         medicationSize = (TextView) mItemView.findViewById(R.id.medications_size);
         medicationStrength = (TextView) mItemView.findViewById(R.id.medication_strenght);
         medicationCompany = (TextView) mItemView.findViewById(R.id.medication_company);
-        medicationImage = (ImageView) mItemView.findViewById(R.id.medication_image);
+        medicationImage = (ImageView) mItemView.findViewById(R.id.medication_image_th);
     }
 
     @Override
