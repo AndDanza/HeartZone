@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="160dp"
+    android:layout_height="200dp"
     android:layout_gravity="center"
     android:layout_marginTop="1dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:selectableItemBackground"
-    android:padding="5dp"
+    android:padding="3dp"
     card_view:cardBackgroundColor="@color/cardview_shadow_end_color"
-    card_view:cardElevation="4dp">
+    card_view:cardElevation="2dp">
 
     <RelativeLayout
-        android:layout_width="155dp"
-        android:layout_height="178dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="2dp">
 
         <ImageView
@@ -32,8 +31,10 @@
             card_view:srcCompat="@mipmap/ic_launcher" />
 
         <RelativeLayout
+            android:id="@+id/details_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_below="@+id/medication_image"
             android:layout_marginTop="7dp">
 
@@ -45,28 +46,28 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="Demo name" />
 
             <TextView
                 android:id="@+id/medications_size"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/medication_name"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:text="Number of pills" />
+                android:layout_toEndOf="@+id/size_lable"
+                android:text="num" />
 
             <TextView
                 android:id="@+id/medication_strenght"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/medications_size"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
+                android:layout_toEndOf="@+id/strenght_lable"
                 tools:text="Pill strenght" />
 
             <TextView
@@ -78,6 +79,23 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 tools:text="Manufacturer" />
+
+            <TextView
+                android:id="@+id/size_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_above="@+id/medication_strenght"
+                android:layout_alignStart="@+id/medication_name"
+                android:text="@string/pillNumber" />
+
+            <TextView
+                android:id="@+id/strenght_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignStart="@+id/size_lable"
+                android:layout_below="@+id/size_lable"
+                android:text="@string/pillStrenght" />
+
         </RelativeLayout>
 
     </RelativeLayout>
