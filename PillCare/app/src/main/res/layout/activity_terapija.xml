@@ -1,172 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     tools:context="air1715.pillcare.Activities.TerapijaActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:layout_editor_absoluteY="81dp">
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:padding="6dp">
 
-    <ImageView
-        android:id="@+id/medicamentImageNewTherapy"
-        android:layout_width="172dp"
-        android:layout_height="124dp"
+        <ImageButton
+            android:id="@+id/newTherapyBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="26dp"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@android:color/background_light"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        <TextView
+            android:id="@+id/start_therapy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/startTherapyBtn"
+            android:layout_centerHorizontal="true"
+            android:text="@string/startTherapy"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/new_therapy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/newTherapyBtn"
+            android:layout_alignStart="@+id/newTherapyBtn"
+            android:layout_below="@+id/newTherapyBtn"
+            android:text="@string/newTherapy"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/medicamentNameAndPackageSize"
-        android:layout_width="129dp"
-        android:layout_height="47dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:text="N/A"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicamentImageNewTherapy" />
+        <TextView
+            android:id="@+id/stop_therapy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stopTherapy"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_below="@+id/stopTherapyBtn"
+            android:layout_alignStart="@+id/stopTherapyBtn" />
 
-    <TextView
-        android:id="@+id/medicamentPackageSize"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="N/A"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/medicamentNameAndPackageSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicamentNameAndPackageSize"
-        app:layout_constraintVertical_bias="0.294" />
+        <ImageButton
+            android:id="@+id/startTherapyBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@android:drawable/ic_media_play"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/start_therapy_label" />
 
-    <TextView
-        android:id="@+id/medicamentPackageLeft"
-        android:layout_width="226dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="N/A"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/medicamentPackageSize"
-        app:layout_constraintVertical_bias="0.761" />
+        <ImageButton
+            android:id="@+id/stopTherapyBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="30dp"
+            app:srcCompat="@android:drawable/ic_media_pause"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
 
-    <ImageButton
-        android:id="@+id/newTherapyBtn"
-        android:layout_width="67dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicamentPackageLeft"
-        app:srcCompat="@android:drawable/ic_input_add" />
+    </RelativeLayout>
 
-    <ImageButton
-        android:id="@+id/startTherapyBtn"
-        android:layout_width="67dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/stopTherapyBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTherapyBtn"
-        app:layout_constraintVertical_bias="0.444"
-        app:srcCompat="@android:drawable/ic_media_play" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout">
 
-    <ImageButton
-        android:id="@+id/stopTherapyBtn"
-        android:layout_width="67dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_media_pause" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relativeLayout"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="227dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Nova terapija"
-        android:textSize="25dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.322"
-        app:layout_constraintStart_toEndOf="@+id/newTherapyBtn" />
+            <ImageView
+                android:id="@+id/medication_image"
+                android:layout_width="220dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="227dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Pokreni terapiju"
-        android:textSize="25dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.322"
-        app:layout_constraintStart_toEndOf="@+id/startTherapyBtn" />
+            <TextView
+                android:id="@+id/medication_name_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/medication_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="Medication name"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="227dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Zaustavi terapiju"
-        android:textSize="25dp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.322"
-        app:layout_constraintStart_toEndOf="@+id/stopTherapyBtn" />
+            <TextView
+                android:id="@+id/medication_strength_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativeLayout"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="154dp"
+                android:text="@string/pillStrenght"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/medication_num_pills_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignStart="@+id/medication_strength_lable"
+                android:layout_below="@+id/medication_strength_lable"
+                android:layout_marginTop="15dp"
+                android:text="@string/pillNumber"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-</android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/medications_help_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/medication_num_pills_lable"
+                android:layout_below="@+id/medication_num_pills_lable"
+                android:layout_marginTop="14dp"
+                android:text="@string/pillWarning"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/medication_strength"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignBaseline="@+id/medication_strength_lable"
+                android:layout_alignBottom="@+id/medication_strength_lable"
+                android:layout_toEndOf="@+id/medication_strength_lable"
+                android:text="TextView"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/medication_num_pills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:layout_alignBaseline="@+id/medication_num_pills_lable"
+                android:layout_alignBottom="@+id/medication_num_pills_lable"
+                android:layout_toEndOf="@+id/medication_num_pills_lable" />
+
+            <TextView
+                android:id="@+id/medication_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:layout_below="@+id/medications_help_lable"
+                android:layout_alignStart="@+id/medications_help_lable" />
+
+            <TextView
+                android:id="@+id/pharma_company_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pharmaCompany"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignBaseline="@+id/pharma_company"
+                android:layout_alignBottom="@+id/pharma_company"
+                android:layout_alignStart="@+id/medication_help" />
+
+            <TextView
+                android:id="@+id/pharma_company"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/medication_help"
+                android:layout_toEndOf="@+id/pharma_company_label" />
+
+            <ImageView
+                android:id="@+id/pharma_company_logo"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/pharma_company"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
