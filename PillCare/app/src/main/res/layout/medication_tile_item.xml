@@ -20,7 +20,7 @@
         android:layout_margin="2dp">
 
         <ImageView
-            android:id="@+id/medication_image"
+            android:id="@+id/medication_image_th"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
@@ -35,11 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/medication_image"
+            android:layout_below="@+id/medication_image_th"
             android:layout_marginTop="7dp">
 
             <TextView
-                android:id="@+id/medication_name"
+                android:id="@+id/medication_name_th"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -54,7 +54,7 @@
                 android:id="@+id/medications_size"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_below="@+id/medication_name"
+                android:layout_below="@+id/medication_name_th"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_toEndOf="@+id/size_lable"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_above="@+id/medication_strenght"
-                android:layout_alignStart="@+id/medication_name"
+                android:layout_alignStart="@+id/medication_name_th"
                 android:text="@string/pillNumber" />
 
             <TextView

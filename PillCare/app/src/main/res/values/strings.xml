@@ -12,4 +12,9 @@
     <string name="input_RetypePassword">Ponovite Lozinku</string>
     <string name="pillNumber">Broj tableta:</string>
     <string name="pillStrenght">Jačina(mg):</string>
+    <string name="newTherapy">Kreiraj</string>
+    <string name="startTherapy">Pokreni</string>
+    <string name="stopTherapy">Zaustavi</string>
+    <string name="pillWarning">Upute:</string>
+    <string name="pharmaCompany">Proizvodi:</string>
 </resources>
