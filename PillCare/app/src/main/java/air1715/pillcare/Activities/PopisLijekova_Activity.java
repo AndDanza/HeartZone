@@ -31,6 +31,7 @@ import air1715.pillcare.Adapters.MedicationsListRepresentation;
 import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularRepresentation;
+import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 
@@ -42,8 +43,9 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private final Activity activity = this;
     private Button therapyBtn;
     private Context context;
+    private ModularityController presentationController;
 
-    ModularRepresentation medicationPreview;
+
     List<Lijek> medications;
     List<Proizvodac> companies;
 
@@ -59,9 +61,15 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         medications = (List<Lijek>) dataControl.GetData("medications", null, null);
         companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null, null);
 
-        medicationPreview = new MedicationsTileRepresentation(findViewById(R.id.main_recycler), context);
-        medicationPreview.LoadData(medications, companies);
-        medicationPreview.SetAdapter();
+        View recycler = findViewById(R.id.main_recycler);
+
+        presentationController = ModularityController.GetInstance();
+        presentationController.SetData(medications, companies);
+        presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
+        presentationController.AddModularOption(new MedicationsListRepresentation(recycler, context));
+
+        presentationController.ShowModularOption();
+
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
@@ -131,16 +139,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View recycler = findViewById(R.id.main_recycler);
 
-                if(medicationPreview.getClass() == MedicationsTileRepresentation.class) {
-                    medicationPreview = new MedicationsListRepresentation(recycler, context);
-                }
-                else{
-                    medicationPreview = new MedicationsTileRepresentation(recycler, context);
-                }
-                medicationPreview.LoadData(medications, companies);
-                medicationPreview.SetAdapter();
+                presentationController.ShowModularOption();
             }
         });
     }
