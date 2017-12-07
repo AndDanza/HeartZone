@@ -76,7 +76,7 @@ public class TerapijaActivity extends AppCompatActivity {
                     intent.putExtra("medication", medication);
                     startActivity(intent);
                 } else {
-                    PopUpUtils.sendMessage(context, "Već imate dodanu navedenu terapiju");
+                    PopUpUtils.sendMessage(context, "Već imate dodanu terapiju s navedenim lijekom");
                 }
             }
         });
@@ -91,7 +91,7 @@ public class TerapijaActivity extends AppCompatActivity {
                 if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                     PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
                 } else
-                    PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
+                    PopUpUtils.sendMessage(context, "Niste napravili terapiju s ovim lijekom");
 
             }
         });
@@ -106,7 +106,7 @@ public class TerapijaActivity extends AppCompatActivity {
                 if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                     PopUpUtils.sendMessage(context, "Terapija je zaustavljenja");
                 } else
-                    PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
+                    PopUpUtils.sendMessage(context, "Niste napravili terapiju s ovim lijekom");
             }
         });
 

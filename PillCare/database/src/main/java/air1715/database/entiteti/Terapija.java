@@ -60,7 +60,7 @@ public class Terapija extends BaseModel implements Serializable {
     }
 
     public Terapija(JSONObject jsonObject) throws JSONException {
-        this.aktivna = jsonObject.getBoolean("aktivna");
+        this.aktivna = jsonObject.getString("aktivna").equals("1") ? true : false;
         this.lijekoviId = jsonObject.getInt("lijekoviId");
         this.korisnikId = jsonObject.getInt("korisnikId");
         this.pocetak = jsonObject.getString("pocetak");
