@@ -47,6 +47,7 @@ public class NoviPregled_Activity extends AppCompatActivity {
         final Map params = new HashMap<String, String>();
 
         final Context context = getApplicationContext();
+        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
         inputTerminDatum = (TextView) findViewById(R.id.inputTerminDatum);
         inputTerminVrijeme = (TextView) findViewById(R.id.inputTerminVrijeme);

@@ -30,7 +30,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_pregleda);
 
-        loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        loggedUser = PrijavaActivity.getLoggedUser();
 
         FillWithData();
 
@@ -55,7 +55,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
     private void FillWithData(){
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = new DataLoadController(manager);
-        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", loggedUser);
+        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", loggedUser, null);
 
         ListView listViewAppointments=(ListView) findViewById(R.id.listViewPregledi);
 
