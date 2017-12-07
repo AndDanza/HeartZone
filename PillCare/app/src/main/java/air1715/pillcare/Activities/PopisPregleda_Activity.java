@@ -23,16 +23,39 @@ import air1715.pillcare.R;
 
 public class PopisPregleda_Activity extends AppCompatActivity {
 
+    Korisnik loggedUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_pregleda);
 
-        final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
+        loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
+        FillWithData();
+
+        Button openNoviPregledActivity = (Button) findViewById(R.id.btnDodajNoviPregled);
+        openNoviPregledActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openActivity = new Intent(PopisPregleda_Activity.this, NoviPregled_Activity.class);
+                openActivity.putExtra("korisnik",loggedUser);
+                startActivity(openActivity);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        FillWithData();
+    }
+
+    private void FillWithData(){
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = new DataLoadController(manager);
-        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", loggedUser, null);
+        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", loggedUser);
 
         ListView listViewAppointments=(ListView) findViewById(R.id.listViewPregledi);
 
@@ -45,18 +68,6 @@ public class PopisPregleda_Activity extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
-
-        Button openNoviPregledActivity = (Button) findViewById(R.id.btnDodajNoviPregled);
-        openNoviPregledActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent openActivity = new Intent(PopisPregleda_Activity.this, NoviPregled_Activity.class);
-                startActivity(openActivity);
-            }
-        });
     }
-
-
-
 
 }
