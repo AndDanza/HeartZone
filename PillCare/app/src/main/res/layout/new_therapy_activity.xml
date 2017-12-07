@@ -32,8 +32,8 @@
 
     <TextView
         android:id="@+id/medicamentNameAndPackageSize"
-        android:layout_width="141dp"
-        android:layout_height="60dp"
+        android:layout_width="146dp"
+        android:layout_height="77dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -65,12 +65,12 @@
         android:layout_height="43dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.057"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/medicamentNameAndPackageSize" />
 
@@ -93,13 +93,13 @@
         android:layout_width="50dp"
         android:layout_height="43dp"
         android:layout_marginEnd="8dp"
-        android:gravity="center"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="69dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/medicamentNameAndPackageSize" />
 
@@ -107,8 +107,8 @@
         android:id="@+id/textView11"
         android:layout_width="106dp"
         android:layout_height="31dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="60dp"
         android:text="dnevno"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"

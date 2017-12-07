@@ -10,15 +10,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
+import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
 import air1715.pillcare.R;
 import air1715.pillcare.Utils.HttpUtils;
@@ -33,6 +36,7 @@ public class NovaTerapijaActivity extends AppCompatActivity {
     Context context;
 
     Lijek medication;
+    Proizvodac company;
     Korisnik loggedUser;
 
     EditText singleDoseEditText;
@@ -57,6 +61,10 @@ public class NovaTerapijaActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         medication = (Lijek) getIntent().getSerializableExtra("medication");
+        company = (Proizvodac) getIntent().getSerializableExtra("company");
+
+        LoadDataInXML(medication, company);
+
         loggedUser = PrijavaActivity.getLoggedUser();
 
         singleDoseEditText = (EditText) findViewById(R.id.singleDoseEditText);
@@ -110,6 +118,21 @@ public class NovaTerapijaActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+    }
+
+    private void LoadDataInXML(Lijek medication, Proizvodac company) {
+        View itemView = getWindow().getDecorView();
+
+        ImageView packImage = (ImageView) findViewById(R.id.medicamentImageNewTherapy);
+        TextView medicationName = (TextView) findViewById(R.id.medicamentNameAndPackageSize);
+
+
+        Picasso.with(itemView.getContext()).load(medication.getPakiranje()).into(packImage);
+        medicationName.setText(medication.getNaziv() + ". Broj tableta: " + String.valueOf(medication.getBrojTableta()) + ". Jacina: " + String.valueOf(medication.getJacina()));
+
 
     }
 }
