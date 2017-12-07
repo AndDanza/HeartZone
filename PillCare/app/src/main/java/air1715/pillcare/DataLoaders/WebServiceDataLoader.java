@@ -16,6 +16,7 @@ import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
+import air1715.pillcare.Activities.PrijavaActivity;
 import air1715.pillcare.Utils.HttpUtils;
 
 /**
@@ -27,16 +28,18 @@ public class WebServiceDataLoader implements DataLoader {
     public WebServiceDataLoader() {
     }
 
+    Korisnik korisnik = PrijavaActivity.getLoggedUser();
+
     @Override
-    public Object GetData(String dataType, Korisnik user) {
+    public Object GetData(String dataType, Korisnik user, Object object) {
         Object returnData = null;
 
         switch (dataType) {
             case "medications":
                 returnData = (Object) GetMedications();
                 break;
-            case "therapies":
-                returnData = (Object) GetTherapies();
+            case "allTherapies":
+                returnData = (Object) GetAllTherapies(korisnik);
                 break;
             case "pharmaCompanies":
                 returnData = (Object) GetPharmaCompanies();
@@ -44,6 +47,8 @@ public class WebServiceDataLoader implements DataLoader {
             case "appointments":
                 returnData = (Object) GetAppointments(user);
                 break;
+            case "specificTherapy":
+                returnData = (Object) getSpecificTherapy(korisnik, object);
         }
 
         return returnData;
@@ -83,7 +88,7 @@ public class WebServiceDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Terapija> GetTherapies(){
+    public List<Terapija> GetAllTherapies(Korisnik korisnik){
         return null;
     }
 
@@ -149,5 +154,27 @@ public class WebServiceDataLoader implements DataLoader {
         }
 
         return appointments;
+    }
+
+    public Terapija getSpecificTherapy(Korisnik user, Object medicament) {
+        Map params = new HashMap<String, String>();
+        params.put("user", user);
+        params.put("medicament", (Lijek) medicament);
+        JSONObject response = HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/specificnaTerapija.php");
+        Terapija terapija = null;
+        try {
+            if(response != null) {
+                Log.d("response", "response razlicit od null pregledi");
+                terapija = new Terapija(response);
+            }
+            else {
+                Log.d("null", "null u response-u appointments");
+            }
+        }
+        catch (JSONException e) {
+            System.out.println("JsonExceptionAppointments. " + e.getLocalizedMessage());
+        }
+
+        return terapija;
     }
 }

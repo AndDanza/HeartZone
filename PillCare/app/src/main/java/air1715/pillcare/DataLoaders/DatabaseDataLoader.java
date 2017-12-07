@@ -15,17 +15,12 @@ import air1715.database.entiteti.Terapija;
 public class DatabaseDataLoader implements DataLoader {
 
     @Override
-    public Object GetData(String dataType, Korisnik user) {
-        return null;
-    }
-
-    @Override
     public List<Lijek> GetMedications() {
         return null;
     }
 
     @Override
-    public List<Terapija> GetTherapies() {
+    public List<Terapija> GetAllTherapies(Korisnik korisnik) {
         return null;
     }
 
@@ -36,6 +31,11 @@ public class DatabaseDataLoader implements DataLoader {
 
     @Override
     public List<Pregled> GetAppointments(Korisnik user) {
+        return null;
+    }
+
+    @Override
+    public Object GetData(String dataType, Korisnik user, Object object) {
         return null;
     }
 }

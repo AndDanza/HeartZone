@@ -56,7 +56,7 @@ public class NovaTerapijaActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
-        medication = (Lijek) getIntent().getSerializableExtra("lijek");
+        medication = (Lijek) getIntent().getSerializableExtra("medication");
         loggedUser = PrijavaActivity.getLoggedUser();
 
         singleDoseEditText = (EditText) findViewById(R.id.singleDoseEditText);

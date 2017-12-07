@@ -7,6 +7,9 @@ import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,32 +20,54 @@ import java.util.List;
 
 public class Terapija extends BaseModel implements Serializable {
     @PrimaryKey
-    @Column int lijekoviId;
+    @Column
+    int lijekoviId;
 
     @PrimaryKey
-    @Column int korisnikId;
+    @Column
+    int korisnikId;
 
-    @Column String pocetak;
+    @Column
+    String pocetak;
 
-    @Column String kraj;
+    @Column
+    String kraj;
 
-    @Column Double pojedinacnaDoza;
+    @Column
+    Double pojedinacnaDoza;
 
-    @Column int brojDnevnihDoza;
+    @Column
+    int brojDnevnihDoza;
 
-    @Column boolean aktivna;
+    @Column
+    boolean aktivna;
 
-    @Column int upozorenje;
+    @Column
+    int upozorenje;
 
-    @Column int razmakDnevnihDoza;
+    @Column
+    int razmakDnevnihDoza;
 
     @ForeignKey(tableClass = Korisnik.class)
-    @Column Korisnik korisnik;
+    @Column
+    Korisnik korisnik;
 
     @ForeignKey(tableClass = Lijek.class)
-    @Column Lijek lijek;
+    @Column
+    Lijek lijek;
 
     public Terapija() {
+    }
+
+    public Terapija(JSONObject jsonObject) throws JSONException {
+        this.aktivna = jsonObject.getBoolean("aktivna");
+        this.lijekoviId = jsonObject.getInt("lijekoviId");
+        this.korisnikId = jsonObject.getInt("korisnikId");
+        this.pocetak = jsonObject.getString("pocetak");
+        this.kraj = jsonObject.getString("kraj");
+        this.pojedinacnaDoza = jsonObject.getDouble("pojedinacnaDoza");
+        this.upozorenje = jsonObject.getInt("upozorenje");
+        this.razmakDnevnihDoza = jsonObject.getInt("razmakDnevnihDoza");
     }
 
     public int getLijekoviId() {
@@ -132,7 +157,8 @@ public class Terapija extends BaseModel implements Serializable {
     public void setLijek(Lijek lijek) {
         this.lijek = lijek;
     }
-    public List<Terapija> getAll(){
+
+    public List<Terapija> getAll() {
         return SQLite.select().from(Terapija.class).queryList();
     }
 }

@@ -21,7 +21,7 @@ public class DataLoadController {
         this.connection = connectionMobile;
     }
 
-    public Object GetData(String dataType, Korisnik user){
+    public Object GetData(String dataType, Korisnik user, Object object){
         Object data = null;
         boolean isConnectedToInternet = false;
         DataLoader dataLoader = null;
@@ -35,7 +35,7 @@ public class DataLoadController {
             dataLoader = new DatabaseDataLoader();
         }
 
-        data = dataLoader.GetData(dataType, user);
+        data = dataLoader.GetData(dataType, user, object);
 
         return data;
     }
