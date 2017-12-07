@@ -22,7 +22,7 @@
     </item>
     <item
         android:id="@+id/IzmjenaPodataka"
-        android:title="Promijeni podatke"
+        android:title="Uredi profil"
         android:icon="@drawable/ic_event_available_black_24dp">
     </item>
     <item

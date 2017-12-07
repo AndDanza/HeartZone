@@ -24,70 +24,91 @@ import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
 public class IzmjenaPodataka_Activity extends AppCompatActivity {
+    EditText email;
+    EditText userName;
+    EditText firstName;
+    EditText lastName;
+    EditText password;
+    EditText repeatPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_izmjena_podataka);
         final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+
+        email = (EditText) findViewById(R.id.input_ChangeEmail);
+        userName = (EditText) findViewById(R.id.input_ChangeUserNameRegistration);
+        firstName = (EditText) findViewById(R.id.input_ChangeFirstName);
+        lastName = (EditText) findViewById(R.id.input_ChangeLastName);
+        password = (EditText) findViewById(R.id.input_ChangePasswordRegistration);
+        repeatPassword = (EditText) findViewById(R.id.input_ChangeRetypePassword);
+
+        loadUserdata(loggedUser);
+
         Button buttonChange = (Button) findViewById(R.id.button_ChangeData);
         buttonChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isNetworkAvailable()==true) {
-                    changeData(loggedUser);
-                }
-                else  {
-                     Toast.makeText(IzmjenaPodataka_Activity.this,"Nemate pristup internetu, nije moguće promijeniti podatke",Toast.LENGTH_SHORT).show();
-                }
+                                            @Override
+                                            public void onClick(View v) {
+                                                if (isNetworkAvailable() == true) {
+
+                                                    changeData(loggedUser);
+
+                                                } else {
+                                                    Toast.makeText(IzmjenaPodataka_Activity.this, "Nemate pristup internetu, nije moguće promijeniti podatke", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
+        );
     }
-            }
-        );}
+
+    private void loadUserdata(Korisnik korisnik) {
+
+        email.setText(korisnik.getEmail());
+        userName.setText(korisnik.getKorisnickoIme());
+        firstName.setText(korisnik.getIme());
+        lastName.setText(korisnik.getPrezime());
+
+    }
 
     private void changeData(Korisnik loggedUser) {
 
+        String newPassword = password.getText().toString();
+        String newEmail = email.getText().toString();
+        String newUserName = userName.getText().toString();
+        String newFirstName = firstName.getText().toString();
+        String newLastName = lastName.getText().toString();
+        String newRepeatPassword = repeatPassword.getText().toString();
 
-        final EditText email = (EditText) findViewById(R.id.input_ChangeEmail);
-        final EditText userName = (EditText) findViewById(R.id.input_ChangeUserNameRegistration);
-        final EditText firstName = (EditText) findViewById(R.id.input_ChangeFirstName);
-        final EditText lastName = (EditText) findViewById(R.id.input_ChangeLastName);
-        final EditText password = (EditText) findViewById(R.id.input_ChangePasswordRegistration);
-        final EditText repeatPassword = (EditText) findViewById(R.id.input_ChangeRetypePassword);
-        if (email.getText().toString().isEmpty() || userName.getText().toString().isEmpty() || firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || password.getText().toString().isEmpty() || repeatPassword.getText().toString().isEmpty())
+        if (newEmail.isEmpty() || newFirstName.isEmpty() || newLastName.isEmpty() || newUserName.isEmpty())
             Toast.makeText(IzmjenaPodataka_Activity.this, "Niste popunili sva polja", Toast.LENGTH_SHORT).show();
         else {
-            // Log.d("email", loggedUser.getEmail());
-            String newEmail = email.getText().toString();
             loggedUser.setEmail(newEmail);
-            Log.d("new email", loggedUser.getEmail());
-
-            String newUserName = userName.getText().toString();
             loggedUser.setKorisnickoIme(newUserName);
-            Log.d("new user",loggedUser.getKorisnickoIme());
-
-            String newFirstName = firstName.getText().toString();
             loggedUser.setIme(newFirstName);
-
-            String newLastName = lastName.getText().toString();
             loggedUser.setPrezime(newLastName);
 
-            String newPassword = password.getText().toString();
-            String newRepeatPassword = repeatPassword.getText().toString();
-
-            if (newPassword.equals(newRepeatPassword)) {
-
-                loggedUser.setLozinka(newRepeatPassword);
-                //Log.d("new pass",loggedUser.getLozinka());
-                updateUser(loggedUser);
-                //Log.d("stanje:",loggedUser.getLozinka());
+            if (!password.getText().toString().isEmpty() && !repeatPassword.getText().toString().isEmpty()) {
 
 
-            } else
-                Toast.makeText(IzmjenaPodataka_Activity.this, "Lozinka i potvrda lozinke moraju biti isti", Toast.LENGTH_SHORT).show();
+                if (newPassword.equals(newRepeatPassword)) {
+                    try {
+                        newPassword = EncryptionUtils.sha1(newPassword);
+                        loggedUser.setLozinka(newPassword);
+                    } catch (NoSuchAlgorithmException e) {
+                        Toast.makeText(IzmjenaPodataka_Activity.this, "Došlo je do pogreške", Toast.LENGTH_SHORT).show();
+                    }
+                } else
+                    Toast.makeText(IzmjenaPodataka_Activity.this, "Lozinka i potvrda lozinke moraju biti isti", Toast.LENGTH_SHORT).show();
 
+
+            }
+            updateUser(loggedUser);
 
         }
     }
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -95,17 +116,16 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void updateUser(Korisnik korisnik){
-
+    private void updateUser(Korisnik korisnik) {
         try {
             Map params = new HashMap<String, Object>();
             params.put("update", korisnik);
-            if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/dodajKorisnika.php") != null) {
-                Toast.makeText(IzmjenaPodataka_Activity.this, "Uspješno ste promijenili podatke!", Toast.LENGTH_SHORT).show();
-                ;
-                Intent intent = new Intent(getBaseContext(), IzmjenaPodataka_Activity.class);
-                startActivity(intent);
-            }
+
+            Toast.makeText(IzmjenaPodataka_Activity.this, "Uspješno ste promijenili podatke!", Toast.LENGTH_SHORT).show();
+            
+            Intent intent = new Intent(getBaseContext(), IzmjenaPodataka_Activity.class);
+            intent.putExtra("korisnik", korisnik);
+            startActivity(intent);
         } catch (Exception e) {
             Toast.makeText(IzmjenaPodataka_Activity.this, "Došlo je do pogreške", Toast.LENGTH_SHORT).show();
         }
