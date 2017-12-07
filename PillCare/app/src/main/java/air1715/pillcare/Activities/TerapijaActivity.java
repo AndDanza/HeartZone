@@ -38,6 +38,7 @@ public class TerapijaActivity extends AppCompatActivity {
     Context context;
     ConnectivityManager manager;
     DataLoadController dataControl;
+    Terapija therapy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +62,8 @@ public class TerapijaActivity extends AppCompatActivity {
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
+        therapy = (Terapija) dataControl.GetData("specificTherapy", loggedUser, medication);
+
         LoadDataInXML(medication, company);
 
         ImageButton newTherapyBtn = (ImageButton) findViewById(R.id.newTherapyBtn);
@@ -70,10 +73,10 @@ public class TerapijaActivity extends AppCompatActivity {
         newTherapyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Terapija therapy = (Terapija) dataControl.GetData("specificTherapy", loggedUser, medication);
                 if (therapy == null) {
                     Intent intent = new Intent(getBaseContext(), NovaTerapijaActivity.class);
                     intent.putExtra("medication", medication);
+                    intent.putExtra("company", company);
                     startActivity(intent);
                 } else {
                     PopUpUtils.sendMessage(context, "Već imate dodanu terapiju s navedenim lijekom");
@@ -84,14 +87,19 @@ public class TerapijaActivity extends AppCompatActivity {
         startTherapyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map params = new HashMap<String, Object>();
-                params.put("start", "1");
-                params.put("user", loggedUser);
-                params.put("medicament", medication);
-                if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
-                    PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
-                } else
+                if (therapy == null)
                     PopUpUtils.sendMessage(context, "Niste napravili terapiju s ovim lijekom");
+                else {
+                    Map params = new HashMap<String, Object>();
+                    params.put("start", "1");
+                    params.put("user", loggedUser);
+                    params.put("medicament", medication);
+                    if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null)
+                        PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
+                    else
+                        PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
+                }
+
 
             }
         });
@@ -99,14 +107,18 @@ public class TerapijaActivity extends AppCompatActivity {
         stopTherapyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map params = new HashMap<String, Object>();
-                params.put("start", "0");
-                params.put("user", loggedUser);
-                params.put("medicament", medication);
-                if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
-                    PopUpUtils.sendMessage(context, "Terapija je zaustavljenja");
-                } else
+                if (therapy == null)
                     PopUpUtils.sendMessage(context, "Niste napravili terapiju s ovim lijekom");
+                else {
+                    Map params = new HashMap<String, Object>();
+                    params.put("start", "0");
+                    params.put("user", loggedUser);
+                    params.put("medicament", medication);
+                    if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null)
+                        PopUpUtils.sendMessage(context, "Terapija je zaustavljena");
+                    else
+                        PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
+                }
             }
         });
 
@@ -135,4 +147,5 @@ public class TerapijaActivity extends AppCompatActivity {
         companyName.setText(company.getNaziv());
 
     }
+
 }
