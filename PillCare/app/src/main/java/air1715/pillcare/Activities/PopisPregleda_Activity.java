@@ -32,7 +32,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
 
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = new DataLoadController(manager);
-        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", loggedUser);
+        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", loggedUser, null);
 
         ListView listViewAppointments=(ListView) findViewById(R.id.listViewPregledi);
 

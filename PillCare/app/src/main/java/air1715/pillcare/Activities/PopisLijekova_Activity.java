@@ -56,8 +56,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         context = this;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = new DataLoadController(manager);
-        medications = (List<Lijek>) dataControl.GetData("medications", null);
-        companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null);
+        medications = (List<Lijek>) dataControl.GetData("medications", null, null);
+        companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null, null);
 
         medicationPreview = new MedicationsTileRepresentation(findViewById(R.id.main_recycler), context);
         medicationPreview.LoadData(medications, companies);

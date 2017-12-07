@@ -1,6 +1,8 @@
 package air1715.pillcare.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -14,15 +16,28 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
+import air1715.database.entiteti.Terapija;
+import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
+import air1715.pillcare.Utils.HttpUtils;
+import air1715.pillcare.Utils.PopUpUtils;
 
 /**
  * Created by Marijan Hranj on 05/12/2017.
  */
 
 public class TerapijaActivity extends AppCompatActivity {
+
+    Context context;
+    ConnectivityManager manager;
+    DataLoadController dataControl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,8 +51,15 @@ public class TerapijaActivity extends AppCompatActivity {
 
         FlowManager.init(new FlowConfig.Builder(this).build());
 
+        context = getApplicationContext();
+
+        manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        dataControl = new DataLoadController(manager);
+
         final Lijek medication = (Lijek) getIntent().getSerializableExtra("medication");
         final Proizvodac company = (Proizvodac) getIntent().getSerializableExtra("company");
+
+        final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
         LoadDataInXML(medication, company);
 
@@ -48,9 +70,43 @@ public class TerapijaActivity extends AppCompatActivity {
         newTherapyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), NovaTerapijaActivity.class);
-                intent.putExtra("lijek", medication);
-                startActivity(intent);
+                Terapija therapy = (Terapija) dataControl.GetData("specificTherapy", loggedUser, medication);
+                if (therapy == null) {
+                    Intent intent = new Intent(getBaseContext(), NovaTerapijaActivity.class);
+                    intent.putExtra("medication", medication);
+                    startActivity(intent);
+                } else {
+                    PopUpUtils.sendMessage(context, "Već imate dodanu navedenu terapiju");
+                }
+            }
+        });
+
+        startTherapyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map params = new HashMap<String, Object>();
+                params.put("start", "1");
+                params.put("user", loggedUser);
+                params.put("medicament", medication);
+                if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
+                    PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
+                } else
+                    PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
+
+            }
+        });
+
+        stopTherapyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map params = new HashMap<String, Object>();
+                params.put("start", "0");
+                params.put("user", loggedUser);
+                params.put("medicament", medication);
+                if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
+                    PopUpUtils.sendMessage(context, "Terapija je zaustavljenja");
+                } else
+                    PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
             }
         });
 
