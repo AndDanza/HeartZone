@@ -30,7 +30,6 @@ public class NoviPregled_Activity extends AppCompatActivity {
         final Map params = new HashMap<String, String>();
 
         final Context context = getApplicationContext();
-        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
 
         Button actionDodajPregled = (Button) findViewById(R.id.btnDodajPregled);
         actionDodajPregled.setOnClickListener(new View.OnClickListener() {

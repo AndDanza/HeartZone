@@ -41,10 +41,6 @@ public class TerapijaActivity extends AppCompatActivity {
 
         LoadDataInXML(medication, company);
 
-        //TODO
-        //potrebno dovesti objekt korisnika
-        //final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
-
         ImageButton newTherapyBtn = (ImageButton) findViewById(R.id.newTherapyBtn);
         ImageButton startTherapyBtn = (ImageButton) findViewById(R.id.startTherapyBtn);
         ImageButton stopTherapyBtn = (ImageButton) findViewById(R.id.stopTherapyBtn);
@@ -53,7 +49,7 @@ public class TerapijaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), NovaTerapijaActivity.class);
-                //intent.putExtra("korisnik", loggedUser);
+                intent.putExtra("lijek", medication);
                 startActivity(intent);
             }
         });

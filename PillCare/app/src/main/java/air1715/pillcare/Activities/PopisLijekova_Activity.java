@@ -63,7 +63,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         medicationPreview.LoadData(medications, companies);
         medicationPreview.SetAdapter();
 
-        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
         if (!loggedUser.exists())
             loggedUser.save();
@@ -93,7 +93,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     }
                     case R.id.pregledi : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,PopisPregleda_Activity.class);
-                        changeUserData.putExtra("korisnik",loggedUser);
                         startActivity(changeUserData);
                     }
                     case R.id.dnevniRaspored : {
@@ -101,7 +100,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     }
                     case R.id.IzmjenaPodataka : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
-                        changeUserData.putExtra("korisnik",loggedUser);
                         startActivity(changeUserData);
                     }
                 }
@@ -143,17 +141,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 }
                 medicationPreview.LoadData(medications, companies);
                 medicationPreview.SetAdapter();
-            }
-        });
-
-        therapyBtn = (Button) findViewById(R.id.startTherapyActivity);
-
-        therapyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), TerapijaActivity.class);
-                intent.putExtra("korisnik", loggedUser);
-                startActivity(intent);
             }
         });
     }

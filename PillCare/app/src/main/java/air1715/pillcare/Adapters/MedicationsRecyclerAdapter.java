@@ -1,7 +1,5 @@
 package air1715.pillcare.Adapters;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +9,6 @@ import java.util.List;
 
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
-import air1715.pillcare.DataLoaders.DataLoadController;
-import air1715.pillcare.R;
 
 
 /**
