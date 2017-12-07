@@ -34,7 +34,7 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
 
     private void changeData() {
 
-        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
         final EditText email = (EditText) findViewById(R.id.input_ChangeEmail);
         final EditText userName=(EditText) findViewById(R.id.input_ChangeUserNameRegistration);
         final EditText firstName=(EditText) findViewById(R.id.input_ChangeFirstName);

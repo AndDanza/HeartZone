@@ -30,6 +30,8 @@ import air1715.pillcare.Utils.PopUpUtils;
 
 public class PrijavaActivity extends AppCompatActivity {
 
+    private static Korisnik loggedUser = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +79,8 @@ public class PrijavaActivity extends AppCompatActivity {
                             Korisnik korisnik = new Korisnik(response);
                             String encryptedPw = EncryptionUtils.sha1(password);
                             if (encryptedPw.equals(korisnik.getLozinka())) {
+                                loggedUser = korisnik;
                                 Intent intent = new Intent(getBaseContext(), PopisLijekova_Activity.class);
-                                intent.putExtra("korisnik", korisnik);
                                 startActivity(intent);
                             } else {
                                 PopUpUtils.sendMessage(context, "Pogresna lozinka");
@@ -99,4 +101,7 @@ public class PrijavaActivity extends AppCompatActivity {
 
     }
 
+    public static Korisnik getLoggedUser() {
+        return loggedUser;
+    }
 }

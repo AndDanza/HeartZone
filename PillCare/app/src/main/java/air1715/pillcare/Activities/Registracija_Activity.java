@@ -24,6 +24,7 @@ import air1715.pillcare.Utils.PopUpUtils;
 
 public class Registracija_Activity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

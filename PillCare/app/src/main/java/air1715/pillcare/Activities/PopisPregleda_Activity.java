@@ -28,7 +28,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_pregleda);
 
-        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = new DataLoadController(manager);
