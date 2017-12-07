@@ -108,9 +108,11 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     }
                     case R.id.IzmjenaPodataka : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
+                        changeUserData.putExtra("korisnik",loggedUser);
                         startActivity(changeUserData);
                     }
                 }
+
 
 
                 return true;
