@@ -56,7 +56,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         //proba recycler
         context = this;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        DataLoadController dataControl = new DataLoadController(manager);
+        DataLoadController dataControl = DataLoadController.GetInstance(manager);
         medications = (List<Lijek>) dataControl.GetData("medications", null, null);
         companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null, null);
 

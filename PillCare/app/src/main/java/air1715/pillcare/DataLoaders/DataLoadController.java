@@ -15,10 +15,19 @@ import air1715.database.entiteti.Korisnik;
  */
 
 public class DataLoadController {
-    private ConnectivityManager connection = null;
+    private static ConnectivityManager connection = null;
+    private static DataLoadController controller = null;
 
-    public DataLoadController(ConnectivityManager connectionMobile) {
-        this.connection = connectionMobile;
+    private DataLoadController() {
+    }
+
+    public static DataLoadController GetInstance(ConnectivityManager manager){
+        connection = manager;
+
+        if(controller == null)
+            controller = new DataLoadController();
+
+        return controller;
     }
 
     public Object GetData(String dataType, Korisnik user, Object object){
@@ -29,10 +38,10 @@ public class DataLoadController {
         isConnectedToInternet = CheckInternetConnection();
 
         if(isConnectedToInternet == true){
-            dataLoader = new WebServiceDataLoader();
+            dataLoader = WebServiceDataLoader.GetInstance();
         }
         else{
-            dataLoader = new DatabaseDataLoader();
+            dataLoader = DatabaseDataLoader.GetInstance();
         }
 
         data = dataLoader.GetData(dataType, user, object);

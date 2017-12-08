@@ -13,6 +13,22 @@ import air1715.database.entiteti.Terapija;
  */
 
 public class DatabaseDataLoader implements DataLoader {
+    private static DatabaseDataLoader databaseLoader = null;
+
+    private DatabaseDataLoader() {
+    }
+
+    @Override
+    public Object GetData(String dataType, Korisnik user, Object object) {
+        return null;
+    }
+
+    public static DatabaseDataLoader GetInstance(){
+        if(databaseLoader == null)
+            databaseLoader = new DatabaseDataLoader();
+
+        return databaseLoader;
+    }
 
     @Override
     public List<Lijek> GetMedications() {
@@ -34,8 +50,5 @@ public class DatabaseDataLoader implements DataLoader {
         return null;
     }
 
-    @Override
-    public Object GetData(String dataType, Korisnik user, Object object) {
-        return null;
-    }
+
 }

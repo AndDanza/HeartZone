@@ -124,6 +124,8 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
 
             Toast.makeText(IzmjenaPodataka_Activity.this, "Uspješno ste promijenili podatke!", Toast.LENGTH_SHORT).show();
 
+            //// TODO: 08.12.2017  dodat korisnika u static varijablu unutar klase korisnik
+
             Intent intent = new Intent(getBaseContext(), IzmjenaPodataka_Activity.class);
             intent.putExtra("korisnik", korisnik);
             startActivity(intent);

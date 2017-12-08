@@ -55,7 +55,7 @@ public class TerapijaActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        dataControl = new DataLoadController(manager);
+        dataControl = DataLoadController.GetInstance(manager);
 
         final Lijek medication = (Lijek) getIntent().getSerializableExtra("medication");
         final Proizvodac company = (Proizvodac) getIntent().getSerializableExtra("company");

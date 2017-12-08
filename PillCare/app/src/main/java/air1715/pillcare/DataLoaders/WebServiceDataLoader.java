@@ -24,8 +24,9 @@ import air1715.pillcare.Utils.HttpUtils;
  */
 
 public class WebServiceDataLoader implements DataLoader {
+    private static WebServiceDataLoader webLoader = null;
 
-    public WebServiceDataLoader() {
+    private WebServiceDataLoader() {
     }
 
     Korisnik korisnik = PrijavaActivity.getLoggedUser();
@@ -52,6 +53,13 @@ public class WebServiceDataLoader implements DataLoader {
         }
 
         return returnData;
+    }
+
+    public static WebServiceDataLoader GetInstance(){
+        if(webLoader == null)
+            webLoader = new WebServiceDataLoader();
+
+        return webLoader;
     }
 
     @Override
