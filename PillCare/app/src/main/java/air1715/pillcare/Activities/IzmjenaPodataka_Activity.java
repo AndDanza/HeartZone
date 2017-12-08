@@ -30,13 +30,14 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
     EditText lastName;
     EditText password;
     EditText repeatPassword;
+    Korisnik loggedUser;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_izmjena_podataka);
-        final Korisnik loggedUser = (Korisnik) getIntent().getSerializableExtra("korisnik");
+        loggedUser = PrijavaActivity.getLoggedUser();
 
         email = (EditText) findViewById(R.id.input_ChangeEmail);
         userName = (EditText) findViewById(R.id.input_ChangeUserNameRegistration);
@@ -124,7 +125,7 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
 
             Toast.makeText(IzmjenaPodataka_Activity.this, "Uspješno ste promijenili podatke!", Toast.LENGTH_SHORT).show();
 
-            //// TODO: 08.12.2017  dodat korisnika u static varijablu unutar klase korisnik
+            PrijavaActivity.setLoggedUser(korisnik);
 
             Intent intent = new Intent(getBaseContext(), IzmjenaPodataka_Activity.class);
             intent.putExtra("korisnik", korisnik);

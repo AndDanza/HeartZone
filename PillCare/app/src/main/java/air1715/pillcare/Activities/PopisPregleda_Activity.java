@@ -39,7 +39,6 @@ public class PopisPregleda_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent openActivity = new Intent(PopisPregleda_Activity.this, NoviPregled_Activity.class);
-                openActivity.putExtra("korisnik",loggedUser);
                 startActivity(openActivity);
             }
         });

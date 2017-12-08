@@ -104,4 +104,8 @@ public class PrijavaActivity extends AppCompatActivity {
     public static Korisnik getLoggedUser() {
         return loggedUser;
     }
+
+    public static void setLoggedUser(Korisnik newUser){
+        loggedUser = newUser;
+    }
 }
