@@ -57,7 +57,7 @@ public class WebServiceDataLoader implements DataLoader {
     @Override
     public List<Lijek> GetMedications() {
         Map params = new HashMap<String, String>();
-        params.put("type", "all");
+        params.put("user_id", korisnik.getId());
         JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/lijekovi.php");
         List<Lijek> medications = new ArrayList<Lijek>();
         try {

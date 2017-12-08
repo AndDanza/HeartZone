@@ -17,4 +17,10 @@
     <string name="stopTherapy">Zaustavi</string>
     <string name="pillWarning">Upute:</string>
     <string name="pharmaCompany">Proizvodi:</string>
+    <string name="dialogOK">Uredu</string>
+    <string name="no_therapies_user">
+        Trenutno nemate dodan niti jedan lijek u vašim terapijama.
+        \nKlikom na barcode skener možete otvoriti čitač barcode-a i skenirani lijek dodati u listu terapija.
+        \nIsti će se potom prikazati na ovoj stranici.</string>
+    <string name="warning_dialog_title">Upozorenje</string>
 </resources>
