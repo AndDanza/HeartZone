@@ -13,9 +13,10 @@ import air1715.database.entiteti.Terapija;
  */
 
 public interface DataLoader {
-    Object GetData(String dataType, Korisnik user, Object object);
+    Object GetData(String dataType, Object object);
     List<Lijek> GetMedications();
-    List<Terapija> GetAllTherapies(Korisnik korisnik);
+    List<Terapija> GetAllTherapies();
     List<Proizvodac> GetPharmaCompanies();
-    List<Pregled> GetAppointments(Korisnik user);
+    List<Pregled> GetAppointments();
+    Terapija getSpecificTherapy(Object object);
 }

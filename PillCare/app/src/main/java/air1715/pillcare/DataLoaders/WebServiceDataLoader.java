@@ -24,14 +24,15 @@ import air1715.pillcare.Utils.HttpUtils;
  */
 
 public class WebServiceDataLoader implements DataLoader {
+    private static WebServiceDataLoader webLoader = null;
 
-    public WebServiceDataLoader() {
+    private WebServiceDataLoader() {
     }
 
     Korisnik korisnik = PrijavaActivity.getLoggedUser();
 
     @Override
-    public Object GetData(String dataType, Korisnik user, Object object) {
+    public Object GetData(String dataType, Object object) {
         Object returnData = null;
 
         switch (dataType) {
@@ -39,25 +40,32 @@ public class WebServiceDataLoader implements DataLoader {
                 returnData = (Object) GetMedications();
                 break;
             case "allTherapies":
-                returnData = (Object) GetAllTherapies(korisnik);
+                returnData = (Object) GetAllTherapies();
                 break;
             case "pharmaCompanies":
                 returnData = (Object) GetPharmaCompanies();
                 break;
             case "appointments":
-                returnData = (Object) GetAppointments(user);
+                returnData = (Object) GetAppointments();
                 break;
             case "specificTherapy":
-                returnData = (Object) getSpecificTherapy(korisnik, object);
+                returnData = (Object) getSpecificTherapy(object);
         }
 
         return returnData;
     }
 
+    public static WebServiceDataLoader GetInstance(){
+        if(webLoader == null)
+            webLoader = new WebServiceDataLoader();
+
+        return webLoader;
+    }
+
     @Override
     public List<Lijek> GetMedications() {
         Map params = new HashMap<String, String>();
-        params.put("type", "all");
+        params.put("user_id", korisnik.getId());
         JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/lijekovi.php");
         List<Lijek> medications = new ArrayList<Lijek>();
         try {
@@ -88,7 +96,7 @@ public class WebServiceDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Terapija> GetAllTherapies(Korisnik korisnik){
+    public List<Terapija> GetAllTherapies(){
         return null;
     }
 
@@ -125,9 +133,9 @@ public class WebServiceDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Pregled> GetAppointments(Korisnik user) {
+    public List<Pregled> GetAppointments() {
         Map params = new HashMap<String, String>();
-        params.put("user", user.getKorisnickoIme());
+        params.put("user", korisnik.getKorisnickoIme());
         JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/pregled.php");
         List<Pregled> appointments = new ArrayList<Pregled>();
         try {
@@ -156,9 +164,9 @@ public class WebServiceDataLoader implements DataLoader {
         return appointments;
     }
 
-    public Terapija getSpecificTherapy(Korisnik user, Object medicament) {
+    public Terapija getSpecificTherapy(Object medicament) {
         Map params = new HashMap<String, String>();
-        params.put("user", user);
+        params.put("user", korisnik);
         params.put("medicament", (Lijek) medicament);
         JSONObject response = HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/specificnaTerapija.php");
         Terapija terapija = null;

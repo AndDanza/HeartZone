@@ -2,6 +2,7 @@ package air1715.pillcare.Activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -9,10 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,9 +28,7 @@ import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Adapters.MedicationsListRepresentation;
-import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.Adapters.MedicationsTileRepresentation;
-import air1715.pillcare.Adapters.ModularRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
@@ -45,9 +43,10 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private Context context;
     private ModularityController presentationController;
 
-
     List<Lijek> medications;
     List<Proizvodac> companies;
+
+    Button getData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +56,36 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         //proba recycler
         context = this;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        DataLoadController dataControl = new DataLoadController(manager);
+        DataLoadController dataControl = DataLoadController.GetInstance(manager);
         medications = (List<Lijek>) dataControl.GetData("medications", null, null);
         companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null, null);
 
         View recycler = findViewById(R.id.main_recycler);
+        getData = (Button) findViewById(R.id.get_data);
 
-        presentationController = ModularityController.GetInstance();
-        presentationController.SetData(medications, companies);
-        presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
-        presentationController.AddModularOption(new MedicationsListRepresentation(recycler, context));
+        if(medications != null) {
+            presentationController = ModularityController.GetInstance();
+            presentationController.SetData(medications, companies);
+            presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
+            presentationController.AddModularOption(new MedicationsListRepresentation(recycler, context));
 
-        presentationController.ShowModularOption();
+            presentationController.ShowModularOption();
+
+            getData.setVisibility(View.VISIBLE);
+        }
+        else{
+            final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
+            builder.setView(R.layout.popis_lijekova_alert);
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.show();
+        }
 
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
@@ -108,11 +125,9 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     }
                     case R.id.IzmjenaPodataka : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
-                        changeUserData.putExtra("korisnik",loggedUser);
                         startActivity(changeUserData);
                     }
                 }
-
 
 
                 return true;
@@ -137,7 +152,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
             }
         });
 
-        Button getData = (Button) findViewById(R.id.get_data);
+
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
