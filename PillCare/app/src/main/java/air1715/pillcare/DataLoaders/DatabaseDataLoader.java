@@ -7,6 +7,7 @@ import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
+import air1715.pillcare.Activities.PrijavaActivity;
 
 /**
  * Created by Andrea on 29.11.2017.
@@ -18,10 +19,7 @@ public class DatabaseDataLoader implements DataLoader {
     private DatabaseDataLoader() {
     }
 
-    @Override
-    public Object GetData(String dataType, Korisnik user, Object object) {
-        return null;
-    }
+    Korisnik korisnik = PrijavaActivity.getLoggedUser();
 
     public static DatabaseDataLoader GetInstance(){
         if(databaseLoader == null)
@@ -31,12 +29,17 @@ public class DatabaseDataLoader implements DataLoader {
     }
 
     @Override
+    public Object GetData(String dataType, Object object) {
+        return null;
+    }
+
+    @Override
     public List<Lijek> GetMedications() {
         return null;
     }
 
     @Override
-    public List<Terapija> GetAllTherapies(Korisnik korisnik) {
+    public List<Terapija> GetAllTherapies() {
         return null;
     }
 
@@ -46,9 +49,12 @@ public class DatabaseDataLoader implements DataLoader {
     }
 
     @Override
-    public List<Pregled> GetAppointments(Korisnik user) {
+    public List<Pregled> GetAppointments() {
         return null;
     }
 
-
+    @Override
+    public Terapija getSpecificTherapy(Object object) {
+        return null;
+    }
 }

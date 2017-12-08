@@ -44,7 +44,7 @@ public class DataLoadController {
             dataLoader = DatabaseDataLoader.GetInstance();
         }
 
-        data = dataLoader.GetData(dataType, user, object);
+        data = dataLoader.GetData(dataType, object);
 
         return data;
     }
