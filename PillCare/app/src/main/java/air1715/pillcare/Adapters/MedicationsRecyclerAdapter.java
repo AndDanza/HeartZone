@@ -60,4 +60,10 @@ public class MedicationsRecyclerAdapter extends RecyclerView.Adapter<Medications
     public int getItemViewType(int position) {
         return layout_id;
     }
+
+    public void ClearData() {
+        int size = this.medications.size();
+        this.medications.clear();
+        notifyItemRangeRemoved(0, size);
+    }
 }

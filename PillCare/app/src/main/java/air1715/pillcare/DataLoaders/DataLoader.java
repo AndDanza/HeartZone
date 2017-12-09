@@ -19,4 +19,5 @@ public interface DataLoader {
     List<Proizvodac> GetPharmaCompanies();
     List<Pregled> GetAppointments();
     Terapija getSpecificTherapy(Object object);
+    Lijek getSpecificMedication(Object object);
 }

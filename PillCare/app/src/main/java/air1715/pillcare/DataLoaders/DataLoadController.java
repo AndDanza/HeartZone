@@ -30,7 +30,7 @@ public class DataLoadController {
         return controller;
     }
 
-    public Object GetData(String dataType, Korisnik user, Object object){
+    public Object GetData(String dataType, Object object){
         Object data = null;
         boolean isConnectedToInternet = false;
         DataLoader dataLoader = null;

@@ -50,6 +50,10 @@ public class WebServiceDataLoader implements DataLoader {
                 break;
             case "specificTherapy":
                 returnData = (Object) getSpecificTherapy(object);
+                break;
+            case "specificMed":
+                returnData = (Object) getSpecificMedication(object);
+                break;
         }
 
         return returnData;
@@ -184,5 +188,29 @@ public class WebServiceDataLoader implements DataLoader {
         }
 
         return terapija;
+    }
+
+    @Override
+    public Lijek getSpecificMedication(Object object) {
+        String med_id = (String) object;
+
+        Map params = new HashMap<String, String>();
+        params.put("med_id", med_id);
+        JSONObject response = HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/traziLijek.php");
+        Lijek medication = null;
+        try {
+            if(response != null) {
+                Log.d("response", "response razlicit od null pregledi");
+                medication = new Lijek(response);
+            }
+            else {
+                Log.d("null", "null u response-u appointments");
+            }
+        }
+        catch (JSONException e) {
+            System.out.println("JsonExceptionAppointments. " + e.getLocalizedMessage());
+        }
+
+        return medication;
     }
 }

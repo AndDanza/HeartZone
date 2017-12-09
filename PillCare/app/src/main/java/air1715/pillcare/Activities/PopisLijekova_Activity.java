@@ -22,12 +22,14 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Adapters.MedicationsListRepresentation;
+import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
@@ -39,14 +41,14 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private ActionBarDrawerToggle abdt;
     private Button pokreniBarcodeSkener;
     private final Activity activity = this;
-    private Button therapyBtn;
     private Context context;
-    private ModularityController presentationController;
+    private ModularityController presentationController = null;
+    DataLoadController dataControl;
 
     List<Lijek> medications;
     List<Proizvodac> companies;
 
-    Button getData;
+    Button switchModularRepresentaion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,37 +58,23 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         //proba recycler
         context = this;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        DataLoadController dataControl = DataLoadController.GetInstance(manager);
-        medications = (List<Lijek>) dataControl.GetData("medications", null, null);
-        companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null, null);
+        dataControl = DataLoadController.GetInstance(manager);
+        medications = (List<Lijek>) dataControl.GetData("medications", null);
+        companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null);
 
         View recycler = findViewById(R.id.main_recycler);
-        getData = (Button) findViewById(R.id.get_data);
+        switchModularRepresentaion = (Button) findViewById(R.id.get_data);
 
         if(medications != null) {
-            presentationController = ModularityController.GetInstance();
-            presentationController.SetData(medications, companies);
-            presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
-            presentationController.AddModularOption(new MedicationsListRepresentation(recycler, context));
+            if (presentationController == null)
+                SetModularRepresentation(recycler);
+            else
+                presentationController.SetData(medications, companies);
 
             presentationController.ShowModularOption();
-
-            getData.setVisibility(View.VISIBLE);
         }
-        else{
-            final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
-            builder.setView(R.layout.popis_lijekova_alert);
-
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            builder.show();
-        }
-
+        else
+            ShowWarning();
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
@@ -136,7 +124,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
 
         pokreniBarcodeSkener = (Button) findViewById(R.id.button_barCodeScanner);
-        //metoda koja pokreće barcode skener
         pokreniBarcodeSkener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,13 +140,26 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
 
 
-        getData.setOnClickListener(new View.OnClickListener() {
+        switchModularRepresentaion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 presentationController.ShowModularOption();
             }
         });
+    }
+
+    private void ShowWarning() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
+        builder.setView(R.layout.popis_lijekova_alert);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
     }
 
     @Override
@@ -178,11 +178,92 @@ public class PopisLijekova_Activity extends AppCompatActivity {
             } else {
                 Log.d("PopisLijekova_Activity", "Skenirano");
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+
+                Lijek showMedication = null;
+
+                if(medications != null) {
+                    showMedication = GetMatchingMedication(result.getContents());
+                    medications.clear();
+                    medications.add(showMedication);
+                    presentationController.SetData(medications, companies);
+
+                    switchModularRepresentaion.setVisibility(View.VISIBLE);
+                }
+                else {
+                    showMedication = (Lijek) dataControl.GetData("specificMed", result.getContents());
+                    medications = new ArrayList<Lijek>();
+                    medications.add(showMedication);
+
+                    if(presentationController == null) {
+                        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                        dataControl = DataLoadController.GetInstance(manager);
+
+                        View recycler = findViewById(R.id.main_recycler);
+                        SetModularRepresentation(recycler);
+                    }
+                    else
+                        presentationController.SetData(medications, companies);
+
+                    presentationController.ShowModularOption();
+
+                    switchModularRepresentaion.setVisibility(View.VISIBLE);
+                }
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
             super.onActivityResult(requestCode, resultCode, data);
         }
+
+        Button refresh = (Button) findViewById(R.id.refreshRepresentation);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presentationController.ClearData();
+
+                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                dataControl = DataLoadController.GetInstance(manager);
+                medications = (List<Lijek>) dataControl.GetData("medications", null);
+
+                if (medications != null){
+
+                    View recycler = findViewById(R.id.main_recycler);
+                    switchModularRepresentaion = (Button) findViewById(R.id.get_data);
+
+                    if (presentationController == null)
+                        SetModularRepresentation(recycler);
+                    else
+                        presentationController.SetData(medications, companies);
+
+                    presentationController.ShowModularOption();
+                }
+                else
+                    switchModularRepresentaion.setVisibility(View.INVISIBLE);
+
+            }
+        });
+    }
+
+    private void SetModularRepresentation(View recycler) {
+        if(medications != null) {
+            presentationController = ModularityController.GetInstance();
+            presentationController.SetData(medications, companies);
+            presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
+            presentationController.AddModularOption(new MedicationsListRepresentation(recycler, context));
+
+            switchModularRepresentaion.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private Lijek GetMatchingMedication(String barcode) {
+        Lijek medication = null;
+
+        for(Lijek med : medications){
+            if(med.getBarkod().equals(barcode)){
+                medication = med;
+            }
+        }
+
+        return medication;
     }
 }
 

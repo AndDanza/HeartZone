@@ -23,6 +23,8 @@ public class Lijek extends BaseModel implements Serializable {
     @PrimaryKey
     @Column int id;
 
+    @Column String barkod;
+
     @Column String naziv;
 
     @Column int jacina;
@@ -43,12 +45,21 @@ public class Lijek extends BaseModel implements Serializable {
 
     public Lijek(JSONObject jsonObject) throws JSONException {
         this.id = jsonObject.getInt("id");
+        this.barkod = jsonObject.getString("barkod");
         this.naziv = jsonObject.getString("naziv");
         this.jacina = jsonObject.getInt("jacina");
         this.brojTableta = jsonObject.getInt("broj_tableta");
         this.pakiranje = jsonObject.getString("pakiranje");
         this.upute = jsonObject.getString("upute");
         this.proizvodacId = jsonObject.getInt("proizvodac_id");
+    }
+
+    public String getBarkod() {
+        return barkod;
+    }
+
+    public void setBarkod(String barkod) {
+        this.barkod = barkod;
     }
 
     public int getId() {
