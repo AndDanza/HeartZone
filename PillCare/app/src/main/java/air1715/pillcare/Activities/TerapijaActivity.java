@@ -62,7 +62,7 @@ public class TerapijaActivity extends AppCompatActivity {
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
-        therapy = (Terapija) dataControl.GetData("specificTherapy", loggedUser, medication);
+        therapy = (Terapija) dataControl.GetData("specificTherapy", medication);
 
         LoadDataInXML(medication, company);
 

@@ -17,25 +17,25 @@
 
     <Button
         android:id="@+id/button_barCodeScanner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Skeniraj BarCode"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/ic_menu_camera"
         android:textColor="@android:color/black"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="27dp" />
+        android:layout_alignBaseline="@+id/get_data"
+        android:layout_alignBottom="@+id/get_data"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/get_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_barCodeScanner"
-        android:layout_alignBottom="@+id/button_barCodeScanner"
-        android:layout_marginEnd="17dp"
-        android:text="Button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:background="@android:drawable/ic_media_next"
         android:textColor="@android:color/black"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
 
 
     <android.support.v7.widget.RecyclerView
@@ -43,6 +43,16 @@
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/refreshRepresentation"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:drawable/ic_menu_rotate"
+        android:layout_alignBaseline="@+id/get_data"
+        android:layout_alignBottom="@+id/get_data"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp" />
 
 </RelativeLayout>
 <android.support.design.widget.NavigationView
