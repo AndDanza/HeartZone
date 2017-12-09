@@ -57,4 +57,9 @@ public class DatabaseDataLoader implements DataLoader {
     public Terapija getSpecificTherapy(Object object) {
         return null;
     }
+
+    @Override
+    public Lijek getSpecificMedication(Object object) {
+        return null;
+    }
 }
