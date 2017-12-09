@@ -23,6 +23,7 @@ public class MedicationsListRepresentation implements ModularRepresentation {
     List<Proizvodac> companies = null;
     View recycler;
     Context context;
+    MedicationsRecyclerAdapter adapter;
 
     public MedicationsListRepresentation(View recycler, Context context) {
         this.recycler = recycler;
@@ -37,11 +38,14 @@ public class MedicationsListRepresentation implements ModularRepresentation {
 
     @Override
     public void SetAdapter() {
-        MedicationsRecyclerAdapter adapter =
-                new MedicationsRecyclerAdapter(R.layout.medication_list_item, medications, companies);
+        adapter = new MedicationsRecyclerAdapter(R.layout.medication_list_item, medications, companies);
         RecyclerView recyclerView = (RecyclerView) recycler;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
+    }
+
+    public void ClearData(){
+        adapter.ClearData();
     }
 }

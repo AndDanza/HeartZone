@@ -52,4 +52,9 @@ public class ModularityController {
         medicationPreview.LoadData(medications, companies);
         medicationPreview.SetAdapter();
     }
+
+    public void ClearData(){
+        ModularRepresentation representation = options.get(index);
+        representation.ClearData();
+    }
 }
