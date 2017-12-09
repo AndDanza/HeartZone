@@ -22,12 +22,14 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Adapters.MedicationsListRepresentation;
+import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
@@ -40,7 +42,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private Button pokreniBarcodeSkener;
     private final Activity activity = this;
     private Context context;
-    private ModularityController presentationController;
+    private ModularityController presentationController = null;
     DataLoadController dataControl;
 
     List<Lijek> medications;
@@ -63,7 +65,16 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         View recycler = findViewById(R.id.main_recycler);
         switchModularRepresentaion = (Button) findViewById(R.id.get_data);
 
-        SetModularRepresentation(recycler);
+        if(medications != null) {
+            if (presentationController == null)
+                SetModularRepresentation(recycler);
+            else
+                presentationController.SetData(medications, companies);
+
+            presentationController.ShowModularOption();
+        }
+        else
+            ShowWarning();
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
@@ -137,6 +148,20 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
     }
 
+    private void ShowWarning() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
+        builder.setView(R.layout.popis_lijekova_alert);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return abdt.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
@@ -154,22 +179,35 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                 Log.d("PopisLijekova_Activity", "Skenirano");
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
 
-                Lijek showMedication = GetMatchingMedication(result.getContents());
-                
-                if(showMedication != null)
-                {
-                    //show medication from list
+                Lijek showMedication = null;
+
+                if(medications != null) {
+                    showMedication = GetMatchingMedication(result.getContents());
                     medications.clear();
                     medications.add(showMedication);
-
                     presentationController.SetData(medications, companies);
 
-                    presentationController.ShowModularOption();
+                    switchModularRepresentaion.setVisibility(View.VISIBLE);
                 }
-                else{
-                    //// TODO: 09.12.2017 go to web wervice
-                }
+                else {
+                    showMedication = (Lijek) dataControl.GetData("specificMed", result.getContents());
+                    medications = new ArrayList<Lijek>();
+                    medications.add(showMedication);
 
+                    if(presentationController == null) {
+                        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                        dataControl = DataLoadController.GetInstance(manager);
+
+                        View recycler = findViewById(R.id.main_recycler);
+                        SetModularRepresentation(recycler);
+                    }
+                    else
+                        presentationController.SetData(medications, companies);
+
+                    presentationController.ShowModularOption();
+
+                    switchModularRepresentaion.setVisibility(View.VISIBLE);
+                }
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
@@ -180,11 +218,27 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                medications = (List<Lijek>) dataControl.GetData("medications", null);
-                companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null);
+                presentationController.ClearData();
 
-                View recycler = findViewById(R.id.main_recycler);
-                SetModularRepresentation(recycler);
+                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                dataControl = DataLoadController.GetInstance(manager);
+                medications = (List<Lijek>) dataControl.GetData("medications", null);
+
+                if (medications != null){
+
+                    View recycler = findViewById(R.id.main_recycler);
+                    switchModularRepresentaion = (Button) findViewById(R.id.get_data);
+
+                    if (presentationController == null)
+                        SetModularRepresentation(recycler);
+                    else
+                        presentationController.SetData(medications, companies);
+
+                    presentationController.ShowModularOption();
+                }
+                else
+                    switchModularRepresentaion.setVisibility(View.INVISIBLE);
+
             }
         });
     }
@@ -196,22 +250,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
             presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
             presentationController.AddModularOption(new MedicationsListRepresentation(recycler, context));
 
-            presentationController.ShowModularOption();
-
             switchModularRepresentaion.setVisibility(View.VISIBLE);
-        }
-        else{
-            final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
-            builder.setView(R.layout.popis_lijekova_alert);
-
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            builder.show();
         }
     }
 
