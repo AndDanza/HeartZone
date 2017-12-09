@@ -19,13 +19,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Registracija_Activity" />
-        <activity android:name=".Activities.PopisLijekova_Activity" />
-        <activity android:name=".Activities.IzmjenaPodataka_Activity" />
-        <activity android:name=".Activities.TerapijaActivity" />
-        <activity android:name=".Activities.NovaTerapijaActivity" />
-        <activity android:name=".Activities.PopisPregleda_Activity" />
-        <activity android:name=".Activities.NoviPregled_Activity"></activity>
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.Registracija_Activity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.PopisLijekova_Activity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.IzmjenaPodataka_Activity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.TerapijaActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.NovaTerapijaActivity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.PopisPregleda_Activity" />
+        <activity android:screenOrientation="portrait"
+            android:name=".Activities.NoviPregled_Activity"/>
     </application>
 
 </manifest>
