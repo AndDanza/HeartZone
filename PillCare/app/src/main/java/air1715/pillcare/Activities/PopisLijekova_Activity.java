@@ -39,14 +39,13 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private ActionBarDrawerToggle abdt;
     private Button pokreniBarcodeSkener;
     private final Activity activity = this;
-    private Button therapyBtn;
     private Context context;
     private ModularityController presentationController;
 
     List<Lijek> medications;
     List<Proizvodac> companies;
 
-    Button getData;
+    Button switchModularRepresentaion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         companies = (List<Proizvodac>) dataControl.GetData("pharmaCompanies", null, null);
 
         View recycler = findViewById(R.id.main_recycler);
-        getData = (Button) findViewById(R.id.get_data);
+        switchModularRepresentaion = (Button) findViewById(R.id.get_data);
 
         if(medications != null) {
             presentationController = ModularityController.GetInstance();
@@ -71,7 +70,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
             presentationController.ShowModularOption();
 
-            getData.setVisibility(View.VISIBLE);
+            switchModularRepresentaion.setVisibility(View.VISIBLE);
         }
         else{
             final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
@@ -153,7 +152,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
 
 
-        getData.setOnClickListener(new View.OnClickListener() {
+        switchModularRepresentaion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

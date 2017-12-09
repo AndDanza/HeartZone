@@ -50,11 +50,11 @@ public class MedicationsViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     private void GetViewElements() {
-        medicationName = (TextView) mItemView.findViewById(R.id.medication_name_th);
+        medicationName = (TextView) mItemView.findViewById(R.id.medication_name);
         medicationSize = (TextView) mItemView.findViewById(R.id.medications_size);
         medicationStrength = (TextView) mItemView.findViewById(R.id.medication_strenght);
         medicationCompany = (TextView) mItemView.findViewById(R.id.medication_company);
-        medicationImage = (ImageView) mItemView.findViewById(R.id.medication_image_th);
+        medicationImage = (ImageView) mItemView.findViewById(R.id.medication_image);
     }
 
     @Override
