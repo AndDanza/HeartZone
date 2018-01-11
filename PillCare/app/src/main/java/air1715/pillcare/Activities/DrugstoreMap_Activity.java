@@ -1,15 +1,35 @@
 package air1715.pillcare.Activities;
 
 
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import air1715.pillcare.R;
+import air1715.pillcare.Utils.HttpUtils;
+import air1715.pillcare.Utils.PharmacyMapClass;
+
+import static air1715.pillcare.Utils.PopUpUtils.sendMessage;
 
 public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -26,18 +46,73 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
     }
 
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
+
+        PharmaciesOnMap(null);
+    }
+
+
+    private JSONArray getDrugstoresForLocation(Location current) throws JSONException {
+        String storesScript = "https://pillcare.000webhostapp.com/dohvatiLjekarne.php";
+
+        Map params = new HashMap<String, String>();
+        params.put("location", "46.305322,16.328033" /*tu dolazi varijabla location*/ );
+
+        JSONArray response = HttpUtils.sendGetRequestArray(params, storesScript);
+
+        return response;
+    }
+
+    private void PharmaciesOnMap(Location current) {
+        JSONArray response = null;
+        List<PharmacyMapClass> drugstores = null;
+
+        try {
+            response = getDrugstoresForLocation(current);
+
+            if (response != null) {
+                drugstores = parsePharmaciesJSON(response);
+                drawDrugstoresOnMap(drugstores);
+            }
+            else{
+                sendMessage(this, "Nije moguće učitati ljekarne");
+            }
+        }
+        catch (JSONException e) {
+            System.out.println("JsonExceptionMedications. " + e.getLocalizedMessage());
+        }
+    }
+
+    private List<PharmacyMapClass> parsePharmaciesJSON(JSONArray jsonArray) throws JSONException {
+        List<PharmacyMapClass> drugstores = new ArrayList<PharmacyMapClass>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonobject = jsonArray.getJSONObject(i);
+            drugstores.add(new PharmacyMapClass(jsonobject));
+        }
+
+        return drugstores;
+    }
+
+    private void drawDrugstoresOnMap(List<PharmacyMapClass> drugstores) {
+
+        for (PharmacyMapClass pharmacy:drugstores) {
+            LatLng drugstore = new LatLng(pharmacy.getLatitude(),pharmacy.getLongitude());
+            MarkerOptions locationOptions = new MarkerOptions();
+            locationOptions.title(pharmacy.getName());
+            locationOptions.position(drugstore);
+
+            if(pharmacy.getOpen() == 1)
+                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            else if(pharmacy.getOpen() == 0)
+                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            else
+                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+
+            mMap.addMarker(locationOptions);
+        }
     }
 }
