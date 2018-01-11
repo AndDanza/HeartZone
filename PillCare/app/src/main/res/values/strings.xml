@@ -23,4 +23,5 @@
         \nKlikom na barcode skener možete otvoriti čitač barcode-a i skenirani lijek dodati u listu terapija.
         \nIsti će se potom prikazati na ovoj stranici.</string>
     <string name="warning_dialog_title">Upozorenje</string>
+    <string name="title_activity_drugsotre_map_">Map</string>
 </resources>

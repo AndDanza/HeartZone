@@ -29,7 +29,6 @@ import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Adapters.MedicationsListRepresentation;
-import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
@@ -102,11 +101,14 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         break;
                     }
                     case R.id.ljekarne : {
+                        Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                        startActivity(drugstoreMap);
                         break;
                     }
                     case R.id.pregledi : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,PopisPregleda_Activity.class);
                         startActivity(changeUserData);
+                        break;
                     }
                     case R.id.dnevniRaspored : {
                         break;
@@ -114,6 +116,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     case R.id.IzmjenaPodataka : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
                         startActivity(changeUserData);
+                        break;
                     }
                 }
 
