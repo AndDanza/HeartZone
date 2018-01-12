@@ -8,12 +8,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import air1715.database.entiteti.Korisnik;
@@ -31,8 +36,6 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_popis_pregleda);
 
         loggedUser = PrijavaActivity.getLoggedUser();
-
-        FillWithData();
 
         Button openNoviPregledActivity = (Button) findViewById(R.id.btnDodajNoviPregled);
         openNoviPregledActivity.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +58,36 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = DataLoadController.GetInstance(manager);
         List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", null);
+
+//POCETAK
+        String dateTimeUpozorenje="";
+        List<Pregled> todayNotifications = new ArrayList<Pregled>();
+
+        Calendar c = Calendar.getInstance();
+        String datum =  c.get(Calendar.DAY_OF_MONTH)+ "-" + c.get(Calendar.MONTH)+1 + "-" +c.get(Calendar.YEAR);
+        Date datumD=null,datumU=null;
+
+        for (Pregled pregled : appointments) {
+            dateTimeUpozorenje=pregled.getVrijemeUpozorenja();
+
+            String[] datumVrijeme = dateTimeUpozorenje.split(" ");
+            String datumUpozorenja = datumVrijeme[0];
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                datumD=sdf.parse(datum);
+                datumU=sdf.parse(datumUpozorenja);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (pregled.isAktivan() && datumD.equals(datumU)){
+                todayNotifications.add(pregled);
+                Log.d("ELEMENT: ",pregled.getTermin());
+            }
+        }
+
+        //KRAJ
 
         ListView listViewAppointments=(ListView) findViewById(R.id.listViewPregledi);
 
