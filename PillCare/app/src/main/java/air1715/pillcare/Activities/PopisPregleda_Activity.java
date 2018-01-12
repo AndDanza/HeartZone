@@ -1,10 +1,14 @@
 package air1715.pillcare.Activities;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -29,6 +33,7 @@ import air1715.pillcare.R;
 public class PopisPregleda_Activity extends AppCompatActivity {
 
     Korisnik loggedUser;
+    List<Pregled> todayNotifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
     {
         super.onResume();
         FillWithData();
+        NotificationBuilder();
     }
 
     private void FillWithData(){
@@ -61,7 +67,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
 
 //POCETAK
         String dateTimeUpozorenje="";
-        List<Pregled> todayNotifications = new ArrayList<Pregled>();
+        todayNotifications = new ArrayList<Pregled>();
 
         Calendar c = Calendar.getInstance();
         String datum =  c.get(Calendar.DAY_OF_MONTH)+ "-" + c.get(Calendar.MONTH)+1 + "-" +c.get(Calendar.YEAR);
@@ -83,7 +89,6 @@ public class PopisPregleda_Activity extends AppCompatActivity {
 
             if (pregled.isAktivan() && datumD.equals(datumU)){
                 todayNotifications.add(pregled);
-                Log.d("ELEMENT: ",pregled.getTermin());
             }
         }
 
@@ -99,6 +104,33 @@ public class PopisPregleda_Activity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Niste unijeli nijedan pregled!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
+        }
+    }
+
+    private void NotificationBuilder(){
+        int mNotificationId=001;
+        for (Pregled pregled:todayNotifications) {
+            NotificationCompat.Builder mBuilder =
+                    (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.mipmap.notification)
+                            .setContentTitle("PillCare obavijest o pregledu!")
+                            .setContentText(pregled.getBiljeska());
+
+            Intent resultIntent = new Intent(this, PopisPregleda_Activity.class);
+
+            PendingIntent resultPendingIntent =
+                    PendingIntent.getActivity(
+                            this,
+                            0,
+                            resultIntent,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+
+            mBuilder.setContentIntent(resultPendingIntent);
+
+            mNotificationId += 001;
+            NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            mNotifyMgr.notify(mNotificationId, mBuilder.build());
         }
     }
 
