@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/blue_RelativeLayout"
+        android:layout_below="@+id/red_RelativeLayout"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/blue_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/blue_marker"
+            android:text="@string/blue_info"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/blue_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_blue_marker"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView18" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/green_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dialog_title"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/green_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/green_marker"
+            android:text="@string/green_info"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/green_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_green_marker"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/red_RelativeLayout"
+        android:layout_below="@+id/green_RelativeLayout"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/red_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/red_marker"
+            android:text="@string/red_info"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/red_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/green_marker"
+            android:layout_below="@+id/green_marker"
+            android:background="@mipmap/ic_red_marker" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_pharmacy_title"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -1,10 +1,13 @@
 package air1715.pillcare.Activities;
 
 
+import android.content.DialogInterface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,7 +55,23 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
         mMap.setMyLocationEnabled(true);
 
         PharmaciesOnMap(null);
+        ShowInformation();
     }
+
+    private void ShowInformation() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
+        builder.setView(R.layout.pharmacy_alert);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.show();
+    }
+
 
 
     private JSONArray getDrugstoresForLocation(Location current) throws JSONException {
