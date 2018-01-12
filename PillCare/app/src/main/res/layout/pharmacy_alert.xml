@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/blue_RelativeLayout"
         android:layout_below="@+id/red_RelativeLayout"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="2dp">
 
         <TextView
             android:id="@+id/blue_text"
@@ -20,6 +21,7 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/blue_marker"
             android:text="@string/blue_info"
+            android:textSize="16sp"
             android:visibility="visible" />
 
         <ImageView
@@ -27,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/ic_blue_marker"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/textView18" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
@@ -46,6 +48,7 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/green_marker"
             android:text="@string/green_info"
+            android:textSize="16sp"
             android:visibility="visible" />
 
         <ImageView
@@ -62,7 +65,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/red_RelativeLayout"
         android:layout_below="@+id/green_RelativeLayout"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="2dp">
 
         <TextView
             android:id="@+id/red_text"
@@ -71,6 +75,7 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/red_marker"
             android:text="@string/red_info"
+            android:textSize="16sp"
             android:visibility="visible" />
 
         <ImageView
@@ -80,6 +85,34 @@
             android:layout_alignStart="@+id/green_marker"
             android:layout_below="@+id/green_marker"
             android:background="@mipmap/ic_red_marker" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/load_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/blue_RelativeLayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="2dp">
+
+        <TextView
+            android:id="@+id/load_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/load_icon"
+            android:text="@string/load_info"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/load_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_load_pharmacies"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

@@ -1,7 +1,8 @@
-<FrameLayout
+<RelativeLayout
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent">
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,4 +14,13 @@
     tools:layout_editor_absoluteY="8dp"
     tools:layout_editor_absoluteX="8dp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/load_pharmacies"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/ic_load_pharmacies"
+        android:text="" />
+
+</RelativeLayout>

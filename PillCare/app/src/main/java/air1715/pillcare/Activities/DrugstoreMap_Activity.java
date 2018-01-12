@@ -3,20 +3,18 @@ package air1715.pillcare.Activities;
 
 import android.content.DialogInterface;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -41,22 +39,37 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drugsotre_map);
+        setContentView(R.layout.activity_drugstore_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
 
+        Button loadData = (Button) findViewById(R.id.load_pharmacies);
+        loadData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Location loc = mMap.getMyLocation();
+                if (loc != null) {
+                    PharmaciesOnMap(loc.getLatitude(), loc.getLongitude());
+
+                }
+                else
+                    sendMessage(DrugstoreMap_Activity.this, "Uređaj vas još nije locirao");
+            }
+        });
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
 
-        PharmaciesOnMap(null);
         ShowInformation();
     }
+
+
 
     private void ShowInformation() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
@@ -74,23 +87,23 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
 
 
 
-    private JSONArray getDrugstoresForLocation(Location current) throws JSONException {
+    private JSONArray getDrugstoresForLocation(double lat, double lng) throws JSONException {
         String storesScript = "https://pillcare.000webhostapp.com/dohvatiLjekarne.php";
 
         Map params = new HashMap<String, String>();
-        params.put("location", "46.305322,16.328033" /*tu dolazi varijabla location*/ );
+        params.put("location", String.valueOf(lat)+","+String.valueOf(lng));
 
         JSONArray response = HttpUtils.sendGetRequestArray(params, storesScript);
 
         return response;
     }
 
-    private void PharmaciesOnMap(Location current) {
+    private void PharmaciesOnMap(double lat, double lng) {
         JSONArray response = null;
         List<PharmacyMapClass> drugstores = null;
 
         try {
-            response = getDrugstoresForLocation(current);
+            response = getDrugstoresForLocation(lat, lng);
 
             if (response != null) {
                 drugstores = parsePharmaciesJSON(response);
