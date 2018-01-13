@@ -1,13 +1,17 @@
 package air1715.pillcare.Activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -51,6 +55,13 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     List<Proizvodac> companies;
 
     Button switchModularRepresentaion;
+
+    private static final String[] INITIAL_PERMS={
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+    private static final int INITIAL_REQUEST=1337;
+    private static final int LOCATION_REQUEST=INITIAL_REQUEST+3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +107,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Class<? extends AppCompatActivity> activityClass = null;
@@ -108,8 +120,21 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         boolean GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                         if(GpsStatus == true){
-                            Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
-                            startActivity(drugstoreMap);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
+                                if (canAccessLocation()) {
+                                    Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                                    startActivity(drugstoreMap);
+                                }
+                                else {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
+                                        requestPermissions(INITIAL_PERMS, LOCATION_REQUEST);
+                                    }
+                                }
+                            }
+                            else{
+                                Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                                startActivity(drugstoreMap);
+                            }
                         }
                         else{
                             String message = getResources().getString(R.string.gps_info);
@@ -280,5 +305,14 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
         return medication;
     }
-}
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private boolean hasPermission(String perm) {
+        return(PackageManager.PERMISSION_GRANTED==checkSelfPermission(perm));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private boolean canAccessLocation() {
+        return(hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+    }
+}
