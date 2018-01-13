@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,11 +30,12 @@ import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Adapters.MedicationsListRepresentation;
-import air1715.pillcare.Adapters.MedicationsRecyclerAdapter;
 import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
+
+import static air1715.pillcare.Utils.PopUpUtils.sendMessage;
 
 public class PopisLijekova_Activity extends AppCompatActivity {
 
@@ -102,11 +104,23 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         break;
                     }
                     case R.id.ljekarne : {
+                        LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                        boolean GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                        if(GpsStatus == true){
+                            Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                            startActivity(drugstoreMap);
+                        }
+                        else{
+                            String message = getResources().getString(R.string.gps_info);
+                            sendMessage(PopisLijekova_Activity.this, message);
+                        }
                         break;
                     }
                     case R.id.pregledi : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,PopisPregleda_Activity.class);
                         startActivity(changeUserData);
+                        break;
                     }
                     case R.id.dnevniRaspored : {
                         break;
@@ -114,6 +128,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                     case R.id.IzmjenaPodataka : {
                         Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
                         startActivity(changeUserData);
+                        break;
                     }
                 }
 
