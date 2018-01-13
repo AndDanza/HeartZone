@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +34,8 @@ import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
+
+import static air1715.pillcare.Utils.PopUpUtils.sendMessage;
 
 public class PopisLijekova_Activity extends AppCompatActivity {
 
@@ -101,8 +104,16 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         break;
                     }
                     case R.id.ljekarne : {
-                        Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
-                        startActivity(drugstoreMap);
+                        LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                        boolean GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                        if(GpsStatus == true){
+                            Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                            startActivity(drugstoreMap);
+                        }
+                        else{
+                            sendMessage(PopisLijekova_Activity.this, "GPS mora biti uključen za ovu opciju");
+                        }
                         break;
                     }
                     case R.id.pregledi : {
