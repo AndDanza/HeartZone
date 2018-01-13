@@ -55,8 +55,11 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
                     PharmaciesOnMap(loc.getLatitude(), loc.getLongitude());
 
                 }
-                else
-                    sendMessage(DrugstoreMap_Activity.this, "Uređaj vas još nije locirao");
+                else{
+                    String message = getResources().getString(R.string.warning_location);
+                    sendMessage(DrugstoreMap_Activity.this, message);
+                }
+
             }
         });
     }
@@ -110,7 +113,8 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
                 drawDrugstoresOnMap(drugstores);
             }
             else{
-                sendMessage(this, "Nije moguće učitati ljekarne");
+                String message = getResources().getString(R.string.error_pharmacies);
+                sendMessage(DrugstoreMap_Activity.this, message);
             }
         }
         catch (JSONException e) {

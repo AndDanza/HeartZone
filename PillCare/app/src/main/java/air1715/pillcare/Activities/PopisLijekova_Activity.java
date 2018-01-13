@@ -112,7 +112,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                             startActivity(drugstoreMap);
                         }
                         else{
-                            sendMessage(PopisLijekova_Activity.this, "GPS mora biti uključen za ovu opciju");
+                            String message = getResources().getString(R.string.gps_info);
+                            sendMessage(PopisLijekova_Activity.this, message);
                         }
                         break;
                     }

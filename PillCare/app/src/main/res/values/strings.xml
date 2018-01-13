@@ -29,4 +29,7 @@
     <string name="red_info">Crvena oznaka predstavlja ljekarne koje su trenutno zatvorene</string>
     <string name="blue_info">Plava oznaka predstavlja ljekarne za koje ne postoje informacije o radnom vremenu</string>
     <string name="load_info">Tipka za učitavanje ljekarni na dnu ekrana, učitavanje počinje nakon što vas uređaj locira</string>
+    <string name="gps_info">GPS mora biti uključen za ovu opciju</string>
+    <string name="error_pharmacies">Nije moguće učitati ljekarne</string>
+    <string name="warning_location">Uređaj vas još nije locirao</string>
 </resources>
