@@ -76,13 +76,13 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         for (Pregled pregled : appointments) {
             dateTimeUpozorenje=pregled.getVrijemeUpozorenja();
 
-            String[] datumVrijeme = dateTimeUpozorenje.split(" ");
-            String datumUpozorenja = datumVrijeme[0];
+            //String[] datumVrijeme = dateTimeUpozorenje.split(" ");
+            //String datumUpozorenja = datumVrijeme[0];
 
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 datumD=sdf.parse(datum);
-                datumU=sdf.parse(datumUpozorenja);
+                datumU=sdf.parse(dateTimeUpozorenje);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -107,30 +107,41 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         }
     }
 
+    private boolean isNotificationVisible(int myID) {
+        Intent notificationIntent = new Intent(this, PopisPregleda_Activity.class);
+        PendingIntent test = PendingIntent.getActivity(this, myID, notificationIntent, PendingIntent.FLAG_NO_CREATE);
+
+        if(test != null)
+            return true;
+        else
+            return false;
+    }
+
     private void NotificationBuilder(){
-        int mNotificationId=001;
+
         for (Pregled pregled:todayNotifications) {
-            NotificationCompat.Builder mBuilder =
-                    (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.mipmap.notification)
-                            .setContentTitle("PillCare obavijest o pregledu!")
-                            .setContentText(pregled.getBiljeska());
+            if(isNotificationVisible(pregled.getId()) == false) {
+                NotificationCompat.Builder mBuilder =
+                        (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                                .setSmallIcon(R.mipmap.notification)
+                                .setContentTitle("PillCare obavijest o pregledu!")
+                                .setContentText(pregled.getBiljeska());
 
-            Intent resultIntent = new Intent(this, PopisPregleda_Activity.class);
+                Intent resultIntent = new Intent(this, PopisPregleda_Activity.class);
 
-            PendingIntent resultPendingIntent =
-                    PendingIntent.getActivity(
-                            this,
-                            0,
-                            resultIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                    );
+                PendingIntent resultPendingIntent =
+                        PendingIntent.getActivity(
+                                this,
+                                0,
+                                resultIntent,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
 
-            mBuilder.setContentIntent(resultPendingIntent);
+                mBuilder.setContentIntent(resultPendingIntent);
 
-            mNotificationId += 001;
-            NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            mNotifyMgr.notify(mNotificationId, mBuilder.build());
+                NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                mNotifyMgr.notify(pregled.getId(), mBuilder.build());
+            }
         }
     }
 
