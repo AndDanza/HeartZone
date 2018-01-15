@@ -1,11 +1,15 @@
 package air1715.pillcare.Activities;
 
+import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -29,6 +33,7 @@ import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Pregled;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
+import air1715.pillcare.Utils.AlertHandler;
 
 public class PopisPregleda_Activity extends AppCompatActivity {
 
@@ -53,95 +58,76 @@ public class PopisPregleda_Activity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         FillWithData();
-        NotificationBuilder();
+        createAlarms();
     }
 
-    private void FillWithData(){
+    private void createAlarms() {
+        for (Pregled pregled : todayNotifications) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                Date date = sdf.parse(pregled.getVrijemeUpozorenja());
+                long when = date.getTime();
+
+                Intent alertIntent = new Intent(getApplicationContext(), AlertHandler.class);
+                alertIntent.putExtra("appointment", pregled);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, when,
+                        PendingIntent.getBroadcast(getApplicationContext(), pregled.getId(), alertIntent, PendingIntent.FLAG_ONE_SHOT));
+            } catch (ParseException e) {
+                Toast toast = Toast.makeText(this, "Greška", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        }
+    }
+
+    private void FillWithData() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = DataLoadController.GetInstance(manager);
         List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", null);
 
 //POCETAK
-        String dateTimeUpozorenje="";
+        String dateTimeUpozorenje = "";
         todayNotifications = new ArrayList<Pregled>();
 
         Calendar c = Calendar.getInstance();
-        String datum =  c.get(Calendar.DAY_OF_MONTH)+ "-" + c.get(Calendar.MONTH)+1 + "-" +c.get(Calendar.YEAR);
-        Date datumD=null,datumU=null;
+        String datum = c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.MONTH) + 1 + "-" + c.get(Calendar.YEAR);
+        Date datumD = null, datumU = null;
 
         for (Pregled pregled : appointments) {
-            dateTimeUpozorenje=pregled.getVrijemeUpozorenja();
+            dateTimeUpozorenje = pregled.getVrijemeUpozorenja();
 
-            //String[] datumVrijeme = dateTimeUpozorenje.split(" ");
-            //String datumUpozorenja = datumVrijeme[0];
+            String[] datumVrijeme = dateTimeUpozorenje.split(" ");
+            String datumUpozorenja = datumVrijeme[0];
 
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                datumD=sdf.parse(datum);
-                datumU=sdf.parse(dateTimeUpozorenje);
+                datumD = sdf.parse(datum);
+                datumU = sdf.parse(datumUpozorenja);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            if (pregled.isAktivan() && datumD.equals(datumU)){
+            if (pregled.isAktivan() && datumD.equals(datumU)) {
                 todayNotifications.add(pregled);
             }
         }
 
         //KRAJ
 
-        ListView listViewAppointments=(ListView) findViewById(R.id.listViewPregledi);
+        ListView listViewAppointments = (ListView) findViewById(R.id.listViewPregledi);
 
-        if (appointments!=null) {
+        if (appointments != null) {
             ArrayAdapter<Pregled> adapter = new ArrayAdapter<Pregled>(this, android.R.layout.simple_list_item_1, appointments);
             listViewAppointments.setAdapter(adapter);
-        }
-        else{
+        } else {
             Toast toast = Toast.makeText(this, "Niste unijeli nijedan pregled!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        }
-    }
-
-    private boolean isNotificationVisible(int myID) {
-        Intent notificationIntent = new Intent(this, PopisPregleda_Activity.class);
-        PendingIntent test = PendingIntent.getActivity(this, myID, notificationIntent, PendingIntent.FLAG_NO_CREATE);
-
-        if(test != null)
-            return true;
-        else
-            return false;
-    }
-
-    private void NotificationBuilder(){
-
-        for (Pregled pregled:todayNotifications) {
-            if(isNotificationVisible(pregled.getId()) == false) {
-                NotificationCompat.Builder mBuilder =
-                        (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.mipmap.notification)
-                                .setContentTitle("PillCare obavijest o pregledu!")
-                                .setContentText(pregled.getBiljeska());
-
-                Intent resultIntent = new Intent(this, PopisPregleda_Activity.class);
-
-                PendingIntent resultPendingIntent =
-                        PendingIntent.getActivity(
-                                this,
-                                0,
-                                resultIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-
-                mBuilder.setContentIntent(resultPendingIntent);
-
-                NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                mNotifyMgr.notify(pregled.getId(), mBuilder.build());
-            }
         }
     }
 
