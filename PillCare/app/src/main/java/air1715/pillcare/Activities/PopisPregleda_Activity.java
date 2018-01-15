@@ -38,7 +38,8 @@ import air1715.pillcare.Utils.AlertHandler;
 public class PopisPregleda_Activity extends AppCompatActivity {
 
     Korisnik loggedUser;
-    List<Pregled> todayNotifications;
+    List<Pregled> notificationsList;
+    List<Pregled> appointments=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +61,14 @@ public class PopisPregleda_Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        FillWithData();
-        createAlarms();
+        if (FillWithData()!=false){
+            createAlarms();
+        }
+
     }
 
     private void createAlarms() {
-        for (Pregled pregled : todayNotifications) {
+        for (Pregled pregled : notificationsList) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 Date date = sdf.parse(pregled.getVrijemeUpozorenja());
@@ -85,14 +88,17 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         }
     }
 
-    private void FillWithData() {
+    private boolean FillWithData() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = DataLoadController.GetInstance(manager);
-        List<Pregled> appointments = (List<Pregled>) dataControl.GetData("appointments", null);
+        appointments = (List<Pregled>) dataControl.GetData("appointments", null);
 
-//POCETAK
+        if (appointments==null){
+            return false;
+        }
+
         String dateTimeUpozorenje = "";
-        todayNotifications = new ArrayList<Pregled>();
+        notificationsList = new ArrayList<Pregled>();
 
         Calendar c = Calendar.getInstance();
         String datum = c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.MONTH) + 1 + "-" + c.get(Calendar.YEAR);
@@ -112,12 +118,10 @@ public class PopisPregleda_Activity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (pregled.isAktivan() && datumD.equals(datumU)) {
-                todayNotifications.add(pregled);
+            if (pregled.isAktivan() && datumD.getTime()<=datumU.getTime()) {
+                notificationsList.add(pregled);
             }
         }
-
-        //KRAJ
 
         ListView listViewAppointments = (ListView) findViewById(R.id.listViewPregledi);
 
@@ -129,6 +133,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
+        return true;
     }
 
 }
