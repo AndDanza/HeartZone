@@ -168,10 +168,13 @@ public class WebServiceDataLoader implements DataLoader {
         return appointments;
     }
 
-    public Terapija getSpecificTherapy(Object medicament) {
+    public Terapija getSpecificTherapy(Object medicForUser) {
+        List<Object> parameters = (List<Object>) medicForUser;
+
         Map params = new HashMap<String, String>();
-        params.put("user", korisnik);
-        params.put("medicament", (Lijek) medicament);
+        params.put("user", (Korisnik) parameters.get(1));
+        params.put("medicament", (Lijek) parameters.get(0));
+        params.put("active", "1");
         JSONObject response = HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/specificnaTerapija.php");
         Terapija terapija = null;
         try {

@@ -21,9 +21,11 @@ import java.util.List;
 public class Terapija extends BaseModel implements Serializable {
     @PrimaryKey
     @Column
+    int id;
+
+    @Column
     int lijekoviId;
 
-    @PrimaryKey
     @Column
     int korisnikId;
 
@@ -60,6 +62,7 @@ public class Terapija extends BaseModel implements Serializable {
     }
 
     public Terapija(JSONObject jsonObject) throws JSONException {
+        this.id = jsonObject.getInt("id");
         this.aktivna = jsonObject.getString("aktivna").equals("1") ? true : false;
         this.lijekoviId = jsonObject.getInt("lijekoviId");
         this.korisnikId = jsonObject.getInt("korisnikId");
@@ -68,6 +71,14 @@ public class Terapija extends BaseModel implements Serializable {
         this.pojedinacnaDoza = jsonObject.getDouble("pojedinacnaDoza");
         this.upozorenje = jsonObject.getInt("upozorenje");
         this.razmakDnevnihDoza = jsonObject.getInt("razmakDnevnihDoza");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getLijekoviId() {

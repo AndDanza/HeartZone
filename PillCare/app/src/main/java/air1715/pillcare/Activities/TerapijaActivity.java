@@ -1,5 +1,7 @@
 package air1715.pillcare.Activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -16,9 +18,11 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Lijek;
@@ -26,6 +30,7 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
+import air1715.pillcare.Utils.AlertHandler;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
@@ -62,7 +67,11 @@ public class TerapijaActivity extends AppCompatActivity {
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
-        therapy = (Terapija) dataControl.GetData("specificTherapy", medication);
+        List<Object> params = new ArrayList<Object>();
+        params.add((Object) medication);
+        params.add((Object) loggedUser);
+
+        therapy = (Terapija) dataControl.GetData("specificTherapy", (Object)params);
 
         LoadDataInXML(medication, company);
 
@@ -92,10 +101,10 @@ public class TerapijaActivity extends AppCompatActivity {
                 else {
                     Map params = new HashMap<String, Object>();
                     params.put("start", "1");
-                    params.put("user", loggedUser);
-                    params.put("medicament", medication);
-                    if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null)
+                    params.put("therapy_id", therapy.getId());
+                    if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
+                    }
                     else
                         PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
                 }
@@ -112,10 +121,10 @@ public class TerapijaActivity extends AppCompatActivity {
                 else {
                     Map params = new HashMap<String, Object>();
                     params.put("start", "0");
-                    params.put("user", loggedUser);
-                    params.put("medicament", medication);
-                    if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null)
+                    params.put("therapy_id", therapy.getId());
+                    if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Terapija je zaustavljena");
+                    }
                     else
                         PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
                 }
@@ -124,6 +133,7 @@ public class TerapijaActivity extends AppCompatActivity {
 
 
     }
+
 
     private void LoadDataInXML(Lijek medication, Proizvodac company) {
         View itemView = getWindow().getDecorView();
