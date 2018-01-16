@@ -18,7 +18,9 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,8 +70,9 @@ public class TerapijaActivity extends AppCompatActivity {
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
 
         List<Object> params = new ArrayList<Object>();
-        params.add((Object) medication);
-        params.add((Object) loggedUser);
+        params.add(0,(Object) loggedUser);
+        params.add(1, (Object) medication);
+
 
         therapy = (Terapija) dataControl.GetData("specificTherapy", (Object)params);
 
@@ -93,14 +96,20 @@ public class TerapijaActivity extends AppCompatActivity {
             }
         });
 
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         startTherapyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (therapy == null)
                     PopUpUtils.sendMessage(context, "Niste napravili terapiju s ovim lijekom");
                 else {
+                    Calendar cal = Calendar.getInstance();
+                    String todayDate = format.format(cal.getTime());
+
                     Map params = new HashMap<String, Object>();
                     params.put("start", "1");
+                    params.put("date", todayDate);
                     params.put("therapy_id", therapy.getId());
                     if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
@@ -119,8 +128,12 @@ public class TerapijaActivity extends AppCompatActivity {
                 if (therapy == null)
                     PopUpUtils.sendMessage(context, "Niste napravili terapiju s ovim lijekom");
                 else {
-                    Map params = new HashMap<String, Object>();
+                    Calendar cal = Calendar.getInstance();
+                    String todayDate = format.format(cal.getTime());
+
+                    Map params = new HashMap<String, String>();
                     params.put("start", "0");
+                    params.put("date", todayDate);
                     params.put("therapy_id", therapy.getId());
                     if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Terapija je zaustavljena");
