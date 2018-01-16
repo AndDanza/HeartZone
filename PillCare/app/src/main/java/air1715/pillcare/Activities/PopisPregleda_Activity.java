@@ -62,11 +62,17 @@ public class PopisPregleda_Activity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (FillWithData()!=false){
+            //poziv alarma samo ako postoje pregledi za korisnika
             createAlarms();
         }
 
     }
 
+    /*
+    * Kreiranje intenta koji sadrži kalsu koja će biti otvorena kad se alarm oglasi.
+    * Za kreiranje alarma korištena metoda setExact koja kreira jedan alarm koji se okida u točno zadano
+    * vrijema, ne mora čekati sustav da nakupi više alarma i okine ih.
+    * */
     private void createAlarms() {
         for (Pregled pregled : notificationsList) {
             try {
@@ -88,6 +94,12 @@ public class PopisPregleda_Activity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Metoda za učitavanje podataka sa web servisa te potom u sam view (xml)
+     * Podaci se svrstavaju u dvije liste, svi pregledi (appointments) te lista
+     * pregleda za koje moramo izdati obavijesti (notificationsList) koja sadži sve preglede koji za
+     * datum obavijesti imaju datum nakon današnjeg datuma
+     */
     private boolean FillWithData() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = DataLoadController.GetInstance(manager);
