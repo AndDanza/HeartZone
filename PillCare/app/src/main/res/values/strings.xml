@@ -25,4 +25,6 @@
     <string name="warning_dialog_title">Upozorenje</string>
     <string name="appointment_notification">Obavijest pregledu!</string>
     <string name="pill_notification">Morate popiti lijek!</string>
+    <string name="appointment_empty">Niste unijeli nijedan pregled!</string>
+    <string name="general_error">Došlo je do greške</string>
 </resources>

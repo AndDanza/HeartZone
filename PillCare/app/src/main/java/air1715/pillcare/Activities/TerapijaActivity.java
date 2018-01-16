@@ -277,9 +277,7 @@ public class TerapijaActivity extends AppCompatActivity {
             }
 
         } catch (ParseException e) {
-            Toast toast = Toast.makeText(this, "Greška", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            PopUpUtils.sendMessage(this, getString(R.string.general_error));
         }
     }
 

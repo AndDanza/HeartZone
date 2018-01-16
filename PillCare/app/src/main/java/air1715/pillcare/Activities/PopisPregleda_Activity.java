@@ -34,6 +34,7 @@ import air1715.database.entiteti.Pregled;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 import air1715.pillcare.Utils.AlertHandler;
+import air1715.pillcare.Utils.PopUpUtils;
 
 public class PopisPregleda_Activity extends AppCompatActivity {
 
@@ -87,9 +88,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, when,
                         PendingIntent.getBroadcast(getApplicationContext(), pregled.getId(), alertIntent, PendingIntent.FLAG_ONE_SHOT));
             } catch (ParseException e) {
-                Toast toast = Toast.makeText(this, "Greška", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                PopUpUtils.sendMessage(this, getString(R.string.general_error));
             }
         }
     }
@@ -141,9 +140,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
             ArrayAdapter<Pregled> adapter = new ArrayAdapter<Pregled>(this, android.R.layout.simple_list_item_1, appointments);
             listViewAppointments.setAdapter(adapter);
         } else {
-            Toast toast = Toast.makeText(this, "Niste unijeli nijedan pregled!", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            PopUpUtils.sendMessage(this, getString(R.string.appointment_empty));
         }
         return true;
     }
