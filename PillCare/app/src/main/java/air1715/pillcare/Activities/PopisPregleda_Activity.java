@@ -75,7 +75,7 @@ public class PopisPregleda_Activity extends AppCompatActivity {
                 long when = date.getTime();
 
                 Intent alertIntent = new Intent(getApplicationContext(), AlertHandler.class);
-                alertIntent.putExtra("appointment", pregled);
+                alertIntent.putExtra("notificationObject", pregled);
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, when,
