@@ -216,6 +216,12 @@ public class TerapijaActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    private long countMilisecondsBetweenDailyDose(int daysBetweenDailyDose){
+        final long dayInMiliseconds = 86400000;
+
+        return dayInMiliseconds*daysBetweenDailyDose;
+    }
+
     private void startTherapyAlarms(Terapija therapy, Lijek medication, Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences("stored_alarms", Context.MODE_PRIVATE);
         try {
@@ -229,12 +235,13 @@ public class TerapijaActivity extends AppCompatActivity {
 
             long interval = calculateRepeatInterval(when, Integer.valueOf(therapy.getBrojDnevnihDoza()));
             int numberOfTherapies = therapy.getBrojDnevnihDoza();
+            long daysBetweenDailyDose = countMilisecondsBetweenDailyDose(therapy.getRazmakDnevnihDoza());
 
             int randomID = 0;
 
             for (int i = 0; i < numberOfTherapies; i++) {
                 randomID = generateAlarmID();
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, when, AlarmManager.INTERVAL_DAY,
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, when, daysBetweenDailyDose,
                         PendingIntent.getBroadcast(getApplicationContext(), randomID, alertIntent, 0));
 
                 String storingName = medication.getNaziv()+"_"+String.valueOf(i);
