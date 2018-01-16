@@ -23,6 +23,10 @@ public class AlertHandler extends WakefulBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Object extra = intent.getExtras().getSerializable("notificationObject");
 
+        /*
+        *zaprimljen objekt tipa klase pregled poziva drugačiju notifikaciju (drugačiji tekst i ikona) od
+        *one za terapiju
+        * */
         if(extra.getClass() == Pregled.class){
             Pregled appointment = (Pregled) extra;
             NotificationBuilder(appointment.getBiljeska(),
@@ -41,6 +45,7 @@ public class AlertHandler extends WakefulBroadcastReceiver {
                     R.mipmap.ic_pill_notification);
         }
     }
+
 
     private void NotificationBuilder(String contentString, int notificationID, Context context, int titleStringID, int iconID) {
         NotificationCompat.Builder mBuilder =

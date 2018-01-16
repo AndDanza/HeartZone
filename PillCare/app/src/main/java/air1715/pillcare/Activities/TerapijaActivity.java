@@ -169,6 +169,11 @@ public class TerapijaActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * Zaustavljanje alarma za terapiju ako korisnik odabere opciju "zaustavi terpaiju"
+    * ulazni pramateri su terpaija za koju se gasi alarm te lijek pomću kojeg je kreiran ključ u shared
+    * preferences datoteci i kontekst za dohvaćanje iste
+    * */
     private void stopTherapyAlarms(Terapija therapy, Lijek medication, Context context) {
         int numberOfTherapies = therapy.getBrojDnevnihDoza();
 
@@ -188,6 +193,10 @@ public class TerapijaActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * Uklonjeni alarm i njegove pripadajuće vrijednosti u share preferences datoteci (id)
+     * potrebno je ukloniti kako bi se opet mogao koristiti
+     */
     private void removeSharedPreference(SharedPreferences sharedPref, String key){
         String stringValue = String.valueOf(sharedPref.getInt(key, 0));
         Log.d("shared pref", stringValue);
@@ -196,6 +205,10 @@ public class TerapijaActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    /*
+    * Kreiranje intenta koji se poziva na "okidanje alarma"
+    * Kreira notifikaciju za prikaz za danu terapiju i lijek u terapiji
+    * */
     private Intent createAlertIntent(Terapija therapy, Lijek medication){
         Intent alertIntent = new Intent(getApplicationContext(), AlertHandler.class);
         alertIntent.putExtra("notificationObject", therapy);
@@ -204,11 +217,16 @@ public class TerapijaActivity extends AppCompatActivity {
         return alertIntent;
     }
 
+
     private int generateAlarmID(){
         Random r = new Random();
         return r.nextInt((65000 - 100) + 1) + 100;
     }
 
+    /*
+    * Pohrana tipa ključ - vrijednost u datoteku share preferences po imenu "created_alarms".
+    * Pomoću nje se dohvaćaju ID-evi alarma za danu terapiju.
+    * */
     private void storeSharedPreference(Context context, int alarmID, String storingName){
         SharedPreferences sharedPref = context.getSharedPreferences("created_alarms", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -216,12 +234,20 @@ public class TerapijaActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    /*
+    * Dnevna doza terapije (tableta, dvije...) mogu se uzimati ne samo svaki dan već svaka dva, tri dana...
+    * U tu svrhu potrebno je računati interval sljedeće dnevne doze u milisekundama
+    * */
     private long countMilisecondsBetweenDailyDose(int daysBetweenDailyDose){
         final long dayInMiliseconds = 86400000;
 
         return dayInMiliseconds*daysBetweenDailyDose;
     }
 
+    /*
+    * Pokretanje alarma terapije (alarm mnagerom kreira se alarm
+    * ID alarma pohranjuje se u share preference datoteku "created_alarms"
+    * */
     private void startTherapyAlarms(Terapija therapy, Lijek medication, Context context) {
         SharedPreferences sharedPref = context.getSharedPreferences("stored_alarms", Context.MODE_PRIVATE);
         try {
@@ -257,6 +283,11 @@ public class TerapijaActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    * Od trenutka kad je korisnik pokrenuo uzimanje terpaije do kraja dana računa se vrijeme
+    * u milisekundama, razlika navedenih vremena dijeli se s veličinom dnevne doze (tableta, dvije, tri...)
+    * te time dobivamo razmake između doza unutar dana.
+    * */
     private long calculateRepeatInterval(long startMiliseconds, int timesADay) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
