@@ -23,6 +23,10 @@
         \nKlikom na barcode skener možete otvoriti čitač barcode-a i skenirani lijek dodati u listu terapija.
         \nIsti će se potom prikazati na ovoj stranici.</string>
     <string name="warning_dialog_title">Upozorenje</string>
+    <string name="appointment_notification">Obavijest pregledu!</string>
+    <string name="pill_notification">Morate popiti lijek!</string>
+    <string name="appointment_empty">Niste unijeli nijedan pregled!</string>
+    <string name="general_error">Došlo je do greške</string>
     <string name="title_activity_drugsotre_map_">Map</string>
     <string name="info_pharmacy_title">Informacije</string>
     <string name="green_info">Zelena oznaka predstavlja ljekarne koje su trenutno otvorene</string>

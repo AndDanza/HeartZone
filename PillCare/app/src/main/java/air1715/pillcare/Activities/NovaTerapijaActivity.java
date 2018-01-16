@@ -71,8 +71,6 @@ public class NovaTerapijaActivity extends AppCompatActivity {
         dailyDoseEditText = (EditText) findViewById(R.id.dailyDoseEditText);
         numberOfDaysBeetwenDoseEditText = (EditText) findViewById(R.id.numberOfDaysBeetwenDoseEditText);
         pillsLeftWarningEditText = (EditText) findViewById(R.id.pillsLeftWarningEditText);
-        therapyStartDate = (EditText) findViewById(R.id.therapyStartDate);
-        therapyEndDate = (EditText) findViewById(R.id.therapyEndDate);
 
         ImageView acceptTherapyImageView = (ImageView) findViewById(R.id.acceptTherapyImageView);
         ImageView cancelTherapyImageView = (ImageView) findViewById(R.id.cancelTherapyImageView);
@@ -90,13 +88,10 @@ public class NovaTerapijaActivity extends AppCompatActivity {
                     therapy.setKorisnikId(loggedUser.getId());
                     therapy.setLijek(medication);
                     therapy.setLijekoviId(medication.getId());
-                    therapy.setAktivna(true);
                     therapy.setBrojDnevnihDoza(Integer.parseInt(dailyDoseEditText.getText().toString()));
                     therapy.setPojedinacnaDoza(Double.parseDouble(singleDoseEditText.getText().toString()));
                     therapy.setUpozorenje(Integer.parseInt(pillsLeftWarningEditText.getText().toString()));
                     therapy.setRazmakDnevnihDoza(Integer.parseInt(numberOfDaysBeetwenDoseEditText.getText().toString()));
-                    therapy.setPocetak(therapyStartDate.getText().toString());
-                    therapy.setKraj(therapyEndDate.getText().toString());
 
                     Map params = new HashMap<String, Object>();
                     params.put("therapy", therapy);

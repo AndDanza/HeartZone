@@ -224,33 +224,5 @@
         app:layout_constraintStart_toEndOf="@+id/acceptTherapyImageView"
         app:srcCompat="@android:drawable/ic_delete" />
 
-    <EditText
-        android:id="@+id/therapyStartDate"
-        android:layout_width="108dp"
-        android:layout_height="43dp"
-        android:gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Pocetak"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <EditText
-        android:id="@+id/therapyEndDate"
-        android:layout_width="117dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Kraj"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
-        app:layout_constraintStart_toEndOf="@+id/therapyStartDate"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
 
 </android.support.constraint.ConstraintLayout>
