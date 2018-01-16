@@ -9,18 +9,22 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,6 +117,7 @@ public class TerapijaActivity extends AppCompatActivity {
                     params.put("therapy_id", therapy.getId());
                     if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Terapija je pokrenuta");
+                        startTherapyAlarms(therapy, medication);
                     }
                     else
                         PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
@@ -137,6 +142,7 @@ public class TerapijaActivity extends AppCompatActivity {
                     params.put("therapy_id", therapy.getId());
                     if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/pokreniZaustaviTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Terapija je zaustavljena");
+                        stopTherapyAlarms(therapy);
                     }
                     else
                         PopUpUtils.sendMessage(context, "Problem prilikom spajanja na bazu");
@@ -145,6 +151,37 @@ public class TerapijaActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void stopTherapyAlarms(Terapija therapy) {
+        Intent intent = new Intent(this, AlertHandler.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), therapy.getId(), intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+    }
+
+    private void startTherapyAlarms(Terapija therapy, Lijek medication) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date date = sdf.parse(therapy.getPocetak());
+            long when = date.getTime();
+
+            sdf = new SimpleDateFormat("HH");
+            date = sdf.parse(String.valueOf(therapy.getRazmakDnevnihDoza()));
+            long every = date.getTime();
+
+            Intent alertIntent = new Intent(getApplicationContext(), AlertHandler.class);
+            alertIntent.putExtra("notificationObject", therapy);
+            alertIntent.putExtra("medication", medication);
+
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, when, every,
+                    PendingIntent.getBroadcast(getApplicationContext(), therapy.getId(), alertIntent, PendingIntent.FLAG_ONE_SHOT));
+        } catch (ParseException e) {
+            Toast toast = Toast.makeText(this, "Greška", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
 
 
