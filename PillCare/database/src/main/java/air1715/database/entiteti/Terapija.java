@@ -67,6 +67,7 @@ public class Terapija extends BaseModel implements Serializable {
         this.pojedinacnaDoza = jsonObject.getDouble("pojedinacnaDoza");
         this.upozorenje = jsonObject.getInt("upozorenje");
         this.razmakDnevnihDoza = jsonObject.getInt("razmakDnevnihDoza");
+        this.brojDnevnihDoza = jsonObject.getInt("brojDnevnihDoza");
     }
 
     public int getId() {
