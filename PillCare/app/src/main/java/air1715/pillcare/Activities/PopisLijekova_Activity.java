@@ -1,6 +1,7 @@
 package air1715.pillcare.Activities;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -121,14 +122,12 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         boolean GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                         if (GpsStatus == true) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                                 if (canAccessLocation()) {
                                     Intent drugstoreMap = new Intent(PopisLijekova_Activity.this, DrugstoreMap_Activity.class);
                                     startActivity(drugstoreMap);
                                 } else {
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
-                                        requestPermissions(INITIAL_PERMS, LOCATION_REQUEST);
-                                    }
+                                    requestPermissions(INITIAL_PERMS, LOCATION_REQUEST);
                                 }
                             } else {
                                 Intent drugstoreMap = new Intent(PopisLijekova_Activity.this, DrugstoreMap_Activity.class);
@@ -325,12 +324,16 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         return medication;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
+
     private boolean hasPermission(String perm) {
-        return (PackageManager.PERMISSION_GRANTED == checkSelfPermission(perm));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return (PackageManager.PERMISSION_GRANTED == checkSelfPermission(perm));
+        }
+        return false;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     private boolean canAccessLocation() {
         return (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
     }
