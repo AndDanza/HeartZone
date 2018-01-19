@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,15 +10,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:background="@drawable/ic_account_circle_black_24dp" />
+        android:layout_width="match_parent"
+        android:layout_height="106dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        app:srcCompat="@mipmap/logo2" />
 
-    <TextView
-        android:id="@+id/txtAktivniKorisnik"
-        android:layout_width="219dp"
-        android:layout_height="28dp"
-        android:text="KORISNIK: peroperic2"
-        android:textAlignment="center"
-        android:textSize="18sp" />
 </LinearLayout>

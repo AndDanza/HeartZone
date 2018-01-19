@@ -191,12 +191,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        refreshModularRepresentation();
-    }
-
     /*
     * Metoda koja otvara dialog u slučau da korisnik još nije unio terapiju, a nalazi se u popisu lijekova
     * */
@@ -275,7 +269,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     }
 
     private void refreshModularRepresentation() {
-        presentationController.ClearData();
 
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         dataControl = DataLoadController.GetInstance(manager);

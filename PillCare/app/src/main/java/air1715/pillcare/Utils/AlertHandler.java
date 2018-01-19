@@ -3,6 +3,8 @@ package air1715.pillcare.Utils;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.support.v7.app.NotificationCompat;
 
@@ -42,17 +44,19 @@ public class AlertHandler extends WakefulBroadcastReceiver {
                     therapy.getId(),
                     context,
                     R.string.pill_notification,
-                    R.mipmap.ic_pill_notification);
+                    R.mipmap.notification_lijek);
         }
     }
 
 
     private void NotificationBuilder(String contentString, int notificationID, Context context, int titleStringID, int iconID) {
+        Uri soundAlert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(context)
                         .setSmallIcon(iconID)
                         .setContentTitle(context.getString(titleStringID))
-                        .setContentText(contentString);
+                        .setContentText(contentString)
+                        .setSound(soundAlert);
 
         mBuilder.setDefaults(NotificationCompat.DEFAULT_VIBRATE);
 
