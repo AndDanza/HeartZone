@@ -85,9 +85,6 @@ public class TerapijaActivity extends AppCompatActivity {
 
 
         therapy = (Terapija) dataControl.GetData("specificTherapy", (Object) params);
-        Log.d("terapija", String.valueOf(therapy.getPocetak().length()));
-        Log.d("terapija", therapy.getPocetak().toString());
-        Log.d("terapija", String.valueOf(therapy.getPocetak().getClass()));
 
         LoadDataInXML(medication, company);
 

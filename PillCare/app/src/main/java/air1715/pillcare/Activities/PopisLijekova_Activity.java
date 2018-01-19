@@ -183,6 +183,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         * Tipka na formi koja je prethodno pronađena, deklarirana i inicijalizirana.
         * Pokreće pormjenu iz liste u pločice i obratno
         * */
+        switchModularRepresentaion = (Button) findViewById(R.id.get_data);
         switchModularRepresentaion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

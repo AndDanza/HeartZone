@@ -47,6 +47,9 @@ public class Terapija extends BaseModel implements Serializable {
     @Column
     int razmakDnevnihDoza;
 
+    @Column
+    int stanje;
+
     @ForeignKey(tableClass = Korisnik.class)
     @Column
     Korisnik korisnik;
@@ -68,6 +71,7 @@ public class Terapija extends BaseModel implements Serializable {
         this.upozorenje = jsonObject.getInt("upozorenje");
         this.razmakDnevnihDoza = jsonObject.getInt("razmakDnevnihDoza");
         this.brojDnevnihDoza = jsonObject.getInt("brojDnevnihDoza");
+        this.stanje = jsonObject.getInt("stanje");
     }
 
     public int getId() {
@@ -76,6 +80,14 @@ public class Terapija extends BaseModel implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStanje() {
+        return stanje;
+    }
+
+    public void setStanje(int stanje) {
+        this.stanje = stanje;
     }
 
     public int getLijekoviId() {
