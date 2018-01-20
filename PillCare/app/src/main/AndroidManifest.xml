@@ -36,6 +36,9 @@
             android:name=".Activities.Registracija_Activity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activities.DnevniRaspored_Activity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activities.PopisLijekova_Activity"
             android:screenOrientation="portrait" />
         <activity

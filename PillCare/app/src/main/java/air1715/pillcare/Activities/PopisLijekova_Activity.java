@@ -145,6 +145,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
                         break;
                     }
                     case R.id.dnevniRaspored: {
+                        Intent changeUserDate = new Intent(PopisLijekova_Activity.this, DnevniRaspored_Activity.class);
+                        startActivity(changeUserDate);
                         break;
                     }
                     case R.id.IzmjenaPodataka: {

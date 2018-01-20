@@ -54,6 +54,9 @@ public class WebServiceDataLoader implements DataLoader {
             case "specificMed":
                 returnData = (Object) getSpecificMedication(object);
                 break;
+            case "therapies":
+                returnData = (Object) getTherapies();
+                break;
         }
 
         return returnData;
@@ -168,6 +171,22 @@ public class WebServiceDataLoader implements DataLoader {
         return appointments;
     }
 
+    private List<Terapija> getTherapiesJSON(List<Terapija> therapies, JSONArray jsonArray) throws JSONException {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonobject = jsonArray.getJSONObject(i);
+            Terapija therapy = new Terapija();
+            String medicamentName = jsonobject.getString("naziv_lijeka");
+            Double singleDose = jsonobject.getDouble("pojedinacna_doza");
+            Lijek medicament = new Lijek();
+            medicament.setNaziv(medicamentName);
+            therapy.setLijek(medicament);
+            therapy.setPojedinacnaDoza(singleDose);
+            therapies.add(therapy);
+        }
+
+        return therapies;
+    }
+
     public Terapija getSpecificTherapy(Object medicForUser) {
         List<Object> parameters = (List<Object>) medicForUser;
 
@@ -191,6 +210,28 @@ public class WebServiceDataLoader implements DataLoader {
         }
 
         return terapija;
+    }
+
+    public List<Terapija> getTherapies() {
+        Map params = new HashMap<String, String>();
+        params.put("user_id", korisnik.getId());
+        JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/dohvatiTerapije.php");
+        List<Terapija> therapies = new ArrayList<Terapija>();
+        try {
+            if(response != null) {
+                Log.d("response", "response razlicit od null pregledi");
+                therapies = getTherapiesJSON(therapies, response);
+            }
+            else {
+                Log.d("null", "null u response-u appointments");
+                return null;
+            }
+        }
+        catch (JSONException e) {
+            System.out.println("JsonExceptionAppointments. " + e.getLocalizedMessage());
+        }
+
+        return therapies;
     }
 
     @Override

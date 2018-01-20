@@ -173,4 +173,12 @@ public class Terapija extends BaseModel implements Serializable {
     public List<Terapija> getAll() {
         return SQLite.select().from(Terapija.class).queryList();
     }
+
+
+    @Override
+    public String toString() {
+        return "Morate uzeti:" + System.getProperty("line.separator")
+                + "Lijek: " + getLijek().getNaziv() + System.getProperty("line.separator")
+                + "Pojedinacna doza: " + this.pojedinacnaDoza + System.getProperty("line.separator");
+    }
 }

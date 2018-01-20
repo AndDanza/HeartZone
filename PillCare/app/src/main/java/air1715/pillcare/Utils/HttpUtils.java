@@ -69,6 +69,7 @@ public class HttpUtils {
     public static JSONArray sendGetRequestArray(Map<String, Object> params, String path) {
         Gson gson = new Gson();
         JSONArray jsonResult = null;
+        JSONObject jsonObject = null;
         try {
             String paramatersString = "";
             for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -90,7 +91,14 @@ public class HttpUtils {
             if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
                 HttpEntity entity = response.getEntity();
                 String jsonResponse = EntityUtils.toString(entity);
-                jsonResult = new JSONArray(jsonResponse);
+                try{
+                    jsonResult = new JSONArray(jsonResponse);
+                } catch (JSONException e){
+                    jsonObject = new JSONObject(jsonResponse);
+                    jsonResult = new JSONArray();
+                    jsonResult.put(jsonObject);
+                }
+
             }
         } catch (UnsupportedEncodingException e) {
             System.out.println("UnsuportedEndodingException. " + e.getLocalizedMessage());
