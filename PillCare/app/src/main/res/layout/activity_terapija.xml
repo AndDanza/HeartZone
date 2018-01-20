@@ -19,10 +19,10 @@
             android:id="@+id/newTherapyBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="26dp"
-            app:srcCompat="@android:drawable/ic_input_add"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginStart="26dp"
+            app:srcCompat="@android:drawable/ic_menu_add" />
 
         <TextView
             android:id="@+id/start_therapy_label"
@@ -32,6 +32,7 @@
             android:layout_centerHorizontal="true"
             android:text="@string/startTherapy"
             android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textStyle="bold" />
 
         <TextView
@@ -43,34 +44,36 @@
             android:layout_below="@+id/newTherapyBtn"
             android:text="@string/newTherapy"
             android:textAlignment="center"
+            android:textColor="@color/cardview_light_background"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/stop_therapy_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/stopTherapyBtn"
+            android:layout_below="@+id/stopTherapyBtn"
             android:text="@string/stopTherapy"
             android:textAlignment="center"
-            android:textStyle="bold"
-            android:layout_below="@+id/stopTherapyBtn"
-            android:layout_alignStart="@+id/stopTherapyBtn" />
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/startTherapyBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@android:drawable/ic_media_play"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/start_therapy_label" />
+            android:layout_alignStart="@+id/start_therapy_label"
+            app:srcCompat="@android:drawable/ic_media_play" />
 
         <ImageButton
             android:id="@+id/stopTherapyBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="30dp"
-            app:srcCompat="@android:drawable/ic_media_pause"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginEnd="30dp"
+            app:srcCompat="@android:drawable/ic_media_pause" />
 
     </RelativeLayout>
 
@@ -121,6 +124,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="154dp"
                     android:text="@string/pillStrenght"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
@@ -132,6 +136,7 @@
                     android:layout_below="@+id/medication_strength_lable"
                     android:layout_marginTop="14dp"
                     android:text="@string/pillNumber"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
@@ -143,6 +148,7 @@
                     android:layout_below="@+id/medication_num_pills_lable"
                     android:layout_marginTop="14dp"
                     android:text="@string/pillWarning"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
@@ -154,6 +160,7 @@
                     android:layout_alignBottom="@+id/medication_strength_lable"
                     android:layout_alignStart="@+id/medication_num_pills"
                     android:text="TextView"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp" />
 
                 <TextView
@@ -164,6 +171,7 @@
                     android:layout_alignBottom="@+id/medication_num_pills_lable"
                     android:layout_alignEnd="@+id/pharma_company_logo"
                     android:text="TextView"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp" />
 
                 <TextView
@@ -174,6 +182,7 @@
                     android:layout_alignBottom="@+id/pharma_company"
                     android:layout_alignStart="@+id/medication_help"
                     android:text="@string/pharmaCompany"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
@@ -181,11 +190,13 @@
                     android:id="@+id/medication_help"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="19sp"
-                    android:layout_marginRight="25dp"
+                    android:layout_alignStart="@+id/medications_help_lable"
                     android:layout_below="@+id/medications_help_lable"
-                    android:layout_alignStart="@+id/medications_help_lable" />
+                    android:layout_marginRight="25dp"
+                    android:text="TextView"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/cardview_light_background"
+                    android:textSize="19sp" />
 
                 <TextView
                     android:id="@+id/pharma_company"
@@ -195,6 +206,8 @@
                     android:layout_marginTop="24dp"
                     android:layout_toEndOf="@+id/pharma_company_label"
                     android:text="TextView"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="19sp" />
 
                 <ImageView

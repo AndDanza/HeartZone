@@ -21,9 +21,11 @@ import java.util.List;
 public class Terapija extends BaseModel implements Serializable {
     @PrimaryKey
     @Column
+    int id;
+
+    @Column
     int lijekoviId;
 
-    @PrimaryKey
     @Column
     int korisnikId;
 
@@ -40,13 +42,13 @@ public class Terapija extends BaseModel implements Serializable {
     int brojDnevnihDoza;
 
     @Column
-    boolean aktivna;
-
-    @Column
     int upozorenje;
 
     @Column
     int razmakDnevnihDoza;
+
+    @Column
+    int stanje;
 
     @ForeignKey(tableClass = Korisnik.class)
     @Column
@@ -60,7 +62,7 @@ public class Terapija extends BaseModel implements Serializable {
     }
 
     public Terapija(JSONObject jsonObject) throws JSONException {
-        this.aktivna = jsonObject.getString("aktivna").equals("1") ? true : false;
+        this.id = jsonObject.getInt("id");
         this.lijekoviId = jsonObject.getInt("lijekoviId");
         this.korisnikId = jsonObject.getInt("korisnikId");
         this.pocetak = jsonObject.getString("pocetak");
@@ -68,6 +70,24 @@ public class Terapija extends BaseModel implements Serializable {
         this.pojedinacnaDoza = jsonObject.getDouble("pojedinacnaDoza");
         this.upozorenje = jsonObject.getInt("upozorenje");
         this.razmakDnevnihDoza = jsonObject.getInt("razmakDnevnihDoza");
+        this.brojDnevnihDoza = jsonObject.getInt("brojDnevnihDoza");
+        this.stanje = jsonObject.getInt("stanje");
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStanje() {
+        return stanje;
+    }
+
+    public void setStanje(int stanje) {
+        this.stanje = stanje;
     }
 
     public int getLijekoviId() {
@@ -116,14 +136,6 @@ public class Terapija extends BaseModel implements Serializable {
 
     public void setBrojDnevnihDoza(int brojDnevnihDoza) {
         this.brojDnevnihDoza = brojDnevnihDoza;
-    }
-
-    public boolean isAktivna() {
-        return aktivna;
-    }
-
-    public void setAktivna(boolean aktivna) {
-        this.aktivna = aktivna;
     }
 
     public int getUpozorenje() {

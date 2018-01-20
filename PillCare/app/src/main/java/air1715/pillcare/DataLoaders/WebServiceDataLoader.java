@@ -168,19 +168,22 @@ public class WebServiceDataLoader implements DataLoader {
         return appointments;
     }
 
-    public Terapija getSpecificTherapy(Object medicament) {
+    public Terapija getSpecificTherapy(Object medicForUser) {
+        List<Object> parameters = (List<Object>) medicForUser;
+
         Map params = new HashMap<String, String>();
-        params.put("user", korisnik);
-        params.put("medicament", (Lijek) medicament);
+        params.put("user", (Korisnik) parameters.get(0));
+        params.put("medicament", (Lijek) parameters.get(1));
+
         JSONObject response = HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/specificnaTerapija.php");
         Terapija terapija = null;
         try {
             if(response != null) {
-                Log.d("response", "response razlicit od null pregledi");
+                Log.d("response", "response razlicit od null specific therapy");
                 terapija = new Terapija(response);
             }
             else {
-                Log.d("null", "null u response-u appointments");
+                Log.d("null", "null u response-u specific therapy");
             }
         }
         catch (JSONException e) {

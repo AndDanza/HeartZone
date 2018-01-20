@@ -71,8 +71,6 @@ public class NovaTerapijaActivity extends AppCompatActivity {
         dailyDoseEditText = (EditText) findViewById(R.id.dailyDoseEditText);
         numberOfDaysBeetwenDoseEditText = (EditText) findViewById(R.id.numberOfDaysBeetwenDoseEditText);
         pillsLeftWarningEditText = (EditText) findViewById(R.id.pillsLeftWarningEditText);
-        therapyStartDate = (EditText) findViewById(R.id.therapyStartDate);
-        therapyEndDate = (EditText) findViewById(R.id.therapyEndDate);
 
         ImageView acceptTherapyImageView = (ImageView) findViewById(R.id.acceptTherapyImageView);
         ImageView cancelTherapyImageView = (ImageView) findViewById(R.id.cancelTherapyImageView);
@@ -82,27 +80,23 @@ public class NovaTerapijaActivity extends AppCompatActivity {
         acceptTherapyImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (singleDoseEditText.getText().toString().isEmpty() || dailyDoseEditText.getText().toString().isEmpty() || numberOfDaysBeetwenDoseEditText.getText().toString().isEmpty() || pillsLeftWarningEditText.getText().toString().isEmpty() || therapyStartDate.getText().toString().isEmpty())
-                    PopUpUtils.sendMessage(context, "Morate popuniti sva polja osim 'Pocetak'");
+                if (singleDoseEditText.getText().toString().isEmpty() || dailyDoseEditText.getText().toString().isEmpty() || numberOfDaysBeetwenDoseEditText.getText().toString().isEmpty() || pillsLeftWarningEditText.getText().toString().isEmpty())
+                    PopUpUtils.sendMessage(context, "Sva polja nisu popunjena");
                 else{
                     Terapija therapy = new Terapija();
                     therapy.setKorisnik(loggedUser);
                     therapy.setKorisnikId(loggedUser.getId());
                     therapy.setLijek(medication);
                     therapy.setLijekoviId(medication.getId());
-                    therapy.setAktivna(true);
                     therapy.setBrojDnevnihDoza(Integer.parseInt(dailyDoseEditText.getText().toString()));
                     therapy.setPojedinacnaDoza(Double.parseDouble(singleDoseEditText.getText().toString()));
                     therapy.setUpozorenje(Integer.parseInt(pillsLeftWarningEditText.getText().toString()));
                     therapy.setRazmakDnevnihDoza(Integer.parseInt(numberOfDaysBeetwenDoseEditText.getText().toString()));
-                    therapy.setPocetak(therapyStartDate.getText().toString());
-                    therapy.setKraj(therapyEndDate.getText().toString());
 
                     Map params = new HashMap<String, Object>();
                     params.put("therapy", therapy);
                     if (HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/dodajTerapiju.php") != null) {
                         PopUpUtils.sendMessage(context, "Uspješno ste se dodali terapiju");
-                        therapy.save();
                         Intent intent = new Intent(getBaseContext(), PopisLijekova_Activity.class);
                         startActivity(intent);
                     } else

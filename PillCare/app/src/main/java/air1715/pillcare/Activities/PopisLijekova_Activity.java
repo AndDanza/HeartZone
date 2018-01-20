@@ -1,6 +1,7 @@
 package air1715.pillcare.Activities;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +40,7 @@ import air1715.pillcare.Adapters.MedicationsTileRepresentation;
 import air1715.pillcare.Adapters.ModularityController;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
+import air1715.pillcare.Utils.PopUpUtils;
 
 import static air1715.pillcare.Utils.PopUpUtils.sendMessage;
 
@@ -56,19 +59,19 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
     Button switchModularRepresentaion;
 
-    private static final String[] INITIAL_PERMS={
+    //parametri za lokaciju - google maps
+    private static final String[] INITIAL_PERMS = {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
-    private static final int INITIAL_REQUEST=1337;
-    private static final int LOCATION_REQUEST=INITIAL_REQUEST+3;
+    private static final int INITIAL_REQUEST = 1337;
+    private static final int LOCATION_REQUEST = INITIAL_REQUEST + 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popis_lijekova_);
 
-        //proba recycler
         context = this;
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         dataControl = DataLoadController.GetInstance(manager);
@@ -78,15 +81,14 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         View recycler = findViewById(R.id.main_recycler);
         switchModularRepresentaion = (Button) findViewById(R.id.get_data);
 
-        if(medications != null) {
+        if (medications != null) {
             if (presentationController == null)
                 SetModularRepresentation(recycler);
             else
                 presentationController.SetData(medications, companies);
 
             presentationController.ShowModularOption();
-        }
-        else
+        } else
             ShowWarning();
 
         final Korisnik loggedUser = PrijavaActivity.getLoggedUser();
@@ -111,47 +113,42 @@ public class PopisLijekova_Activity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Class<? extends AppCompatActivity> activityClass = null;
-                switch (item.getItemId()){
-                    case R.id.lijekovi : {
+                switch (item.getItemId()) {
+                    case R.id.lijekovi: {
                         break;
                     }
-                    case R.id.ljekarne : {
-                        LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                    case R.id.ljekarne: {
+                        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                         boolean GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-                        if(GpsStatus == true){
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
+                        if (GpsStatus == true) {
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
                                 if (canAccessLocation()) {
-                                    Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                                    Intent drugstoreMap = new Intent(PopisLijekova_Activity.this, DrugstoreMap_Activity.class);
                                     startActivity(drugstoreMap);
+                                } else {
+                                    requestPermissions(INITIAL_PERMS, LOCATION_REQUEST);
                                 }
-                                else {
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.DONUT) {
-                                        requestPermissions(INITIAL_PERMS, LOCATION_REQUEST);
-                                    }
-                                }
-                            }
-                            else{
-                                Intent drugstoreMap = new Intent(PopisLijekova_Activity.this,DrugstoreMap_Activity.class);
+                            } else {
+                                Intent drugstoreMap = new Intent(PopisLijekova_Activity.this, DrugstoreMap_Activity.class);
                                 startActivity(drugstoreMap);
                             }
-                        }
-                        else{
+                        } else {
                             String message = getResources().getString(R.string.gps_info);
                             sendMessage(PopisLijekova_Activity.this, message);
                         }
                         break;
                     }
-                    case R.id.pregledi : {
-                        Intent changeUserData=new Intent(PopisLijekova_Activity.this,PopisPregleda_Activity.class);
+                    case R.id.pregledi: {
+                        Intent changeUserData = new Intent(PopisLijekova_Activity.this, PopisPregleda_Activity.class);
                         startActivity(changeUserData);
                         break;
                     }
-                    case R.id.dnevniRaspored : {
+                    case R.id.dnevniRaspored: {
                         break;
                     }
-                    case R.id.IzmjenaPodataka : {
-                        Intent changeUserData=new Intent(PopisLijekova_Activity.this,IzmjenaPodataka_Activity.class);
+                    case R.id.IzmjenaPodataka: {
+                        Intent changeUserData = new Intent(PopisLijekova_Activity.this, IzmjenaPodataka_Activity.class);
                         startActivity(changeUserData);
                         break;
                     }
@@ -163,6 +160,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
 
 
+        //pokretanje opcije barcode skenera
         pokreniBarcodeSkener = (Button) findViewById(R.id.button_barCodeScanner);
         pokreniBarcodeSkener.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +178,11 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
 
 
+        /*
+        * Tipka na formi koja je prethodno pronađena, deklarirana i inicijalizirana.
+        * Pokreće pormjenu iz liste u pločice i obratno
+        * */
+        switchModularRepresentaion = (Button) findViewById(R.id.get_data);
         switchModularRepresentaion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,6 +191,9 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         });
     }
 
+    /*
+    * Metoda koja otvara dialog u slučau da korisnik još nije unio terapiju, a nalazi se u popisu lijekova
+    * */
     private void ShowWarning() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
         builder.setView(R.layout.popis_lijekova_alert);
@@ -208,12 +214,12 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     }
 
 
+    //rezultat koji vraća barcode skener
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Log.d("PopisLijekova_Activity", "Skeniranje prekinuto");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Log.d("PopisLijekova_Activity", "Skenirano");
@@ -221,27 +227,25 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
                 Lijek showMedication = null;
 
-                if(medications != null) {
+                if (medications != null) {
                     showMedication = GetMatchingMedication(result.getContents());
                     medications.clear();
                     medications.add(showMedication);
                     presentationController.SetData(medications, companies);
 
                     switchModularRepresentaion.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     showMedication = (Lijek) dataControl.GetData("specificMed", result.getContents());
                     medications = new ArrayList<Lijek>();
                     medications.add(showMedication);
 
-                    if(presentationController == null) {
+                    if (presentationController == null) {
                         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                         dataControl = DataLoadController.GetInstance(manager);
 
                         View recycler = findViewById(R.id.main_recycler);
                         SetModularRepresentation(recycler);
-                    }
-                    else
+                    } else
                         presentationController.SetData(medications, companies);
 
                     presentationController.ShowModularOption();
@@ -258,33 +262,40 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presentationController.ClearData();
-
-                ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                dataControl = DataLoadController.GetInstance(manager);
-                medications = (List<Lijek>) dataControl.GetData("medications", null);
-
-                if (medications != null){
-
-                    View recycler = findViewById(R.id.main_recycler);
-                    switchModularRepresentaion = (Button) findViewById(R.id.get_data);
-
-                    if (presentationController == null)
-                        SetModularRepresentation(recycler);
-                    else
-                        presentationController.SetData(medications, companies);
-
-                    presentationController.ShowModularOption();
-                }
-                else
-                    switchModularRepresentaion.setVisibility(View.INVISIBLE);
+                refreshModularRepresentation();
 
             }
         });
     }
 
+    private void refreshModularRepresentation() {
+
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        dataControl = DataLoadController.GetInstance(manager);
+        medications = (List<Lijek>) dataControl.GetData("medications", null);
+
+        if (medications != null) {
+
+            View recycler = findViewById(R.id.main_recycler);
+            switchModularRepresentaion = (Button) findViewById(R.id.get_data);
+
+            if (presentationController == null)
+                SetModularRepresentation(recycler);
+            else
+                presentationController.SetData(medications, companies);
+
+            presentationController.ShowModularOption();
+        } else
+            switchModularRepresentaion.setVisibility(View.INVISIBLE);
+
+        PopUpUtils.sendMessage(context, getString(R.string.medications_refresh_data));
+
+        if(medications == null)
+            ShowWarning();
+    }
+
     private void SetModularRepresentation(View recycler) {
-        if(medications != null) {
+        if (medications != null) {
             presentationController = ModularityController.GetInstance();
             presentationController.SetData(medications, companies);
             presentationController.AddModularOption(new MedicationsTileRepresentation(recycler, context));
@@ -297,8 +308,8 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private Lijek GetMatchingMedication(String barcode) {
         Lijek medication = null;
 
-        for(Lijek med : medications){
-            if(med.getBarkod().equals(barcode)){
+        for (Lijek med : medications) {
+            if (med.getBarkod().equals(barcode)) {
                 medication = med;
             }
         }
@@ -306,13 +317,17 @@ public class PopisLijekova_Activity extends AppCompatActivity {
         return medication;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
+
     private boolean hasPermission(String perm) {
-        return(PackageManager.PERMISSION_GRANTED==checkSelfPermission(perm));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return (PackageManager.PERMISSION_GRANTED == checkSelfPermission(perm));
+        }
+        return false;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     private boolean canAccessLocation() {
-        return(hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+        return (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION));
     }
 }

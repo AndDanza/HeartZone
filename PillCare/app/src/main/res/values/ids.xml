@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="load_pharmacies" type="id" />
+    <item name="medications_refresh_data" type="id">Podaci o lijekovima su osvježeni</item>
 </resources>
