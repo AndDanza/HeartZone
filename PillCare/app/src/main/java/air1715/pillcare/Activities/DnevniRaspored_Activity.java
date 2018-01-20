@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import air1715.database.entiteti.DnevniRaspored;
 import air1715.database.entiteti.Korisnik;
 import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Terapija;
@@ -31,6 +32,7 @@ public class DnevniRaspored_Activity extends AppCompatActivity {
 
     Korisnik loggedUser;
     List<Terapija> therapies;
+    List<Pregled> appointments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +59,26 @@ public class DnevniRaspored_Activity extends AppCompatActivity {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         DataLoadController dataControl = DataLoadController.GetInstance(manager);
         therapies = (List<Terapija>) dataControl.GetData("therapies", null);
+        appointments = (List<Pregled>) dataControl.GetData("daily_appointments", null);
 
+        List<DnevniRaspored> dailySchedules = new ArrayList<>();
+        for(Terapija therapy : therapies){
+            DnevniRaspored dailySchedule = new DnevniRaspored();
+            dailySchedule.setLijek(therapy.getLijek());
+            dailySchedule.setPojedinacnaDoza(therapy.getPojedinacnaDoza());
+            dailySchedules.add(dailySchedule);
+        }
+        for(Pregled appointment : appointments){
+            DnevniRaspored dailySchedule = new DnevniRaspored();
+            dailySchedule.setBiljeska(appointment.getBiljeska());
+            dailySchedule.setTermin(appointment.getTermin());
+            dailySchedules.add(dailySchedule);
+        }
 
         ListView listViewAppointments = (ListView) findViewById(R.id.listViewDnevniraspored);
 
         if (therapies != null) {
-            ArrayAdapter<Terapija> adapter = new ArrayAdapter<Terapija>(this, android.R.layout.simple_list_item_1, therapies);
+            ArrayAdapter<DnevniRaspored> adapter = new ArrayAdapter<DnevniRaspored>(this, android.R.layout.simple_list_item_1, dailySchedules);
             listViewAppointments.setAdapter(adapter);
         } else {
             PopUpUtils.sendMessage(this, getString(R.string.therapies_empty));

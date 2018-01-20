@@ -48,6 +48,9 @@ public class WebServiceDataLoader implements DataLoader {
             case "appointments":
                 returnData = (Object) GetAppointments();
                 break;
+            case "daily_appointments":
+                returnData = (Object) getDailyAppointments();
+                break;
             case "specificTherapy":
                 returnData = (Object) getSpecificTherapy(object);
                 break;
@@ -256,5 +259,27 @@ public class WebServiceDataLoader implements DataLoader {
         }
 
         return medication;
+    }
+
+    public List<Pregled> getDailyAppointments() {
+        Map params = new HashMap<String, String>();
+        params.put("user", korisnik.getKorisnickoIme());
+        JSONArray response = HttpUtils.sendGetRequestArray(params, "https://pillcare.000webhostapp.com/dnevniPregled.php");
+        List<Pregled> appointments = new ArrayList<Pregled>();
+        try {
+            if(response != null) {
+                Log.d("response", "response razlicit od null pregledi");
+                appointments = getAppointmentsJSON(appointments, response);
+            }
+            else {
+                Log.d("null", "null u response-u appointments");
+                return null;
+            }
+        }
+        catch (JSONException e) {
+            System.out.println("JsonExceptionAppointments. " + e.getLocalizedMessage());
+        }
+
+        return appointments;
     }
 }
