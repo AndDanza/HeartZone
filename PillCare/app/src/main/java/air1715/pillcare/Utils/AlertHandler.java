@@ -15,6 +15,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -70,14 +72,23 @@ public class AlertHandler extends WakefulBroadcastReceiver {
             ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = manager.getActiveNetworkInfo();
 
-            if(netInfo != null && netInfo.isConnectedOrConnecting())
+            if(netInfo != null && netInfo.isConnectedOrConnecting()) {
                 updateTherapyPillStatus(therapy, medication);
+
+                storeTherapyPillStatus(therapy);
+            }
         }
+    }
+
+    private void storeTherapyPillStatus(Terapija therapy) {
+        Map params = new HashMap<String, Object>();
+        params.put("therapy", therapy);
+        HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/azurirajTerapiju.php");
     }
 
     private Terapija updateTherapyPillStatus(Terapija therapy, Lijek medication) {
         Terapija updatedTherapyState = calculateCurrentPillStatus(therapy);
-        Log.d("Stanje", String.valueOf(therapy.getStanje()));
+
         return updatedTherapyState;
     }
 
