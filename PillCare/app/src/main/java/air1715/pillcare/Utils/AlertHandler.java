@@ -40,13 +40,23 @@ public class AlertHandler extends WakefulBroadcastReceiver {
         else if(extra.getClass() == Terapija.class){
             Terapija therapy = (Terapija) extra;
             Lijek medication = (Lijek) intent.getExtras().getSerializable("medication");
+
             NotificationBuilder(medication.getNaziv(),
                     therapy.getId(),
                     context,
                     R.string.pill_notification,
                     R.mipmap.notification_lijek);
+
+            if(therapy.getStanje() <= 5){
+                NotificationBuilder("Terapije: "+medication.getNaziv(),
+                    1548,
+                    context,
+                    R.string.therapy_pill_status,
+                    R.mipmap.notification_lijek);
+            }
         }
     }
+
 
 
     private void NotificationBuilder(String contentString, int notificationID, Context context, int titleStringID, int iconID) {
