@@ -37,4 +37,5 @@
     <string name="error_pharmacies">Nije moguće učitati ljekarne</string>
     <string name="warning_location">Uređaj vas još nije locirao</string>
     <string name="medications_refresh_data">Podaci o lijekovima su osvježeni</string>
+    <string name="therapy_pill_status">Kritična razina tableta</string>
 </resources>
