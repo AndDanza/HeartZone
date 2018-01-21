@@ -62,22 +62,24 @@ public class DnevniRaspored_Activity extends AppCompatActivity {
         appointments = (List<Pregled>) dataControl.GetData("daily_appointments", null);
 
         List<DnevniRaspored> dailySchedules = new ArrayList<>();
-        for(Terapija therapy : therapies){
-            DnevniRaspored dailySchedule = new DnevniRaspored();
-            dailySchedule.setLijek(therapy.getLijek());
-            dailySchedule.setPojedinacnaDoza(therapy.getPojedinacnaDoza());
-            dailySchedules.add(dailySchedule);
-        }
-        for(Pregled appointment : appointments){
-            DnevniRaspored dailySchedule = new DnevniRaspored();
-            dailySchedule.setBiljeska(appointment.getBiljeska());
-            dailySchedule.setTermin(appointment.getTermin());
-            dailySchedules.add(dailySchedule);
-        }
+        if(therapies != null)
+            for(Terapija therapy : therapies){
+                DnevniRaspored dailySchedule = new DnevniRaspored();
+                dailySchedule.setLijek(therapy.getLijek());
+                dailySchedule.setPojedinacnaDoza(therapy.getPojedinacnaDoza());
+                dailySchedules.add(dailySchedule);
+            }
+        if(appointments != null)
+            for(Pregled appointment : appointments){
+                DnevniRaspored dailySchedule = new DnevniRaspored();
+                dailySchedule.setBiljeska(appointment.getBiljeska());
+                dailySchedule.setTermin(appointment.getTermin());
+                dailySchedules.add(dailySchedule);
+            }
 
         ListView listViewAppointments = (ListView) findViewById(R.id.listViewDnevniraspored);
 
-        if (therapies != null) {
+        if (!dailySchedules.isEmpty()) {
             ArrayAdapter<DnevniRaspored> adapter = new ArrayAdapter<DnevniRaspored>(this, android.R.layout.simple_list_item_1, dailySchedules);
             listViewAppointments.setAdapter(adapter);
         } else {

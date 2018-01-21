@@ -26,7 +26,7 @@
     <string name="appointment_notification">Obavijest o pregledu!</string>
     <string name="pill_notification">Morate popiti lijek!</string>
     <string name="appointment_empty">Niste unijeli nijedan pregled!</string>
-    <string name="therapies_empty">Za navedenog korisnika nema aktivnih terapija!</string>
+    <string name="therapies_empty">Za navedenog korisnika nema dnevnog rasporeda!</string>
     <string name="general_error">Došlo je do greške</string>
     <string name="title_activity_drugsotre_map_">Map</string>
     <string name="info_pharmacy_title">Informacije</string>
