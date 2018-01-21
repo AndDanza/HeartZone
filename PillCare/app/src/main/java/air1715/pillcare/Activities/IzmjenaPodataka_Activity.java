@@ -89,7 +89,7 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
     }
 
     /*
-    * Učitavanje podataka iz objekta korisnika na formu
+    * Ucitavanje podataka iz objekta korisnika na formu
     * */
     private void loadUserdata(Korisnik korisnik) {
 

@@ -179,7 +179,7 @@ public class TerapijaActivity extends AppCompatActivity {
 
     /*
     * Zaustavljanje alarma za terapiju ako korisnik odabere opciju "zaustavi terpaiju"
-    * ulazni pramateri su terpaija za koju se gasi alarm te lijek pomću kojeg je kreiran ključ u shared
+    * ulazni pramateri su terpaija za koju se gasi alarm te lijek pomću kojeg je kreiran kljuc u shared
     * preferences datoteci i kontekst za dohvaćanje iste
     * */
     private void stopTherapyAlarms(Terapija therapy, Lijek medication, Context context) {
@@ -232,8 +232,8 @@ public class TerapijaActivity extends AppCompatActivity {
     }
 
     /*
-    * Pohrana tipa ključ - vrijednost u datoteku share preferences po imenu "created_alarms".
-    * Pomoću nje se dohvaćaju ID-evi alarma za danu terapiju.
+    * Pohrana tipa kljuc - vrijednost u datoteku share preferences po imenu "created_alarms".
+    * Pomocu nje se dohvaćaju ID-evi alarma za danu terapiju.
     * */
     private void storeSharedPreference(Context context, int alarmID, String storingName){
         SharedPreferences sharedPref = context.getSharedPreferences("created_alarms", Context.MODE_PRIVATE);
@@ -243,8 +243,8 @@ public class TerapijaActivity extends AppCompatActivity {
     }
 
     /*
-    * Dnevna doza terapije (tableta, dvije...) mogu se uzimati ne samo svaki dan već svaka dva, tri dana...
-    * U tu svrhu potrebno je računati interval sljedeće dnevne doze u milisekundama
+    * Dnevna doza terapije (tableta, dvije...) mogu se uzimati ne samo svaki dan vec svaka dva, tri dana...
+    * U tu svrhu potrebno je racunati interval sljedece dnevne doze u milisekundama
     * */
     private long countMilisecondsBetweenDailyDose(int daysBetweenDailyDose){
         final long dayInMiliseconds = 86400000;
@@ -290,8 +290,8 @@ public class TerapijaActivity extends AppCompatActivity {
     }
 
     /*
-    * Od trenutka kad je korisnik pokrenuo uzimanje terpaije do kraja dana računa se vrijeme
-    * u milisekundama, razlika navedenih vremena dijeli se s veličinom dnevne doze (tableta, dvije, tri...)
+    * Od trenutka kad je korisnik pokrenuo uzimanje terpaije do kraja dana racuna se vrijeme
+    * u milisekundama, razlika navedenih vremena dijeli se s velicinom dnevne doze (tableta, dvije, tri...)
     * te time dobivamo razmake između doza unutar dana.
     * */
     private long calculateRepeatInterval(long startMiliseconds, int timesADay) {

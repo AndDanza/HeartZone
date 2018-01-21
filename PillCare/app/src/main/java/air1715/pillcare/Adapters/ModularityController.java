@@ -51,7 +51,7 @@ public class ModularityController {
      *
      * @param option the option
      */
-//dodavanje opcije prikaza u listu mogućih prikaza
+//dodavanje opcije prikaza u listu mogucih prikaza
     public void AddModularOption(ModularRepresentation option){
         options.add(option);
     }
@@ -62,7 +62,7 @@ public class ModularityController {
      * @param medications the medications
      * @param companies   the companies
      */
-//dohvati podatke o lijekovima i proizvođačima
+//dohvati podatke o lijekovima i proizvodacima
     public void SetData(List<Lijek> medications, List<Proizvodac> companies){
         this.medications = medications;
         this.companies = companies;
@@ -71,7 +71,7 @@ public class ModularityController {
     /**
      * Show modular option.
      */
-//pomoću statičnog brojača izmjenjuju se prikazi
+//pomocu staticnog brojaca izmjenjuju se prikazi
     public void ShowModularOption(){
         index++;
 

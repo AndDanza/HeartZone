@@ -194,7 +194,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
 
         /*
         * Tipka na formi koja je prethodno pronađena, deklarirana i inicijalizirana.
-        * Pokreće pormjenu iz liste u pločice i obratno
+        * Pokrece pormjenu iz liste u plocice i obratno
         * */
         switchModularRepresentaion = (Button) findViewById(R.id.get_data);
         switchModularRepresentaion.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +206,7 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     }
 
     /*
-    * Metoda koja otvara dialog u slučau da korisnik još nije unio terapiju, a nalazi se u popisu lijekova
+    * Metoda koja otvara dialog u slucaju da korisnik još nije unio terapiju, a nalazi se u popisu lijekova
     * */
     private void ShowWarning() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));

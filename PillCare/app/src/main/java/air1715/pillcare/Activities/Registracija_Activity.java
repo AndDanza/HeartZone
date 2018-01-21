@@ -65,7 +65,7 @@ public class Registracija_Activity extends AppCompatActivity {
                 else if (!password.equals(retypePassword))
                     PopUpUtils.sendMessage(context, "Lozinka i potvrda lozinke moraju biti isti");
                 else if (existsUsernameOrEmail(username, email))
-                    PopUpUtils.sendMessage(context, "Postoji već korisnik s navedenim korisničkim imenom ili e-mailom");
+                    PopUpUtils.sendMessage(context, "Postoji vec korisnik s navedenim korisnickim imenom ili e-mailom");
                 else {
                     try {
                         Korisnik user = new Korisnik(firstName, lastName, email, username, EncryptionUtils.sha1(password));
@@ -95,8 +95,8 @@ public class Registracija_Activity extends AppCompatActivity {
      * @return the boolean
      */
 /*
-    * Povjera postoji li korisnik već u bazi
-    * Provjera koristi li se mail već na nekom korisničkom računu
+    * Povjera postoji li korisnik vec u bazi
+    * Provjera koristi li se mail vec na nekom korisnickom racunu
     * */
     public boolean existsUsernameOrEmail(String username, String password) {
         Map params = new HashMap<String, Object>();

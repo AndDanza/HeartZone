@@ -69,14 +69,14 @@ public class PrijavaActivity extends AppCompatActivity {
                 String username = usernameET.getText().toString();
                 String password = passwordET.getText().toString();
                 if (username.equals("")) {
-                    PopUpUtils.sendMessage(context, "Morate unijeti korisničko ime");
+                    PopUpUtils.sendMessage(context, "Morate unijeti korisnicko ime");
                 } else if (password.equals("")) {
                     PopUpUtils.sendMessage(context, "Morate unijeti lozinku");
                 } else {
                     params.put("username", username);
                     JSONObject response = HttpUtils.sendGetRequest(params, "https://pillcare.000webhostapp.com/korisnik.php");
                     if (response == null) {
-                        PopUpUtils.sendMessage(context, "Ne postoji korisnik s navedenim korisničkim imenom ili nemate internet konekciju");
+                        PopUpUtils.sendMessage(context, "Ne postoji korisnik s navedenim korisnickim imenom ili nemate internet konekciju");
                     } else {
                         try {
                             Korisnik korisnik = new Korisnik(response);

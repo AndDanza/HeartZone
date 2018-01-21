@@ -36,7 +36,7 @@ public class AlertHandler extends WakefulBroadcastReceiver {
         Object extra = intent.getExtras().getSerializable("notificationObject");
 
         /*
-        *zaprimljen objekt tipa klase pregled poziva drugačiju notifikaciju (drugačiji tekst i ikona) od
+        *Zaprimljen objekt tipa klase pregled poziva drugaciju notifikaciju (drugaciji tekst i ikona) od
         *one za terapiju
         * */
         if(extra.getClass() == Pregled.class){
@@ -67,7 +67,7 @@ public class AlertHandler extends WakefulBroadcastReceiver {
 
             //ako postoji veza sa internetom
             //ako veza ne postoji prvi put kad se korisnik poveže i oglasi se notifikacija
-            //računa se stanje koje bi trebalo biti na današnji dan i ono se ažurira
+            //racuna se stanje koje bi trebalo biti na danasnji dan i ono se ažurira
             ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = manager.getActiveNetworkInfo();
 
@@ -101,24 +101,24 @@ public class AlertHandler extends WakefulBroadcastReceiver {
         double therapyState = 0;
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            //dohvaćanje početka terapije
+            //dohvacanje pocetka terapije
             String therapyStart = therapy.getPocetak();
             String[] datumVrijeme = therapyStart.split(" ");
             String startDate = datumVrijeme[0];
             Date date = sdf.parse(startDate);
 
-            //dohvaćanje današnjeg datuma
+            //dohvaćanje danasnjeg datuma
             Calendar c = Calendar.getInstance();
             String todayDate = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + 1 + "-" + c.get(Calendar.DAY_OF_MONTH);
             Date todayDateParse = sdf.parse(todayDate);
 
             //razlika dvaju datum je broj dana koliko terapija zasad traje
             long diff = todayDateParse.getTime() - date.getTime();
-            //days + 1 jer inače prvi dan ne bi uzeli u obzir prilikom izračuna
+            //days + 1 jer inace prvi dan ne bi uzeli u obzir prilikom izracuna
             long days = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + 1;
 
-            //stanje terapije je broj dana trajanja (zasad) pomnožen s brojem dnevnih doza (1 , 2 dnevne doze)
-            // i sve pomnoženo sa pojedinačnom dozom (tableta, dvije...)
+            //stanje terapije je broj dana trajanja (zasad) pomnozen s brojem dnevnih doza (1 , 2 dnevne doze)
+            // i sve pomnozeno sa pojedinacnom dozom (tableta, dvije...)
             therapyState = days  * therapy.getPojedinacnaDoza();
 
             therapy.setStanje(therapy.getStanje() - (int)Math.round(therapyState));

@@ -64,7 +64,7 @@ public class DnevniRaspored_Activity extends AppCompatActivity {
 
 
     /*
-     * Metoda za učitavanje podataka sa web servisa te potom u sam view (xml)
+     * Metoda za ucitavanje podataka sa web servisa te potom u sam view (xml)
      * Podaci se svrstavaju u dvije liste, sve terapije (therapies) te lista
      */
     private void FillWithData() {
