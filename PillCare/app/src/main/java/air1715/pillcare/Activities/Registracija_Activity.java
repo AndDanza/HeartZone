@@ -84,6 +84,10 @@ public class Registracija_Activity extends AppCompatActivity {
 
     }
 
+    /*
+    * Povjera postoji li korisnik već u bazi
+    * Provjera koristi li se mail već na nekom korisničkom računu
+    * */
     public boolean existsUsernameOrEmail(String username, String password) {
         Map params = new HashMap<String, Object>();
         params.put("username", username);

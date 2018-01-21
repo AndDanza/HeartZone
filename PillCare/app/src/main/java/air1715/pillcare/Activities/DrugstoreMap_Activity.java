@@ -64,6 +64,9 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
         });
     }
 
+    /*
+    * Kad je karta spremna lociraj korisnika te potom prikaži informacije (legendu)
+    * */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -73,7 +76,9 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
     }
 
 
-
+    /*
+    * Prikaz legende korištenih ikona na karti
+    * */
     private void ShowInformation() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme));
         builder.setView(R.layout.pharmacy_alert);
@@ -89,7 +94,10 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
     }
 
 
-
+    /*
+    * Dohvaćanje ljekarni prema korisnikovoj lokaciji.
+    * Ljekarne se dohvaćaju na serveru i šalju u obliku json-a
+    * */
     private JSONArray getDrugstoresForLocation(double lat, double lng) throws JSONException {
         String storesScript = "https://pillcare.000webhostapp.com/dohvatiLjekarne.php";
 
@@ -101,6 +109,10 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
         return response;
     }
 
+    /*
+    * Kontrola prikaza ljekarni na karti
+    * For petljom iterira se kroz listu ljekarni (PharmacyMapClass) i iscrtavaju na karti
+    * */
     private void PharmaciesOnMap(double lat, double lng) {
         JSONArray response = null;
         List<PharmacyMapClass> drugstores = null;
@@ -122,6 +134,10 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
         }
     }
 
+    /*
+    * JSONArray odgovor dobiven od servisa razbija se na JSONObject-e
+    * Unutar klase PharmacyMapClass JSON objekti pohranjuju se u objekt tipa klase i potom u listu drugstores
+    * */
     private List<PharmacyMapClass> parsePharmaciesJSON(JSONArray jsonArray) throws JSONException {
         List<PharmacyMapClass> drugstores = new ArrayList<PharmacyMapClass>();
 
@@ -133,6 +149,9 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
         return drugstores;
     }
 
+    /*
+    * Prikazivanje markera za ljekarnu na karti
+    * */
     private void drawDrugstoresOnMap(List<PharmacyMapClass> drugstores) {
 
         for (PharmacyMapClass pharmacy:drugstores) {
@@ -141,12 +160,13 @@ public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapRea
             locationOptions.title(pharmacy.getName());
             locationOptions.position(drugstore);
 
+            //svaka boja određuje radno vrijeme ljekarne
             if(pharmacy.getOpen() == 1)
-                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));//još radi
             else if(pharmacy.getOpen() == 0)
-                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));//kraj radnog vremena
             else
-                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                locationOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));//ne zna se
 
             mMap.addMarker(locationOptions);
         }

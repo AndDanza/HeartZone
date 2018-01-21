@@ -11,10 +11,6 @@ import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 
 
-/**
- * Created by Andrea on 05.12.2017.
- */
-
 public class MedicationsRecyclerAdapter extends RecyclerView.Adapter<MedicationsViewHolder> {
     private List<Lijek> medications;
     private List<Proizvodac> companies;

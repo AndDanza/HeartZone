@@ -9,9 +9,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Toni on 21.1.2018..
- */
 public class IzmjenaPodataka_ActivityTest {
     @Test
     public  void isNetworkAvailableTest() throws Exception {

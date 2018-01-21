@@ -8,16 +8,18 @@ import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
 
-/**
- * Created by Andrea on 29.11.2017.
- */
-
 public interface DataLoader {
     Object GetData(String dataType, Object object);
+
     List<Lijek> GetMedications();
+
     List<Terapija> GetAllTherapies();
+
     List<Proizvodac> GetPharmaCompanies();
+
     List<Pregled> GetAppointments();
+
     Terapija getSpecificTherapy(Object object);
+
     Lijek getSpecificMedication(Object object);
 }

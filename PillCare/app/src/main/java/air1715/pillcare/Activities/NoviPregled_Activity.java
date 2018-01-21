@@ -36,7 +36,11 @@ public class NoviPregled_Activity extends AppCompatActivity {
     TextView inputUpozorenjeDatum;
     TextView inputUpozorenjeVrijeme;
     Calendar mCurrentDate;
-    int dayTerminUpozorenje,monthTerminUpozorenje,yearTerminUpozorenje,hourTerminUpozorenje,minuteTerminUpozorenje;
+    int dayTerminUpozorenje,
+    monthTerminUpozorenje,
+    yearTerminUpozorenje,
+    hourTerminUpozorenje,
+    minuteTerminUpozorenje;
     Korisnik loggedUser;
 
     @Override

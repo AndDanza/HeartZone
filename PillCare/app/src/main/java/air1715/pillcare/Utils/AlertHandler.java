@@ -26,10 +26,6 @@ import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Terapija;
 import air1715.pillcare.R;
 
-/**
- * Created by Domagoj on 15.1.2018..
- */
-
 public class AlertHandler extends WakefulBroadcastReceiver {
 
     @Override

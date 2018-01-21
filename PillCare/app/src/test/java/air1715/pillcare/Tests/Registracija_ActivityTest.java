@@ -8,9 +8,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Toni on 21.1.2018..
- */
 public class Registracija_ActivityTest {
     @Test
     public void existsUsernameOrEmailTest() throws Exception {

@@ -46,10 +46,6 @@ import air1715.pillcare.Utils.AlertHandler;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
-/**
- * Created by Marijan Hranj on 05/12/2017.
- */
-
 public class TerapijaActivity extends AppCompatActivity {
 
     Context context;

@@ -27,10 +27,6 @@ import air1715.pillcare.R;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
-/**
- * Created by Marijan Hranj on 05/12/2017.
- */
-
 public class NovaTerapijaActivity extends AppCompatActivity {
 
     Context context;

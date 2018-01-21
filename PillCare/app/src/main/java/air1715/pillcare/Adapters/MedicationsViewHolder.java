@@ -15,10 +15,6 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Activities.TerapijaActivity;
 import air1715.pillcare.R;
 
-/**
- * Created by Andrea on 05.12.2017.
- */
-
 public class MedicationsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     View mItemView;
 

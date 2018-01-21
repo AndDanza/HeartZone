@@ -19,10 +19,6 @@ import air1715.database.entiteti.Terapija;
 import air1715.pillcare.Activities.PrijavaActivity;
 import air1715.pillcare.Utils.HttpUtils;
 
-/**
- * Created by Andrea on 29.11.2017.
- */
-
 public class WebServiceDataLoader implements DataLoader {
     private static WebServiceDataLoader webLoader = null;
 

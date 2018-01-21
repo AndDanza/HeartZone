@@ -4,10 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by Andrea on 11.01.2018.
- */
-
 public class PharmacyMapClass {
     private double latitude;
     private double longitude;

@@ -22,10 +22,6 @@ import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
-/**
- * Created by Marijan Hranj on 30/10/2017.
- */
-
 public class HttpUtils {
 
     private final static String USER_AGENT = "Mozilla/5.0";

@@ -9,10 +9,6 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
 import air1715.pillcare.Activities.PrijavaActivity;
 
-/**
- * Created by Andrea on 29.11.2017.
- */
-
 public class DatabaseDataLoader implements DataLoader {
     private static DatabaseDataLoader databaseLoader = null;
 

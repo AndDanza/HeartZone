@@ -14,10 +14,6 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 
-/**
- * Created by Andrea on 06.12.2017.
- */
-
 public class MedicationsListRepresentation implements ModularRepresentation {
     List<Lijek> medications = null;
     List<Proizvodac> companies = null;

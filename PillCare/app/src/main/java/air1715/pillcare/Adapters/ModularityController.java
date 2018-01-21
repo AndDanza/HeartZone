@@ -6,10 +6,6 @@ import java.util.List;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 
-/**
- * Created by Andrea on 07.12.2017.
- */
-
 public class ModularityController {
     private static ModularityController controller = null;
     private static List<ModularRepresentation> options = null;
@@ -25,6 +21,7 @@ public class ModularityController {
         options = new ArrayList<ModularRepresentation>();
     }
 
+    //singleton implementacija, ukoliko objekt postoji vrati ga, ako ne kreiraj novi
     public static ModularityController GetInstance(){
         if(controller == null)
             controller = new ModularityController();
@@ -32,15 +29,18 @@ public class ModularityController {
         return controller;
     }
 
+    //dodavanje opcije prikaza u listu mogućih prikaza
     public void AddModularOption(ModularRepresentation option){
         options.add(option);
     }
 
+    //dohvati podatke o lijekovima i proizvođačima
     public void SetData(List<Lijek> medications, List<Proizvodac> companies){
         this.medications = medications;
         this.companies = companies;
     }
 
+    //pomoću statičnog brojača izmjenjuju se prikazi
     public void ShowModularOption(){
         index++;
 

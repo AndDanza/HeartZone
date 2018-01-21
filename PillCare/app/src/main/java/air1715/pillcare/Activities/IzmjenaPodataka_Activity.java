@@ -64,6 +64,9 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
         );
     }
 
+    /*
+    * Učitavanje podataka iz objekta korisnika na formu
+    * */
     private void loadUserdata(Korisnik korisnik) {
 
         email.setText(korisnik.getEmail());
@@ -117,6 +120,9 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    /*
+    * Izmjenjene podatke pohrani na server
+    * */
     private void updateUser(Korisnik korisnik) {
         try {
             Map params = new HashMap<String, Object>();

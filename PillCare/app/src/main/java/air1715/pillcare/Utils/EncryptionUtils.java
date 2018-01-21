@@ -3,10 +3,6 @@ package air1715.pillcare.Utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by Marijan Hranj on 31/10/2017.
- */
-
 public class EncryptionUtils {
     public static String sha1(String input) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");

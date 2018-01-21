@@ -10,10 +10,6 @@ import java.util.List;
 
 import air1715.database.entiteti.Korisnik;
 
-/**
- * Created by Andrea on 29.11.2017.
- */
-
 public class DataLoadController {
     private static ConnectivityManager connection = null;
     private static DataLoadController controller = null;
