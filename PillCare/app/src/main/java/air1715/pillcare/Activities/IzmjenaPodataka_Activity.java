@@ -73,7 +73,7 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
 
     }
 
-    private void changeData(Korisnik loggedUser) {
+    public void changeData(Korisnik loggedUser) {
 
         String newPassword = password.getText().toString();
         String newEmail = email.getText().toString();
@@ -110,7 +110,7 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
         }
     }
 
-    private boolean isNetworkAvailable() {
+    public boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
