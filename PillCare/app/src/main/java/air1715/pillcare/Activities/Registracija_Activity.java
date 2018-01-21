@@ -84,7 +84,7 @@ public class Registracija_Activity extends AppCompatActivity {
 
     }
 
-    private boolean existsUsernameOrEmail(String username, String password) {
+    public boolean existsUsernameOrEmail(String username, String password) {
         Map params = new HashMap<String, Object>();
         params.put("username", username);
         params.put("email", password);

@@ -92,7 +92,7 @@ public class AlertHandler extends WakefulBroadcastReceiver {
         return updatedTherapyState;
     }
 
-    private Terapija calculateCurrentPillStatus(Terapija therapy) {
+    public Terapija calculateCurrentPillStatus(Terapija therapy) {
         double therapyState = 0;
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -114,7 +114,7 @@ public class AlertHandler extends WakefulBroadcastReceiver {
 
             //stanje terapije je broj dana trajanja (zasad) pomnožen s brojem dnevnih doza (1 , 2 dnevne doze)
             // i sve pomnoženo sa pojedinačnom dozom (tableta, dvije...)
-            therapyState = days * therapy.getBrojDnevnihDoza() * therapy.getPojedinacnaDoza();
+            therapyState = days  * therapy.getPojedinacnaDoza();
 
             therapy.setStanje(therapy.getStanje() - (int)Math.round(therapyState));
         }
