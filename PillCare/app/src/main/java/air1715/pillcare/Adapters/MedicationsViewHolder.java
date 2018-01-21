@@ -15,18 +15,50 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.Activities.TerapijaActivity;
 import air1715.pillcare.R;
 
+/**
+ * The type Medications view holder.
+ */
 public class MedicationsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    /**
+     * The M item view.
+     */
     View mItemView;
 
+    /**
+     * The Medication name.
+     */
     TextView medicationName;
+    /**
+     * The Medication size.
+     */
     TextView medicationSize;
+    /**
+     * The Medication strength.
+     */
     TextView medicationStrength;
+    /**
+     * The Medication company.
+     */
     TextView medicationCompany;
+    /**
+     * The Medication image.
+     */
     ImageView medicationImage;
 
+    /**
+     * The Medication.
+     */
     Lijek medication;
+    /**
+     * The Company.
+     */
     Proizvodac company;
 
+    /**
+     * Instantiates a new Medications view holder.
+     *
+     * @param itemView the item view
+     */
     public MedicationsViewHolder(View itemView) {
         super(itemView);
         mItemView = itemView;
@@ -34,6 +66,12 @@ public class MedicationsViewHolder extends RecyclerView.ViewHolder implements Vi
         GetViewElements();
     }
 
+    /**
+     * Bind view with data.
+     *
+     * @param medication the medication
+     * @param company    the company
+     */
     public void BindViewWithData(Lijek medication, Proizvodac company){
         this.medication = medication;
         this.company = company;

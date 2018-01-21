@@ -46,11 +46,26 @@ import air1715.pillcare.Utils.AlertHandler;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Terapija activity.
+ */
 public class TerapijaActivity extends AppCompatActivity {
 
+    /**
+     * The Context.
+     */
     Context context;
+    /**
+     * The Manager.
+     */
     ConnectivityManager manager;
+    /**
+     * The Data control.
+     */
     DataLoadController dataControl;
+    /**
+     * The Therapy.
+     */
     Terapija therapy;
 
     @Override

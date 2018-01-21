@@ -22,10 +22,20 @@ import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
+/**
+ * The type Http utils.
+ */
 public class HttpUtils {
 
     private final static String USER_AGENT = "Mozilla/5.0";
 
+    /**
+     * Send get request json object.
+     *
+     * @param params the params
+     * @param path   the path
+     * @return the json object
+     */
     public static JSONObject sendGetRequest(Map<String, Object> params, String path) {
         Gson gson = new Gson();
         JSONObject jsonResult = null;
@@ -62,6 +72,13 @@ public class HttpUtils {
         return jsonResult;
     }
 
+    /**
+     * Send get request array json array.
+     *
+     * @param params the params
+     * @param path   the path
+     * @return the json array
+     */
     public static JSONArray sendGetRequestArray(Map<String, Object> params, String path) {
         Gson gson = new Gson();
         JSONArray jsonResult = null;

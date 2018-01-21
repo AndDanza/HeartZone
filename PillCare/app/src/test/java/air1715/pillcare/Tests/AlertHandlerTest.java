@@ -9,7 +9,15 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * The type Alert handler test.
+ */
 public class AlertHandlerTest {
+    /**
+     * Calculate current pill status test.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void calculateCurrentPillStatusTest() throws Exception {
         Terapija t=new Terapija();

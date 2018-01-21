@@ -36,10 +36,22 @@ import air1715.pillcare.R;
 import air1715.pillcare.Utils.AlertHandler;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Popis pregleda activity.
+ */
 public class PopisPregleda_Activity extends AppCompatActivity {
 
+    /**
+     * The Logged user.
+     */
     Korisnik loggedUser;
+    /**
+     * The Notifications list.
+     */
     List<Pregled> notificationsList;
+    /**
+     * The Appointments.
+     */
     List<Pregled> appointments=null;
 
     @Override

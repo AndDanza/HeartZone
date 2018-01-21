@@ -9,14 +9,25 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.database.entiteti.Terapija;
 import air1715.pillcare.Activities.PrijavaActivity;
 
+/**
+ * The type Database data loader.
+ */
 public class DatabaseDataLoader implements DataLoader {
     private static DatabaseDataLoader databaseLoader = null;
 
     private DatabaseDataLoader() {
     }
 
+    /**
+     * The Korisnik.
+     */
     Korisnik korisnik = PrijavaActivity.getLoggedUser();
 
+    /**
+     * Get instance database data loader.
+     *
+     * @return the database data loader
+     */
     public static DatabaseDataLoader GetInstance(){
         if(databaseLoader == null)
             databaseLoader = new DatabaseDataLoader();

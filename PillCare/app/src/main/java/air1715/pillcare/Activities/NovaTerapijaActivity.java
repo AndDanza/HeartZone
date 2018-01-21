@@ -27,19 +27,52 @@ import air1715.pillcare.R;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Nova terapija activity.
+ */
 public class NovaTerapijaActivity extends AppCompatActivity {
 
+    /**
+     * The Context.
+     */
     Context context;
 
+    /**
+     * The Medication.
+     */
     Lijek medication;
+    /**
+     * The Company.
+     */
     Proizvodac company;
+    /**
+     * The Logged user.
+     */
     Korisnik loggedUser;
 
+    /**
+     * The Single dose edit text.
+     */
     EditText singleDoseEditText;
+    /**
+     * The Daily dose edit text.
+     */
     EditText dailyDoseEditText;
+    /**
+     * The Number of days beetwen dose edit text.
+     */
     EditText numberOfDaysBeetwenDoseEditText;
+    /**
+     * The Pills left warning edit text.
+     */
     EditText pillsLeftWarningEditText;
+    /**
+     * The Therapy start date.
+     */
     EditText therapyStartDate;
+    /**
+     * The Therapy end date.
+     */
     EditText therapyEndDate;
 
     @Override

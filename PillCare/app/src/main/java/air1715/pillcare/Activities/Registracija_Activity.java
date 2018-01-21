@@ -22,6 +22,9 @@ import air1715.pillcare.Utils.EncryptionUtils;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Registracija activity.
+ */
 public class Registracija_Activity extends AppCompatActivity {
 
 
@@ -84,7 +87,14 @@ public class Registracija_Activity extends AppCompatActivity {
 
     }
 
-    /*
+    /**
+     * Exists username or email boolean.
+     *
+     * @param username the username
+     * @param password the password
+     * @return the boolean
+     */
+/*
     * Povjera postoji li korisnik već u bazi
     * Provjera koristi li se mail već na nekom korisničkom računu
     * */

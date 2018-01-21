@@ -29,18 +29,54 @@ import air1715.pillcare.R;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Novi pregled activity.
+ */
 public class NoviPregled_Activity extends AppCompatActivity {
 
+    /**
+     * The Input termin datum.
+     */
     TextView inputTerminDatum;
+    /**
+     * The Input termin vrijeme.
+     */
     TextView inputTerminVrijeme;
+    /**
+     * The Input upozorenje datum.
+     */
     TextView inputUpozorenjeDatum;
+    /**
+     * The Input upozorenje vrijeme.
+     */
     TextView inputUpozorenjeVrijeme;
+    /**
+     * The M current date.
+     */
     Calendar mCurrentDate;
+    /**
+     * The Day termin upozorenje.
+     */
     int dayTerminUpozorenje,
+    /**
+     * The Month termin upozorenje.
+     */
     monthTerminUpozorenje,
+    /**
+     * The Year termin upozorenje.
+     */
     yearTerminUpozorenje,
+    /**
+     * The Hour termin upozorenje.
+     */
     hourTerminUpozorenje,
+    /**
+     * The Minute termin upozorenje.
+     */
     minuteTerminUpozorenje;
+    /**
+     * The Logged user.
+     */
     Korisnik loggedUser;
 
     @Override

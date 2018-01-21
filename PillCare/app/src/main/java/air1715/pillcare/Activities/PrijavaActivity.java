@@ -28,6 +28,9 @@ import air1715.pillcare.Utils.EncryptionUtils;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Prijava activity.
+ */
 public class PrijavaActivity extends AppCompatActivity {
 
     private static Korisnik loggedUser = null;
@@ -101,10 +104,20 @@ public class PrijavaActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Gets logged user.
+     *
+     * @return the logged user
+     */
     public static Korisnik getLoggedUser() {
         return loggedUser;
     }
 
+    /**
+     * Set logged user.
+     *
+     * @param newUser the new user
+     */
     public static void setLoggedUser(Korisnik newUser){
         loggedUser = newUser;
     }

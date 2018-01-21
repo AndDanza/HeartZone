@@ -19,12 +19,18 @@ import air1715.database.entiteti.Terapija;
 import air1715.pillcare.Activities.PrijavaActivity;
 import air1715.pillcare.Utils.HttpUtils;
 
+/**
+ * The type Web service data loader.
+ */
 public class WebServiceDataLoader implements DataLoader {
     private static WebServiceDataLoader webLoader = null;
 
     private WebServiceDataLoader() {
     }
 
+    /**
+     * The Korisnik.
+     */
     Korisnik korisnik = PrijavaActivity.getLoggedUser();
 
     @Override
@@ -61,6 +67,11 @@ public class WebServiceDataLoader implements DataLoader {
         return returnData;
     }
 
+    /**
+     * Get instance web service data loader.
+     *
+     * @return the web service data loader
+     */
     public static WebServiceDataLoader GetInstance(){
         if(webLoader == null)
             webLoader = new WebServiceDataLoader();
@@ -211,6 +222,11 @@ public class WebServiceDataLoader implements DataLoader {
         return terapija;
     }
 
+    /**
+     * Gets therapies.
+     *
+     * @return the therapies
+     */
     public List<Terapija> getTherapies() {
         Map params = new HashMap<String, String>();
         params.put("user_id", korisnik.getId());
@@ -257,6 +273,11 @@ public class WebServiceDataLoader implements DataLoader {
         return medication;
     }
 
+    /**
+     * Gets daily appointments.
+     *
+     * @return the daily appointments
+     */
     public List<Pregled> getDailyAppointments() {
         Map params = new HashMap<String, String>();
         params.put("user", korisnik.getKorisnickoIme());

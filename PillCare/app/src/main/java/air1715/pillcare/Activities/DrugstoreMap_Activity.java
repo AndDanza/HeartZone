@@ -32,6 +32,9 @@ import air1715.pillcare.Utils.PharmacyMapClass;
 
 import static air1715.pillcare.Utils.PopUpUtils.sendMessage;
 
+/**
+ * The type Drugstore map activity.
+ */
 public class DrugstoreMap_Activity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

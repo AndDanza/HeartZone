@@ -11,11 +11,21 @@ import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 
 
+/**
+ * The type Medications recycler adapter.
+ */
 public class MedicationsRecyclerAdapter extends RecyclerView.Adapter<MedicationsViewHolder> {
     private List<Lijek> medications;
     private List<Proizvodac> companies;
     private final int layout_id;
 
+    /**
+     * Instantiates a new Medications recycler adapter.
+     *
+     * @param layoutID    the layout id
+     * @param medications the medications
+     * @param companies   the companies
+     */
     public MedicationsRecyclerAdapter(final int layoutID, final List<Lijek> medications, final List<Proizvodac> companies) {
         this.medications = medications;
         this.companies = companies;
@@ -57,6 +67,9 @@ public class MedicationsRecyclerAdapter extends RecyclerView.Adapter<Medications
         return layout_id;
     }
 
+    /**
+     * Clear data.
+     */
     public void ClearData() {
         int size = this.medications.size();
         this.medications.clear();

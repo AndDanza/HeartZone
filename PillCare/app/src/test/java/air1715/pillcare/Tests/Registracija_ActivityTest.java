@@ -8,7 +8,15 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * The type Registracija activity test.
+ */
 public class Registracija_ActivityTest {
+    /**
+     * Exists username or email test.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void existsUsernameOrEmailTest() throws Exception {
 

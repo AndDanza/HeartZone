@@ -28,10 +28,22 @@ import air1715.pillcare.R;
 import air1715.pillcare.Utils.AlertHandler;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Dnevni raspored activity.
+ */
 public class DnevniRaspored_Activity extends AppCompatActivity {
 
+    /**
+     * The Logged user.
+     */
     Korisnik loggedUser;
+    /**
+     * The Therapies.
+     */
     List<Terapija> therapies;
+    /**
+     * The Appointments.
+     */
     List<Pregled> appointments;
 
     @Override

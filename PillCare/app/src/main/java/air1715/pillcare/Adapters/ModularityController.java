@@ -6,13 +6,25 @@ import java.util.List;
 import air1715.database.entiteti.Lijek;
 import air1715.database.entiteti.Proizvodac;
 
+/**
+ * The type Modularity controller.
+ */
 public class ModularityController {
     private static ModularityController controller = null;
     private static List<ModularRepresentation> options = null;
 
+    /**
+     * The Medications.
+     */
     List<Lijek> medications;
+    /**
+     * The Companies.
+     */
     List<Proizvodac> companies;
 
+    /**
+     * The Medication preview.
+     */
     ModularRepresentation medicationPreview;
 
     private static int index;
@@ -21,7 +33,12 @@ public class ModularityController {
         options = new ArrayList<ModularRepresentation>();
     }
 
-    //singleton implementacija, ukoliko objekt postoji vrati ga, ako ne kreiraj novi
+    /**
+     * Get instance modularity controller.
+     *
+     * @return the modularity controller
+     */
+//singleton implementacija, ukoliko objekt postoji vrati ga, ako ne kreiraj novi
     public static ModularityController GetInstance(){
         if(controller == null)
             controller = new ModularityController();
@@ -29,18 +46,32 @@ public class ModularityController {
         return controller;
     }
 
-    //dodavanje opcije prikaza u listu mogućih prikaza
+    /**
+     * Add modular option.
+     *
+     * @param option the option
+     */
+//dodavanje opcije prikaza u listu mogućih prikaza
     public void AddModularOption(ModularRepresentation option){
         options.add(option);
     }
 
-    //dohvati podatke o lijekovima i proizvođačima
+    /**
+     * Set data.
+     *
+     * @param medications the medications
+     * @param companies   the companies
+     */
+//dohvati podatke o lijekovima i proizvođačima
     public void SetData(List<Lijek> medications, List<Proizvodac> companies){
         this.medications = medications;
         this.companies = companies;
     }
 
-    //pomoću statičnog brojača izmjenjuju se prikazi
+    /**
+     * Show modular option.
+     */
+//pomoću statičnog brojača izmjenjuju se prikazi
     public void ShowModularOption(){
         index++;
 
@@ -53,6 +84,9 @@ public class ModularityController {
         medicationPreview.SetAdapter();
     }
 
+    /**
+     * Clear data.
+     */
     public void ClearData(){
         ModularRepresentation representation = options.get(index);
         representation.ClearData();

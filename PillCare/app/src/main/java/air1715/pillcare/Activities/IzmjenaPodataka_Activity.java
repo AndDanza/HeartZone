@@ -23,13 +23,37 @@ import air1715.pillcare.Utils.EncryptionUtils;
 import air1715.pillcare.Utils.HttpUtils;
 import air1715.pillcare.Utils.PopUpUtils;
 
+/**
+ * The type Izmjena podataka activity.
+ */
 public class IzmjenaPodataka_Activity extends AppCompatActivity {
+    /**
+     * The Email.
+     */
     EditText email;
+    /**
+     * The User name.
+     */
     EditText userName;
+    /**
+     * The First name.
+     */
     EditText firstName;
+    /**
+     * The Last name.
+     */
     EditText lastName;
+    /**
+     * The Password.
+     */
     EditText password;
+    /**
+     * The Repeat password.
+     */
     EditText repeatPassword;
+    /**
+     * The Logged user.
+     */
     Korisnik loggedUser;
 
 
@@ -76,6 +100,11 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * Change data.
+     *
+     * @param loggedUser the logged user
+     */
     public void changeData(Korisnik loggedUser) {
 
         String newPassword = password.getText().toString();
@@ -113,6 +142,11 @@ public class IzmjenaPodataka_Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Is network available boolean.
+     *
+     * @return the boolean
+     */
     public boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

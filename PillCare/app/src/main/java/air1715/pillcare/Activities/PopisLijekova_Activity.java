@@ -44,6 +44,9 @@ import air1715.pillcare.Utils.PopUpUtils;
 
 import static air1715.pillcare.Utils.PopUpUtils.sendMessage;
 
+/**
+ * The type Popis lijekova activity.
+ */
 public class PopisLijekova_Activity extends AppCompatActivity {
 
     private DrawerLayout dl;
@@ -52,11 +55,23 @@ public class PopisLijekova_Activity extends AppCompatActivity {
     private final Activity activity = this;
     private Context context;
     private ModularityController presentationController = null;
+    /**
+     * The Data control.
+     */
     DataLoadController dataControl;
 
+    /**
+     * The Medications.
+     */
     List<Lijek> medications;
+    /**
+     * The Companies.
+     */
     List<Proizvodac> companies;
 
+    /**
+     * The Switch modular representaion.
+     */
     Button switchModularRepresentaion;
 
     //parametri za lokaciju - google maps
@@ -114,9 +129,6 @@ public class PopisLijekova_Activity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Class<? extends AppCompatActivity> activityClass = null;
                 switch (item.getItemId()) {
-                    case R.id.lijekovi: {
-                        break;
-                    }
                     case R.id.ljekarne: {
                         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                         boolean GpsStatus = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);

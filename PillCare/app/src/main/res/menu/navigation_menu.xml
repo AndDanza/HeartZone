@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/lijekovi"
-        android:title="Lijekovi"
-        android:icon="@drawable/ic_assignment_black_24dp">
-    </item>
-    <item
         android:id="@+id/ljekarne"
         android:title="Ljekarne"
         android:icon="@drawable/ic_local_hospital_black_24dp">

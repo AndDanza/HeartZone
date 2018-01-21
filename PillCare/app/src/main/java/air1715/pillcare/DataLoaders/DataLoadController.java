@@ -10,6 +10,9 @@ import java.util.List;
 
 import air1715.database.entiteti.Korisnik;
 
+/**
+ * The type Data load controller.
+ */
 public class DataLoadController {
     private static ConnectivityManager connection = null;
     private static DataLoadController controller = null;
@@ -17,6 +20,12 @@ public class DataLoadController {
     private DataLoadController() {
     }
 
+    /**
+     * Get instance data load controller.
+     *
+     * @param manager the manager
+     * @return the data load controller
+     */
     public static DataLoadController GetInstance(ConnectivityManager manager){
         connection = manager;
 
@@ -26,6 +35,13 @@ public class DataLoadController {
         return controller;
     }
 
+    /**
+     * Get data object.
+     *
+     * @param dataType the data type
+     * @param object   the object
+     * @return the object
+     */
     public Object GetData(String dataType, Object object){
         Object data = null;
         boolean isConnectedToInternet = false;

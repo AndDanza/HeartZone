@@ -26,6 +26,9 @@ import air1715.database.entiteti.Pregled;
 import air1715.database.entiteti.Terapija;
 import air1715.pillcare.R;
 
+/**
+ * The type Alert handler.
+ */
 public class AlertHandler extends WakefulBroadcastReceiver {
 
     @Override
@@ -88,6 +91,12 @@ public class AlertHandler extends WakefulBroadcastReceiver {
         return updatedTherapyState;
     }
 
+    /**
+     * Calculate current pill status terapija.
+     *
+     * @param therapy the therapy
+     * @return the terapija
+     */
     public Terapija calculateCurrentPillStatus(Terapija therapy) {
         double therapyState = 0;
         try{

@@ -14,13 +14,37 @@ import air1715.database.entiteti.Proizvodac;
 import air1715.pillcare.DataLoaders.DataLoadController;
 import air1715.pillcare.R;
 
+/**
+ * The type Medications list representation.
+ */
 public class MedicationsListRepresentation implements ModularRepresentation {
+    /**
+     * The Medications.
+     */
     List<Lijek> medications = null;
+    /**
+     * The Companies.
+     */
     List<Proizvodac> companies = null;
+    /**
+     * The Recycler.
+     */
     View recycler;
+    /**
+     * The Context.
+     */
     Context context;
+    /**
+     * The Adapter.
+     */
     MedicationsRecyclerAdapter adapter;
 
+    /**
+     * Instantiates a new Medications list representation.
+     *
+     * @param recycler the recycler
+     * @param context  the context
+     */
     public MedicationsListRepresentation(View recycler, Context context) {
         this.recycler = recycler;
         this.context = context;
